@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>弹出层特效</title>
+		<meta name="keywords" content="弹出层,特效">
+		<meta name="description" content="弹出层特效">
+		<style>
+			*{margin:0;padding:0;}
+			body{background:#eee;font:bold 16px/1.8 "微软雅黑";color:#888;}
+			.overlay {
+				width:100%;
+				height:100%;
+				background-color:black;
+				display:none;
+				position:absolute;
+				top:0;
+				left:0;
+				z-index:1001;
+				opacity:.88;
+				filter:alpha(opacity=88);
+			}
+			.content {
+				width:25%;
+				height:25%;
+				background-color:white;
+				padding: 20px;
+				border: 10px solid #999;
+				display:none;
+				overflow:auto;
+				position:absolute;
+				top:55%;
+				left:55%;
+				z-index:1002;
+
+			}
+		</style>
+	</head>
+	<body>
+		<p>示例弹出层：
+			<a href="#" id="open">请点这里</a>
+		</p>
+		<div id="light" class="content">这是一个层窗口示例程序：
+			<a href="#" id="close">点这里关闭本窗口</a>
+		</div>
+		<div id="fade" class="overlay">
+		</div>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script>
+			$("#open").click(function() {
+				$("#light").css("display", "block");
+				$("#fade").css("display", "block");
+			});
+			$("#close").click(function() {
+				$("#light").css("display", "none");
+				$("#fade").css("display", "none");
+			});
+		</script>
+	</body>
+</html>

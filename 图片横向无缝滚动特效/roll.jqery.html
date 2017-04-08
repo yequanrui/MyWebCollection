@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片横向无缝滚动特效(Jquery)</title>
+		<meta name="keywords" content="图片,横向,无缝滚动,特效">
+		<meta name="description" content="图片横向无缝滚动特效">
+		<style>
+			*{margin:0;padding:0;list-style:none;}
+			body{background:#ccc;font:bold 14px/180% "微软雅黑";color:#eee;}
+			#list{width:800px;height:280px;border:1px solid #ccc;margin:200px auto;position:relative;overflow:hidden;}
+			#list ul{position:absolute;left:0;top:0;}
+			#list ul li{width:180px;height:255px;margin:10px;float:left;position:relative;}
+			#list ul li span{width:100%;height:25px;background:rgba(0,0,0,0.3);position:absolute;bottom:0;left:0;display:block;}
+			#list ul li p{width:100%;height:25px;text-align:center;position:absolute;bottom:0;left:0;display:block;}
+		</style>
+	</head>
+	<body>
+		<div id="list">
+			<ul class="img_list">
+				<li>
+					<a href="#"><img src="img/1.jpg" alt="图片1" width="180" height="255" /></a>
+					<span></span>
+            		<p><strong>图片1</strong></p>
+				</li>
+				<li>
+					<a href="#"><img src="img/2.jpg" alt="图片2" width="180" height="255" /></a>
+					<span></span>
+					<p><strong>图片2</strong></p>
+				</li>
+				<li>
+					<a href="#"><img src="img/3.jpg" alt="图片3" width="180" height="255" /></a>
+					<span></span>
+					<p><strong>图片3</strong></p>
+				</li>
+				<li>
+					<a href="#"><img src="img/4.jpg" alt="图片4" width="180" height="255" /></a>
+					<span></span>
+					<p><strong>图片4</strong></p>
+				</li>
+				<li>
+					<a href="#"><img src="img/5.jpg" alt="图片5" width="180" height="255" /></a>
+					<span></span>
+					<p><strong>图片5</strong></p>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/jquery-2.1.4.min.js" ></script>
+	<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+	<script>
+		$("#list").slide({
+			mainCell: ".img_list",
+			autoPlay: true,
+			effect: "leftMarquee",
+			opp: "true",
+			vis: 4,
+			interTime: 10,
+		});
+	</script>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>缤纷喷泉特效</title>
+		<meta name="keywords" content="缤纷喷泉,特效">
+		<meta name="description" content="缤纷喷泉特效">
+		<style type="text/css">
+			*{margin:0;padding:0}
+			body,html{overflow:hidden;}
+			canvas{background:url("img/bg.png");}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script type="text/javascript">
+			window.onload = function() {
+				var canvas = document.getElementById("canvas"); //获取到元素
+				var context = canvas.getContext("2d"); //拿到上下文
+				canvas.width = window.screen.availWidth; //将画布布满全屏
+				canvas.height = window.screen.availHeight;
+				var cwidth = canvas.width;
+				var cheight = canvas.height;
+				var ballNums = 400; //初始值
+				var balls = []; //数组
+				var r = 0.1; //小球方向的改变
+				//第一次喷发的数量及属性
+				for (var i = 0; i < ballNums; i++) {
+					var ball = new Ball(); //创建小球，初始化参数
+					ball.x = cwidth / 2; //小球的位置，画布的一半
+					ball.y = cheight; //画布的高度
+					ball.vx = Math.random() * 2 - 1; //随机小球的x位置
+					ball.vy = Math.random() * -10 - 10; //随机上升速度
+					ball.color = getColor() //随机颜色
+					;
+					ball.radius = range(10, 25); //随机大小
+					balls.push(ball); //放入数组
+				}
+				// 绘画
+				function drawCanvas(ball) {
+					ball.vy += r; //每个小球方向的改变
+					ball.x += ball.vx; //每个小球的位置
+					ball.y += ball.vy;
+					//边界的控制
+					if (ball.y - ball.radius > cheight ||
+						ball.y + ball.raidus < 0 ||
+						ball.x - ball.radius > cwidth ||
+						ball.x + ball.radius < 0
+					) { //从新初始化
+						ball.x = cwidth / 2;
+						ball.y = cheight;
+						ball.vx = range(-8, 8); //随机X轴，两边都可以喷
+						ball.vy = Math.random() * -10 - 10;
+					} //调用小球对象通过prototype扩展的方法
+					ball.draw(context);
+				};
+				//一次性，肯定不需要用不断的改变
+				setInterval(function() {
+					context.clearRect(0, 0, cwidth, cheight); //清空画布
+					//一次性绘制200个小球，并且每个小球都调用drawCanvas
+					for (var i = 0; i < balls.length; i++) {
+						drawCanvas(balls[i]); //同时绘制
+					}
+				}, 30);
+			}
+			//类
+			function Ball(radius) {
+				this.radius = radius;
+				this.x = 0;
+				this.y = 0;
+				this.vy = 0;
+				this.vx = 0;
+				this.color = "#369";
+			};
+			//原型链
+			Ball.prototype.draw = function(context) {
+				context.beginPath();
+				context.fillStyle = this.color;
+				context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+				context.fill();
+			};
+			//调用的一些方法
+			function getColor() {
+				var r = Math.floor(Math.random() * 256);
+				var g = Math.floor(Math.random() * 256);
+				var b = Math.floor(Math.random() * 256);
+				return "rgb(" + r + "," + b + "," + g + ")";
+			}
+			// 范围
+			function range(start, end) {
+				return Math.floor(Math.random() * (end - start + 1) + start);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+table.comparisons {
+    border-spacing: 0;
+}
+table.comparisons td.row.header {
+  text-align: right;
+  font-family: Monospace;
+  font-size: 15px;
+  font-weight: 600;
+  padding-right: 14px;
+  white-space: nowrap;
+}
+table.comparisons td.cell {
+    padding: 1.5px;
+}
+table.comparisons td.highlight-cell {
+  background-color:#DDDDDD;
+}
+table.comparisons td.cell div {
+    width: 25px;
+    height: 25px;
+    border: 2px solid black;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+  	background-color: white;
+  	border-color: #b1b1b1;
+}
+table.comparisons td.cell.equal div {
+  background-color: #5bbe5b;
+  border-color: #0b6c0b;
+}
+table.comparisons td.header.col {
+	height: 90px;
+}
+table.comparisons td.header.col span.rotate {
+  position: absolute;
+  font-family: Monospace;
+  font-size: 15px;
+  font-weight: 600;
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg);
+}
+table.comparisons .expression {
+  font-size: 13px;
+  color: #666;
+  padding-left: 8px;
+}

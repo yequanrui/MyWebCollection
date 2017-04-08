@@ -1,0 +1,42 @@
+.key_board{font:0.8em Arial,sans-serif; position:absolute; border:1px solid #ccc; padding:20px; border-radius:5px; background:#fff; height:175px; display:none; z-index:999;}
+.keyboard_row,.keyboard_row td{padding:0; vertical-align:top; border-collapse:collapse;}
+.keyboard_key,.keyboard_key-m img{margin:0; padding:0;}
+.keyboard_key{font-size:18px; position:relative; display:block; width:32px; height:32px; margin-right:3px; cursor:pointer; text-align:center; border:1px solid #e8e8e8;-webkit-border-radius:5px;-moz-border-radius:5px;-o-border-radius:5px;border-radius:5px;}
+.keyboard_key:active{border:1px solid #d8d8d8;}
+.keyboard_key-m{line-height:29px;}
+.spacer{width:60px; visibility:hidden;}
+.backspace,.lshift,.rshift,.capslock,.atmark{text-align:left;}
+.backspace .keyboard_key-m,.lshift .keyboard_key-m,.rshift .keyboard_key-m,.capslock .keyboard_key-m,.atmark .keyboard_key-m{padding-left:10px;}
+.backspace{width:77px;}
+.atmark{width:42px;}
+.capslock{font-size:12px; width:52px;}
+.keyboard_key-m img{margin-top:8px;}
+.enter{font-size:12px; width:57px;}
+.lshift{font-size:12px; width:62px;}
+.rshift{font-size:12px; width:82px;}
+.sch{font-size:14px;}
+.space{width:240px;}
+.alt{font-size:16px; width:85px;}
+.marked{background-color:#dfffcc;}
+.pressed .keyboard_key-m{line-height:31px;}
+.suppressed{background-color:#f2b5a0;}
+.suppressed .keyboard_key-m{line-height:31px;}
+.disabled{cursor:default; color:#e6e6e6;}
+.keyboard_lang{font-size:11px; width:141px; text-align:left;}
+.keyboard_lang-i{width:62px; position:relative; top:4px; float:left; padding:3px 9px 3px 7px; background:#fff; border:1px solid #e8e8e8;}
+.keyboard_lang-ic{font:0/0 a; display:-moz-inline-box; display:inline-block; width:20px; height:12px; margin-top:1px; cursor:pointer; vertical-align:bottom; background:url(../img/langs.png) no-repeat;}
+.keyboard_lang-ru .keyboard_lang-ic{background-position:0 -48px;}
+.keyboard_lang-es .keyboard_lang-ic{background-position:0 -36px;}
+.keyboard_lang-fr .keyboard_lang-ic{background-position:0 -24px;}
+.keyboard_lang-de .keyboard_lang-ic{background-position:0 -12px;}
+.keyboard_lang-en .keyboard_lang-ic{background-position:0 0;}
+.keyboard_row td{padding-bottom:3px;}
+.keyboard_lang-selector .b-menu__item{font-size:11px;}
+.key_board .b-menu__layout-vert{margin:0; padding:0; list-style:none;}
+.keyboard_lang-selector{display:none; position:absolute; bottom:-1px; left:-1px; box-shadow: 0 0 1px 0 rgba(0,0,0,.6),0 10px 25px -5px rgba(0,0,0,0.4); width:80px; background:#fff;}
+.keyboard_lang-selector .b-menu__layout-vert li{padding:0.5em;}
+.keyboard_lang a{text-decoration:none; color:#222;}
+.keyboard_lang a:hover{color:#f00;}
+.keyboard_ico{width:27px; opacity:0.5; height:12px; background:url('../img/ico.png') 0 0 no-repeat; cursor:pointer; display:block; position:absolute; z-index:200;}
+.keyboard_ico:hover,.keyboard_ico.active{opacity:1;}
+.keyboard_close{position:absolute; right:7px; top:7px; height:8px; width:9px; cursor:pointer; background:url('../img/close.png') 0 top no-repeat;}

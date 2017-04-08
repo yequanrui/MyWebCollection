@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>黑客帝国流星雨特效</title>
+		<meta name="keywords" content="黑客帝国,流星雨,特效">
+		<meta name="description" content="黑客帝国流星雨特效">
+		<title>Document</title>
+		<style type="text/css">
+			*{margin:0;padding:0}
+			body{overflow:hidden;}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas">
+			您的浏览器不支持canvas标签，请您更换浏览器！！
+		</canvas>
+		<script>
+			var canvas = document.getElementById("canvas");
+			var can = canvas.getContext("2d");
+			var s = window.screen;//获取到浏览器的屏幕
+			var w = canvas.width = s.width;//把屏幕的宽度设置给canvas
+			var h = canvas.height = s.height;//把屏幕的高度设置给canvas
+			//can.fillStyle = color2();//设置fill方法的颜色
+			//can.font = "30px 微软雅黑";//设置字体的大小与类型
+			//can.fillText("黑客帝国",100,100);//绘制实心的文本:绘制的文本，文本的坐标X，文本的坐标Y
+			var words = Array(256).join("1").split("");//设置一个包含256个空元素的数组
+			//join("1")用1来把数组里的元素拼接为字符串
+			//split("")过滤掉数组里的空元素
+			function draw(){
+				can.fillStyle = "rgba(0,0,0,0.05)";
+				can.fillRect(0,0,w,h);//画一个实心的矩形:坐标X，坐标Y，矩形的宽高
+				can.fillStyle = color2();//设置fill方法的随机颜色
+				words.map(function(y,n){
+					text = String.fromCharCode(Math.ceil(65+Math.random()*57))//生成A-Z a-z之间的值
+					x = n*10;
+					can.fillText(text,x,y);
+					words[n] = (y > 758 +Math.random()*484)? 0 : y+10;//js三元表达式
+				});//数组元素的映射
+			}
+			setInterval(draw,50);//定时器：50毫秒调用一次 draw();
+			//随机颜色，方法一：
+			function color1(){
+				var color = "";
+				var colors = [0,1,2,3,4,5,6,7,8,9,"a","b","c","d","e","f"];
+				for(var i=0;i<6;i++){
+					var n = Math.ceil(Math.random()*15);//0-15之间的整数
+					color += "" + colors[n];
+					if(i==5){
+						return "#"+color;
+					}
+				}
+			}
+			//随机颜色，方法二：
+			function color2(){
+				var color = Math.ceil(Math.random()*16777215).toString(16);//0-16777215之间的随机值转换为16进制
+				while(color.length<6)
+				{
+					color = "0" + color;
+				}
+				return "#"+color;
+			}
+			//随机颜色，方法三：
+			function color3(){
+				return "#" + (function(color){
+					return new Array(7-color.length).join("0")+color;
+				})((Math.random() * 0x1000000 <<0).toString(16))
+			}
+		</script>
+	</body>
+</html>

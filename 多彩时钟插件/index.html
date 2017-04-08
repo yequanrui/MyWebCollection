@@ -1,0 +1,25 @@
+<!DOCTYPE  html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>多彩时钟插件</title>
+		<meta name="keywords" content="多彩,时钟,插件">
+		<meta name="description" content="多彩时钟插件">
+		<link rel="stylesheet" type="text/css" href="css/jquery.tzineClock.css" />
+		<style>
+			*{margin:0;padding:0}
+			body{background:#252525;font:bold 14px/1.5 "微软雅黑";color:#666;}
+			#fancyClock{width:600px;height:200px;margin:200px auto;border:none;}
+		</style>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.tzineClock.js"></script>
+	</head>
+	<body>
+		<div id="fancyClock"></div>
+		<script>
+			$(document).ready(function(){
+				$('#fancyClock').tzineClock();
+			});
+		</script>
+	</body>
+</html>

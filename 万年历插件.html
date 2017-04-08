@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>万年历插件</title>
+		<meta name="keywords" content="万年历,插件">
+		<meta name="description" content="万年历插件">
+		<style>
+			*{margin:0;padding:0;font-family:"微软雅黑";}
+			body{background:url("img/bg.png");color:#666;}
+			h2{margin:1% auto;text-align:center;}
+			.box{width:460px;background:#eee;margin:1% auto;border:1px solid #666;border-radius:5px;box-shadow:1px 1px 10px #fff;}
+			.box p{text-align:center;margin:10px auto;}
+			#datalist{width:90%;margin:10px auto;border-collapse:collapse;text-align:center;}
+			#datalist th{height:30px;background:linear-gradient(#789,#456);border:1px solid #ccc;color:#eee;}
+			#datalist tr:hover{background:linear-gradient(#3fdafb,#0ca7b8);}
+			#datalist td{border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<h2>万年历</h2	>
+			<p>
+				年份：<select id="year"></select>
+				月份：<select id="month"></select>
+			</p>
+			<table id="datalist">
+				<thead>
+					<tr>
+						<th>星期日</th>
+						<th>星期一</th>
+						<th>星期二</th>
+						<th>星期三</th>
+						<th>星期四</th>
+						<th>星期五</th>
+						<th>星期六</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script>
+			var date = new Date(); // 初始化日期对象
+			// 判断该年是否闰年
+			function isLeapYear(year) {
+				return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
+			};
+			// 生成日历
+			function create() {
+				var year = $("#year").val();
+				var month = $("#month").val();
+				var days = 30;
+				if (isLeapYear(year) && month == 2) {
+					days = 29;
+				} else if (!isLeapYear(year) && month == 2) {
+					days = 28;
+				} else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+					days = 31;
+				}
+				var cdate = new Date(year, month - 1, 1);
+				var week = cdate.getDay();
+				var tbody = $("#datalist tbody"); // 获取tbody对象
+				var chtml = "";
+				var index = 1;
+				while (true) {
+					chtml += "<tr>";
+					for (var i = 0; i < 7; i++) {
+						if (index == 1 && i == week) {
+							chtml += "<td>1</td>";
+							index++;
+						} else if (index > 1 && index <= days) {
+							chtml += "<td>" + index + "</td>";
+							index++;
+						} else
+							chtml += "<td>&nbsp;</td>";
+					}
+					chtml += "</tr>";
+					if (index >= days) break;
+				}
+				tbody.html(chtml);
+				// 设置表格不同颜色的奇偶行
+				$("#datalist tr:odd").css("background-color", "#fff");
+				$("#datalist tr:even").css("background-color", "#eee");
+			}
+			// 初始化日历函数
+			function init() {
+				var year = $("#year"); // 获取年份对象
+				var month = $("#month"); // 获取月份对象
+				// 初始化年份下拉框
+				var html = "";
+				for (var i = 2000; i < 2031; i++) {
+					var mark = "";
+					if (date.getFullYear() == i)
+						mark = "selected='selected'"
+					html += "<option value='" + i + "' " + mark + ">" + i + "</option>";
+				}
+				year.html(html).change(function() {
+					create();
+				});
+				// 初始化月份下拉框
+				var mhtml = "";
+				for (var i = 1; i <= 12; i++) {
+					var mark = "";
+					if (date.getMonth() + 1 == i)
+						mark = "selected='selected'"
+					mhtml += "<option value='" + i + "' " + mark + ">" + i + "</option>";
+				}
+				month.html(mhtml).change(function() {
+					create();
+				});
+				create();
+			}
+			init();
+		</script>
+	</body>
+</html>

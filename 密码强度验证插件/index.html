@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>密码强度验证插件</title>
+		<meta name="keywords" content="密码,强度,验证,插件">
+		<meta name="description" content="密码强度验证插件">
+		<style>
+			*{margin:0;padding:0;}
+			body{background:url("../img/bg.png");font:bold 14px/1.5 "微软雅黑";color:#aaa;}
+			#page-wrap{width:310px;margin:10% auto 0;text-align:center;}
+			#title{margin:20px 0;font-size:20px;}
+			input{width:290px;height:35px;padding:0 5px;border:5px solid #ccc;border-radius:5px;box-shadow:0 0 10px #aaa;font:14px/1.5 "微软雅黑";}
+			#complexitywrap{border:1px solid #ccc;margin:15px 0;border-radius:5px;box-shadow:0 0 10px #aaa;}
+			#complexity{padding:5px 0;border-radius:5px;box-shadow:0 0 5px #333;font-size:18px;}
+			.valid{background:green;}
+			.invalid{background:red;}
+		</style>
+	</head>
+	<body>
+		<div id="page-wrap">
+			<div id="title">密码长度验证</div>
+			<input type="password" name="password" id="password" placeholder="输入密码" />
+			<div id="complexitywrap">
+				<div id="complexity">0%</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.complexify.js"></script>
+		<script type="text/javascript" src="js/jquery.placeholder.min.js"></script>
+		<script>
+			$(function() {
+				$('input[placeholder]').placeholder();
+				$("#password").complexify({}, function(valid, complexity) {
+					if (!valid) {
+						$('#complexity').stop().animate({
+							'width': complexity + '%'
+						}).removeClass('valid').addClass('invalid');
+					} else {
+						$('#complexity').stop().animate({
+							'width': complexity + '%'
+						}).removeClass('invalid').addClass('valid');
+					}
+					$('#complexity').html(Math.round(complexity) + '%');
+				});
+			});
+		</script>
+	</body>
+</html>

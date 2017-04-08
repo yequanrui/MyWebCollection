@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>元素背景梦幻闪烁特效</title>
+		<link rel="stylesheet" href="css/normalize.css" />
+		<script type="text/javascript" src="../js/prefixfree.min.js"></script>
+		<style>
+			@import url(http://fonts.useso.com/css?family=Lato:400,900|Montez);
+			html{min-height:100%;background: url("../img/bg.png");font:200 1em/1.5 Lato;text-align:center;color:#ddd;}
+			html body{padding:50px;}
+			h1{width:900px;margin:0 auto 1em;font-size:1.9em;text-shadow:0 2px 1px #111;}
+			h1 span{margin:0 .3em;font:300 1.9em/1.5 Montez;color:#f08;}
+			p{margin:10px auto;padding:5px 10px;display:inline-block;}
+			.content{font-size:110%;padding:1em 0;}
+			.sparkley {background:#3e5771;margin:0 1em;padding:16px 36px;border:none;border-radius:3px;box-shadow:0 38px 32px -23px black;color:#eee;transition:all .25s ease;}
+			.sparkley:hover{background:#2c3e50;color:rgba(255,255,255,.2);}
+			.img{width:500px;margin:40px auto 0;display:block;}
+			.img img{width:100%;border-radius:5px;}
+		</style>
+		<!--[if IE]>
+		<script src="../js/html5shiv.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="content">
+			<h1>A little canvas script to <span>add magic</span> to DOM elements!</h1>
+			<button class="sparkley">Everything's better with sparkles!</button>
+			<button class="sparkley last">I eat rainbows and poop butterflies!!</button>
+			<div class="img">
+				<img id="image" src="img/Rain-l.jpg" />
+			</div>
+			<p>It won't work on images or DOM elements which cannot contain other elements, unless we wrap them.</p>
+		</div>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js" ></script>
+		<script type="text/javascript" src="js/stars.js"></script>
+	</body>
+</html>

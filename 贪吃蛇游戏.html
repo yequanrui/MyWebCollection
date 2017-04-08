@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>贪吃蛇游戏</title>
+		<meta name="keywords" content="贪吃蛇,游戏">
+		<meta name="description" content="贪吃蛇游戏">
+		<style type="text/css">
+			body{background:url("img/bg.png");}
+			h1{text-shadow:2px 4px 6px #888;color:#eee;}
+			canvas{background:#123456;}
+		</style>
+	</head>
+	<body>
+		<div align=center>
+			<h1>JavaScript开发贪吃蛇游戏</h1>
+			<canvas id="myCanvas" width="450" height="450"></canvas>
+			<audio src="bg.mp3" id="backSound"></audio>
+		</div>
+		<script type="text/javascript">
+			/*
+				第一阶段(看到可见的表格)
+				1、绘制表格 横着30个格子 竖着30个格子 格子宽度15
+				2、绘制蛇
+				3、在中心绘制一个食物
+				(完成初步布局)
+				第二阶段(让蛇运动起来)
+				1、让蛇头可以跟着键盘的上下左右移动
+				2、让身体跟着蛇头一起运动
+				3、吃食物
+				第三阶段(让蛇自动运动，判断蛇的死亡)
+			*/
+			// 拿到canvas这个对象
+			var canvas = document.getElementById("myCanvas");
+			// 画图工具的面板
+			var context = canvas.getContext("2d");
+			/**********蛇 Start**********/
+			// 蛇的长度
+			var length = 5;
+			// 当前食物的坐标
+			var foodX = 15;
+			var foodY = 15;
+			var food;
+			// 构造食物对象
+			function Food(x, y) {
+				this.x = x;
+				this.y = y;
+				return this;
+			}
+			// 蛇的身体，节点对象
+			/**********蛇 End**********/
+			// 方格 x,y,f   坐标+方向 上2 下-2 左1 右-1
+			function Cell(x, y, f) {
+				this.x = x;
+				this.y = y;
+				this.f = f;
+				return this;
+			}
+			// 变长
+			var width = 15;
+			// 初始化蛇
+			var snake = [];
+			for (var i = 0; i < length; i++)
+				snake[i] = new Cell(i, 0, -1);
+			food = new Food(15, 15);
+			// 画蛇的方法
+			function drawSnake() {
+				context.clearRect(0, 0, 450, 450);
+				// 画横线
+				context.strokeStyle = "#789";
+				for (var i = 0; i < 30; i++) {
+					context.beginPath();
+					// 移动到点 y = 0,0 0,1*15 2*15 3*15 4 5
+					context.moveTo(0, i * width);
+					// 从刚刚这个点画到下面这个点
+					context.lineTo(450, i * width);
+					context.closePath();
+					context.stroke();
+				}
+				//画竖线
+				for (var i = 0; i < 30; i++) {
+					context.beginPath();
+					// 移动到点 y = 0,0 0,1*15 2*15 3*15 4 5
+					context.moveTo(i * width, 0);
+					// 从刚刚这个点画到下面这个点
+					context.lineTo(i * width, 450);
+					context.closePath();
+					context.stroke();
+				}
+				// 画蛇
+				context.strokeStyle = "black";
+				for (var i = 0; i < snake.length; i++) {
+					context.fillStyle = "#abc";
+					if (i == snake.length - 1)
+						context.fillStyle = "#987";
+					context.beginPath();
+					context.rect(snake[i].x * width, snake[i].y * width, 15, 15);
+					context.closePath();
+					// 填充
+					context.fill();
+					// 绘制已经定义的线路
+					context.stroke();
+				}
+				var head = snake[snake.length - 1];
+				// 如果吃到食物了
+				if (eatFood()) {
+					getFood();
+					food = new Food(foodX, foodY);
+					document.getElementById("backSound").play();
+					var newCell = new Cell(head.x, head.y, head.f);
+					switch (head.f) {
+						case 2:
+							newCell.y--;
+							break;
+						case -1:
+							newCell.x++;
+							break;
+						case -2:
+							newCell.y++;
+							break;
+						case 1:
+							newCell.x--;
+							break;
+					}
+					snake[snake.length] = newCell;
+				}
+				// 450/2 225-15
+				context.fillStyle = "#fdecba";
+				context.beginPath();
+				context.rect(food.x * width, food.y * width, 15, 15);
+				context.closePath();
+				// 填充
+				context.fill();
+				// 绘制已经定义的线路
+				context.stroke();
+			}
+			// 吃食物
+			function eatFood() {
+				var flag = false;
+				var head = snake[snake.length - 1];
+				if (head.x == food.x && head.y == food.y)
+					flag = true;
+				return flag;
+			}
+			// 获取随机的食物
+			function getFood() {
+				// random 0 - 1 取小数  0.9*28 = 26  27
+				foodX = Math.ceil(Math.random() * 28) + 1;
+				foodY = Math.ceil(Math.random() * 28) + 1;
+				// 如果产生的食物跟蛇的位置重合，要重新生成
+				for (var i = 0; i < snake.length; i++)
+				// 坐标重叠 怎么判断食物跟蛇是否有重叠 xy是不是重叠
+					if (snake[i].x == foodX && snake[i].y == foodY)
+						getFood(); // 重新生成 递归调用
+			}
+			// 移动方法
+			function moveSnake(direction) {
+				// 上2 下-2 左1 右-1
+				var newSnake = []; // 新的身体
+				var head = snake[snake.length - 1]; // 新的头
+				var newCell = new Cell(head.x, head.y, head.f);
+				for (var i = 1; i < snake.length; i++)
+					newSnake[i - 1] = snake[i];
+				newSnake[snake.length - 1] = newCell;
+				newCell.f = direction;
+				switch (direction) {
+					case 2:
+						newCell.y--;
+						break;
+					case -1:
+						newCell.x++;
+						break;
+					case -2:
+						newCell.y++;
+						break;
+					case 1:
+						newCell.x--;
+						break;
+				}
+				snake = newSnake;
+				if (checkDeath())
+					drawSnake();
+			}
+			var pause = false;
+			document.onkeydown = function(e) {
+					// 37 38 39 40 上2 下-2 左1 右-1
+					var direction; //方向
+					switch (e.keyCode) {
+						case 37:
+							direction = 1;
+							break;
+						case 38:
+							direction = 2;
+							break;
+						case 39:
+							direction = -1;
+							break;
+						case 40:
+							direction = -2;
+							break;
+						default:
+							direction = 0;
+					}
+					if (e.keyCode == 32)
+						if (pause)
+							pause = false;
+						else
+							pause = true;
+					if (!pause)
+						if (direction != 0)
+							moveSnake(direction);
+				}
+			// 判断死亡
+			function checkDeath() {
+				var head = snake[snake.length - 1];
+				if (head.x >= 30 || head.y >= 30 || head.x < 0 || head.y < 0) {
+					document.getElementById("backSound").src = "boli.mp3";
+					document.getElementById("backSound").play();
+					//alert("撞墙了！！！");
+					pause = true;
+				}
+				for (var i = 0; i < snake.length - 1; i++) {
+					if (head.x == snake[i].x && head.y == snake[i].y) {
+						document.getElementById("backSound").src = "hao.wav";
+						document.getElementById("backSound").play();
+						//alert("咬死自己了！！！");
+						pause = true;
+					}
+				}
+				return true;
+			}
+			// 移动倒计时
+			function moveClock() {
+				if (!pause) {
+					var head = snake[snake.length - 1];
+					moveSnake(head.f);
+				}
+			}
+			setInterval(moveClock, 200);
+			drawSnake();
+		</script>
+	</body>
+</html>

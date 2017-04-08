@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片上传放大特效</title>
+		<meta name="keywords" content="图片,上传,放大,特效">
+		<meta name="description" content="图片上传放大特效">
+		<link rel="stylesheet" href="" />
+		<style>
+			*{margin:0;padding:0;}
+			body{background:url("../img/bg.png");}
+			.box{width:900px;height:350px;background:url("img/bg.jpg");margin:0 auto;position:relative;top:160px;}
+			.box .upload_box{width:355px;height:80px;background:linear-gradient(#ddd,#fff);border-radius:5px;padding:10px;position:absolute;top:182px;left:28px;}
+			.box .upload_box .upload{width:355px;height:80px;border:1px solid #ccc;border-radius:5px;}
+			.box .upload_box .upload a{width:80px;height:80px;background:url("img/img.png") center no-repeat;border-right:1px solid #ccc;display:block;float:left;}
+			.box .upload_box .upload a:hover{background-color:#ddd;}
+			input{font:bold 16px/1 "微软雅黑";}
+			input#up_img{width:80px;height:80px;opacity:0;cursor:pointer;}
+			input#up_name{width:252px;height:58px;background-color:transparent;border:1px solid transparent;border-radius:0 5px 5px 0;padding:10px;}
+			input#up_name:hover{background-color:#ddd;}
+			.box .show{width:285px;height:285px;border-radius:10px;text-align:center;position:absolute;top:32px;right:58px;overflow:hidden;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="upload_box">
+				<div class="upload">
+					<a><input type="file" id="up_img" onchange="onupload(this);" /></a>
+					<input type="text" id="up_name" readonly />
+				</div>
+			</div>
+			<div class="show">
+				<img id="preview" width="285" height="285" />
+			</div>
+		</div>
+		<script type="text/javascript" src="js/magnifier.js"></script>
+		<script>
+			function $(id){
+				return document.getElementById(id);
+			}
+			function onupload(imgFile){
+				if(!imgFile.value.match(/.jpg|.gif|.png|.bmp/i)){
+					alert("上传图片格式不正确！");
+					return false;
+				}
+				var img = $("up_img");
+				var name = $("up_name");
+				var obj = $("preview");
+				if(imgFile.files&&imgFile.files[0])
+					name.value="图片名称："+img.files[0].name;
+				obj.src=window.URL.createObjectURL(img.files[0]);
+				obj.setAttribute("bigsrc",obj.src);
+			}
+		</script>
+	</body>
+</html>

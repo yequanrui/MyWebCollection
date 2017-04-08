@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<link rel="stylesheet" href="" />
+		<style>
+			*{margin:0;padding:0;}
+			body{background:#ccc;font:bold 14px/1.8 "微软雅黑";color:#888;}
+			div{position:absolute;text-align:center;}
+			input,button{font:14px/140% "微软雅黑";padding:0 5px;}
+			input[type="button"]{text-align:center;}
+			/*header start*/
+			#header{width:100%;height:50px;
+			background:linear-gradient(#444, #111);top:0;box-shadow:0 1px 10px 1px #111;font-size:20px;line-height:50px;z-index:4;}
+			/*header end*/
+			/*sidebar start*/
+			#sidebar{width:200px;height:calc(100% - 80px);background:linear-gradient(#ddd,#aaa);left:0;top:50px;box-shadow:0 1px 10px 1px #555;overflow-y:auto;z-index:2;}
+			#sidebar .nav{width:100%;}
+			#sidebar .nav ul li{width:70%;height:28px;background:linear-gradient(#456,#123);margin:20px auto;border-radius:5px;color:#eee;list-style:none;}
+			#sidebar .nav ul li.active{background:linear-gradient(#def,#abc);color:#111;}
+			/*sidebar end*/
+			/*main start*/
+			#main{width:calc(100% - 200px);height:calc(100% - 80px);background:linear-gradient(#fff,#ccc);top:50px;right:0;box-shadow:0 1px 10px 1px #888;z-index:1;}
+			/*main end*/
+			/*footer start*/
+			#footer{width:100%;height:30px;background:linear-gradient(#333,#111);bottom:0;box-shadow:0 1px 10px 1px #888;line-height:30px;z-index:3;}
+			#footer span{display:inline-block;}
+			#footer a{background:url(img/bottom_logo.png) no-repeat;padding-left:25px;color:#579!important;text-decoration:none;}
+			#footer a:hover{background:url(img/bottom_logo_hover.png) no-repeat;color:#07f!important;}
+			/*footer end*/
+			</style>
+	</head>
+	<body>
+		<div id="header">header</div>
+		<div id="sidebar">
+			<div class="nav">
+				<ul>
+					<li>sidebar/nav</li>
+					<li>sidebar/nav</li>
+					<li>sidebar/nav</li>
+					<li>sidebar/nav</li>
+					<li>sidebar/nav</li>
+					<li>sidebar/nav</li>
+					<li>Jsidebar/nav</li>
+					<li>Jsidebar/nav</li>
+					<li>sidebar/nav</li>
+					<li>sidebar/nav</li>
+				</ul>
+			</div>
+		</div>
+		<div id="main">main</div>
+		<div id="footer">footer</div>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script>
+			$(function() {
+				$("#sidebar .nav ul li").mouseover(function() {
+					$(this).addClass("active").siblings().removeClass("active");
+				});
+			});
+		</script>
+	</body>
+</html>

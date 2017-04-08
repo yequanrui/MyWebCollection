@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片延时加载特效</title>
+		<meta name="keywords" content="图片,延时,加载,特效">
+		<meta name="description" content="图片延时加载特效">
+		<style>
+			img{border:0px;}
+			.loadAll{width:1000px;margin: 0 auto;}
+			.loadAll h1{height:50px;line-height:50px;overflow:hidden;}
+			.channel_box{width:1000px;padding-top:20px;overflow:hidden;}
+			.channel_caption{height:65px;line-height:65px;overflow:hidden;}
+			.channel_caption h3 a{color:#333;text-decoration:none;}
+			.channel_caption h3 a:hover{color:#3eaf0e;}
+			.channel_row{width:1020px;height:352px;overflow:hidden;}
+			.channel_row .img_box{margin-right:20px;box-shadow:0 1px 1px rgba(0,0,0,0.15);border-radius:2px;float:left;display:inline;overflow:hidden;}
+			.channel_row a{width:100%;height:100%;background:#fff;text-decoration:none;position:relative;display:block;overflow:hidden;}
+			.channel_row .col_1{width:255px;height:350px;float:left;}
+			.channel_row .col_2{width:510px;height:350px;float:left;}
+			.channel_row .large{width:490px;height:350px;}
+			.channel_row .tall{width:235px;height:350px;}
+			.channel_row .small{width:235px;height:165px;margin-bottom:20px;}
+			.channel_row .wide{width:490px;height:165px;margin-bottom:20px;}
+			.channel_row .img_info{width:100%;height:30px;position:absolute;left:0;}
+			.channel_row .large .img_info,.channel_row .tall .img_info{top:350px;}
+			.channel_row .small .img_info,.channel_row .wide .img_info{top:165px;}
+		</style>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.lazyload.js"></script>
+		<script type="text/javascript">
+			var Img = "images/lazyload.gif";
+			jQuery.noConflict()(function() {
+				jQuery.noConflict()("img").lazyload({
+					placeholder: Img,
+					effect: "fadeIn"
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="loadAll">
+			<center><h1>图片延时加载特效</h1></center>
+			<!-- world -->
+			<div class="channel_box">
+				<div class="channel_caption">
+					<h3 class="f_l"><a  href="#">图说世界</a></h3>
+				</div>
+				<div class="channel_row">
+					<div class="img_box large">
+						<a href="#"><img src="images/t01e782faf5d3a4f402.jpg" width="490" height="350"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t015d8273fe1deef09a.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t0131f19432bf3ffa1a.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t010541c91a3735b4e2.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01b3170bd5725fd544.jpg" width="235" height="165"></a>
+					</div>
+				</div>
+			</div>
+			<!-- world end-->
+			<!-- mengchong -->
+			<div class="channel_box">
+				<div class="channel_caption">
+					<h3 class="f_l"><a  href="#">萌宠</a></h3>
+				</div>
+				<div class="channel_row">
+					<div class="img_box large">
+						<a href="#"><img src="images/t0154238e6389313e68.jpg" width="490" height="350"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01211e67901ef1a416.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01e29d871bdfc25cee.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t0171744762b284327b.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t016d451a1db2be39c9.jpg" width="235" height="165"></a>
+					</div>
+				</div>
+			</div>
+			<!-- mengchong end -->
+			<!-- sheying -->
+			<div class="channel_box">
+				<div class="channel_caption">
+					<h3 class="f_l"><a  href="#">摄影</a></h3>
+				</div>
+				<div class="channel_row">
+					<div class="img_box large">
+						<a href="#"><img src="images/t0109b5a3a0b1d47c14.jpg" width="490" height="350"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01114bf3a98f47ea6d.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t013c2e325e620d26f6.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01e4be92dbed43f1e4.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t014eb9bf90f953876c.jpg" width="235" height="165"></a>
+					</div>
+				</div>
+			</div>
+			<!-- sheying end -->
+			<!-- jiaju -->
+			<div class="channel_box">
+				<div class="channel_caption">
+					<h3 class="f_l"><a  href="#">家居</a></h3>
+				</div>
+				<div class="channel_row">
+					<div class="img_box large">
+						<a href="#"><img src="images/t01af7aa1ade76f490b.jpg" width="490" height="350"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t0118ee9ffb069ac62b.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t012ff85540a1bbc902.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01460a3a12cda5360c.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t010acc7635bf941ba8.jpg" width="235" height="165"></a>
+					</div>
+				</div>
+			</div>
+			<!-- jiaju end -->
+			<!-- kuche -->
+			<div class="channel_box">
+				<div class="channel_caption">
+					<h3 class="f_l"><a  href="#">酷车</a></h3>
+				</div>
+				<div class="channel_row">
+					<div class="img_box large">
+						<a href="#"><img src="images/t013c1332235a3ccee9.jpg" width="490" height="350"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01340f454e2dd9ce27.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t010ca976df3ce94fe0.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01378cfe47f1638234.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t0144baf9d6d02f62d1.jpg" width="235" height="165"></a>
+					</div>
+				</div>
+			</div>
+			<!-- kuche end -->
+			<!-- bizhi -->
+			<div class="channel_box">
+				<div class="channel_caption">
+					<h3 class="f_l"><a  href="#">壁纸</a></h3>
+				</div>
+				<div class="channel_row">
+					<div class="img_box large">
+						<a href="#"><img src="images/t01d0fb4dbbcf3448a0.jpg" width="490" height="350"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t016b6513458af96d78.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01040c31cf7ff2cfe8.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01929c545bb3a11bf4.jpg" width="235" height="165"></a>
+					</div>
+					<div class="img_box small">
+						<a href="#"><img src="images/t01bfd9d7792f2d4c9e.jpg" width="235" height="165"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

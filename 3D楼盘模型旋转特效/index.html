@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>3D楼盘模型旋转特效</title>
+		<meta name="keywords" content="3D,楼盘,模型,旋转,特效">
+		<meta name="description" content="3D楼盘模型旋转特效">
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			html{width:100%;height:100%;min-width:400px;min-height:400px;position:relative;}
+			body{height:100%;width:100%;background:url("../img/bg.png");margin:0;top:0;left:0;perspective:500px;overflow:hidden;}
+			div,b{position:absolute;transform-style:preserve-3d;}
+			#city{width:250px;height:250px;background:#789;border:5px solid #456;margin:auto;top:0;bottom:0;left:0;right:0;animation:play 10s linear infinite;}
+			#city div{}
+			#city div b{height:100%;background-color:rgba(176,208,233,0.9);transform:rotateX(90deg);transform-origin:0 0;}
+			#city div b>b{background-color:rgba(128,174,197,0.9);transform:rotateY(90deg);}
+			#city div b>b>b{background-color:rgba(176,208,233,0.9);right:0;transform:rotateY(90deg);transform-origin:100% 0;}
+			#city div b>b>b>b{background-color:rgba(128,174,197,0.9);left:0;transform:rotateY(90deg);transform-origin:0 100%;}
+			#city div b>b>b>b>b{background-color:rgba(176,208,233,0.9);bottom:0;transform:rotateX(-90deg);}
+			#city div.a b{background-image:url("img/1.png");}
+			#city div.b b{background-image:url("img/2.png");}
+			#city div.c b{background-image:url("img/3.png");}
+			#city div.d b{background-image:url("img/4.png");}
+			#city div.e b{background-image:url("img/5.png");}
+			@keyframes play{
+				0%{transform:rotateX(60deg) rotateZ(-180deg);}
+				100%{transform:rotateX(60deg) rotateZ(180deg);}
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function City(base) {
+				this.base = base; // 横向的基数等于纵向的基数
+				this.max = 50;
+			};
+			// 创建地皮，并且把地皮渲染到父级容器
+			City.prototype.buildArea = function(parent) {
+				this.city = document.createElement("div");
+				this.city.id = "city";
+				var b = this.base * this.max;
+				this.city.style.width = this.city.style.height = b;
+				parent.appendChild(this.city);
+			};
+			// 随机生成楼层的长度/宽度
+			City.prototype.randomSize = function() {
+				return (Math.random() * 1000 << 2) % 20 + 20;
+			};
+			// 随机生成楼层的高度
+			City.prototype.randomHeight = function() {
+				return (Math.random() * 1000 << 2) % 130 + 20;
+			};
+			// 随机生成纹理
+			City.prototype.STYLES = ['a', 'b', 'c', 'd', 'e'];
+			City.prototype.randomStyle = function() {
+				return this.STYLES[(Math.random() * 100 << 2) % 5];
+			};
+			// 创建楼层，并且把区域渲染到父级容器
+			City.prototype.buildFloor = function(top, left) {
+				var floor = document.createElement("div");
+				floor.className = this.randomStyle();
+				var length = this.randomSize();
+				var width = this.randomSize();
+				floor.style.height = this.randomHeight() + "px";
+				floor.style.top = top + "px";
+				floor.style.left = left + "px";
+				this.city.appendChild(floor);
+				var b1 = document.createElement("b");
+				b1.style.width = length + "px";
+				floor.appendChild(b1);
+				var b2 = document.createElement("b");
+				b2.style.width = width + "px";
+				b1.appendChild(b2);
+				var b3 = document.createElement("b");
+				b3.style.width = length + "px";
+				b2.appendChild(b3);
+				var b4 = document.createElement("b");
+				b4.style.width = width + "px";
+				b3.appendChild(b4);
+				var b5 = document.createElement("b");
+				b5.style.width = width + "px";
+				b5.style.height = length + "px";
+				b4.appendChild(b5);
+			};
+			City.prototype.build = function(parent) {
+				this.buildArea(parent);
+				for (var i = 0; i < this.base; i++) {
+					for (var j = 0; j < this.base; j++) {
+						this.buildFloor(i * this.max, j * this.max);
+					}
+				}
+			};
+			new City(5).build(document.body);
+			document.body.onclick = function() {
+				this.innerHTML = "";
+				new City(5).build(this);
+			};
+		</script>
+	</body>
+</html>

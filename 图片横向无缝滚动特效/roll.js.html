@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片横向无缝滚动特效(JavaScript)</title>
+		<meta name="keywords" content="图片,双向,滚动,特效">
+		<meta name="description" content="图片双向滚动特效">
+		<style>
+			body{text-align:center;}
+			#left,#right{width:16px;height:60px;cursor:pointer;display:inline-block;vertical-align:middle;}
+			#div{width:800px;overflow:hidden;display:inline-block;vertical-align:middle;}
+			#div1{width:800%;}
+			#div2,#div3{float:left;margin-left:8px;}
+			.btn{height:255px;background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#def),color-stop(1,#abc));padding:5px;border:none;border-radius:5px;color:#111;text-decoration:none;transition:all 1s ease;}
+			.btn:hover{background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#456),color-stop(1,#123));color:#eee;transition:all 1s ease;}
+		</style>
+	</head>
+	<body>
+		<input type="button"class="btn" value="<" onmouseover="moveThis('left')" onmouseout="moveout()" />
+		<div id="div">
+			<div id="div1">
+				<div id="div2">
+					<a href="#"><img src="img/1.jpg" alt="图片1" width="180" height="255" /></a>
+					<a href="#"><img src="img/2.jpg" alt="图片2" width="180" height="255" /></a>
+					<a href="#"><img src="img/3.jpg" alt="图片3" width="180" height="255" /></a>
+					<a href="#"><img src="img/4.jpg" alt="图片4" width="180" height="255" /></a>
+					<a href="#"><img src="img/5.jpg" alt="图片5" width="180" height="255" /></a>
+				</div>
+				<div id="div3"></div>
+			</div>
+		</div>
+		<input type="button"class="btn" value=">" onmouseover="moveThis('right')" onmouseout="moveout()" />
+		<script>
+			var div = document.getElementById("div");
+			var div2 = document.getElementById("div2");
+			var div3 = document.getElementById("div3");
+			div3.innerHTML = div2.innerHTML;
+			function leftMove() {
+				if (div3.offsetWidth - div.scrollLeft <= 0)
+					div.scrollLeft -= div2.offsetWidth;
+				else
+					div.scrollLeft++;
+			}
+			function rightMove() {
+				if (div3.offsetWidth - div.scrollLeft >= 800)
+					div.scrollLeft += div2.offsetWidth;
+				else
+					div.scrollLeft--;
+			}
+			var flag=0;
+			var speed=10;
+			var start = setInterval(rightMove, speed);
+			div.onmouseover=function() {
+				if(start)
+					clearInterval(start);
+			}
+			function moveout(way) {
+				if(start)
+					clearInterval(start);
+			}
+			function moveThis(way) {
+				if(way == 'right') {
+					flag=1;
+					if(start)
+						clearInterval(start);
+					start=setInterval(rightMove, speed);
+				} else {
+					flag=0;
+					if(start)
+						clearInterval(start);
+					start=setInterval(leftMove,speed);
+				}
+				if(flag)
+					div.onmouseout=function() {
+						start=setInterval(rightMove,speed)
+					}
+				else
+					div.onmouseout=function() {
+						start=setInterval(leftMove,speed)
+					}
+			}
+		</script>
+	</body>
+</html>

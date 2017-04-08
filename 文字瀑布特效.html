@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>文字瀑布特效</title>
+		<meta name="keywords" content="文字瀑布,特效">
+		<meta name="description" content="文字瀑布特效">
+		<style type="text/css">
+			*{margin:0;padding:0;list-style-type:none;}
+			body{font:14px/100% "微软雅黑";overflow:hidden;}
+		</style>
+	</head>
+	<body>
+		<canvas id="fall"></canvas>
+		<script type="text/javascript">
+			var s = window.screen;
+			var width = fall.width = s.width;
+			var height = fall.height = s.height;
+			var letters = Array(256).join(1).split('');
+			var draw = function() {
+				fall.getContext('2d').fillStyle = 'rgba(0,0,0,.05)';
+				fall.getContext('2d').fillRect(0, 0, width, height);
+				fall.getContext('2d').fillStyle = '#abcdef';
+				letters.map(function(y_pos, index) {
+					text = String.fromCharCode(21494); //云(20113)、风(39118)、叶(21494)
+					x_pos = index * 10;
+					fall.getContext('2d').fillText(text, x_pos, y_pos);
+					letters[index] = (y_pos > 758 + Math.random() * 1e4) ? 0 : y_pos + 20;
+				});
+			};
+			setInterval(draw, 20);
+		</script>
+	</body>
+</html>

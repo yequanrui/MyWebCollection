@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>大白特效</title>
+		<meta name="keywords" content="大白,特效">
+		<meta name="description" content="大白特效">
+		<style>
+			*{margin:0;padding:0;}
+			body{background:url("img/bg.png")}
+			.Baymax{width:300px;height:600px;margin:20px auto auto;position:relative;}
+			.head{width:100px;height:75px;background:#fff;border-radius:50%;box-shadow:0 6px 6px #888,6px 6px 6px #ccc inset;position:absolute;left:100px;z-index:100;animation:shakehead 10s infinite;}
+			.cover{width:60px;height:12px;position:absolute;left:50%;transform:translate(-50%,0);z-index:101;}
+			.cover.top{top:19px;animation:eyeclose1 3s infinite 2s;}
+			.cover.bottom{bottom:12px;animation:eyeclose2 3s infinite 2s;}
+			.left{width:15px;height:15px;background:#fff;float:left;}
+			.right{width:15px;height:15px;background:#fff;float:right;}
+			.eyes{width:15px;height:15px;background:#000;border-radius:50%;position:absolute;top:35px;}
+			.eyes.l{left:20px;}
+			.eyes.r{right:20px;}
+			.mouse{width:30px;height:3px;border-radius:50%;box-shadow:0 1px 0 #000;position:absolute;top:42px;left:35px;}
+			.arm{width:78px;height:224px;background:#fff;border-radius:50%;position:absolute;top:75px;z-index:91;}
+			.arm.l{box-shadow:6px 6px 6px #ccc inset;left:20px;transform:rotate(16deg);}
+			.arm.r{box-shadow:-6px -6px 6px #ccc inset;right:20px;transform:rotate(-16deg);}
+			.hand{width:50px;height:100px;background:#fff;border-radius:50% 50% 40% 40%;position:absolute;top:160px;}
+			.hand.l{left:15px;transform:rotate(-20deg);}
+			.hand.r{right:15px;transform:rotate(20deg);}
+			.hand:before{content:"";width:15px;height:82px;position:absolute;top:10px;transform:rotate(-0deg);}
+			.hand.l:before{border-radius:50% 20% 20% 50%;box-shadow:4px 0 6px #ccc inset;left:0;}
+			.hand.r:before{border-radius:20% 50% 50% 20%;box-shadow:-4px 0 6px #ccc inset;right:0;}
+			.finger{width:14px;background:#fff;border-radius:50% 50% 40%;box-shadow:0 -2px 2px #ccc inset;position:absolute;}
+			.finger.l1{height:30px;bottom:-40px;left:65px;transform:rotate(-35deg);z-index:90;}
+			.finger.l2{height:40px;bottom:-55px;left:50px;transform:rotate(-45deg);z-index:90;}
+			.finger.l3{height:40px;bottom:-62px;left:49px;transform:rotate(-45deg);z-index:89;}
+			.finger.r1{height:30px;bottom:-40px;right:65px;transform:rotate(35deg);z-index:90;}
+			.finger.r2{height:40px;bottom:-55px;right:50px;transform:rotate(45deg);z-index:90;}
+			.finger.r3{height:40px;bottom:-62px;right:49px;transform:rotate(45deg);z-index:89;}
+			.body{width:214px;height:320px;background:#fff;border-radius:45% 45% 50% 50%;box-shadow:6px 0 6px #ccc inset,-6px 0 6px #ccc inset;position:absolute;top:55px;left:50%;transform:translate(-50%,0);z-index:99;}
+			.heart{width:30px;height:30px;border:1px solid #ccc;border-radius:50%;box-shadow:2px 2px 2px #ccc inset;position:absolute;top:60px;right:55px;z-index:111;}
+			.belly{width:224px;height:264px;background:#fff;border-radius:42% 42% 50% 50%;box-shadow:0 3px 2px #888,0 -6px 6px #ccc inset ;position:absolute;bottom:0;left:50%;transform:translate(-50%,0);}
+			.belly:before{content:" ";width:20px;height:120px;border-radius:50% 20% 20% 50%;box-shadow:4px 0 6px #ccc inset;position:absolute;top:50px;left:-2px;transform:rotate(3deg);}
+			.belly:after{content:" ";width:20px;height:120px;border-radius:20% 50% 50% 20%;box-shadow:-4px 0 6px #ccc inset;position:absolute;top:50px;right:-2px;transform:rotate(-3deg);}
+			.leg{width:80px;height:145px;background:#fff;position:absolute;top:290px;}
+			.leg.l{border-radius:40% 30% 10px 45%;box-shadow:-2px 0 2px #999 inset,4px 0 4px #ccc inset,-4px 0 4px #ccc inset;left:70px;}
+			.leg.r{border-radius:30% 40% 45% 10px;box-shadow:2px 0 2px #999 inset,4px 0 4px #ccc inset,-4px 0 4px #ccc inset;right:70px;}
+			@keyframes shakehead{
+			    0%{transform:rotate(0deg);}
+			    25%{transform:rotate(6deg);}
+			    50%{transform:rotate(0deg);}
+			    75%{transform:rotate(-6deg);}
+			    100%{transform:rotate(0deg);}
+			}
+			@keyframes eyeclose1{
+			    0%{top:19px;}
+			    10%{top:28px;}
+			    20%{top:19px;}
+			    20%{top:28px;}
+			    40%{top:19px;}
+			}
+			@keyframes eyeclose2{
+			    0%{bottom:12px;}
+			    10%{bottom:20px;}
+			    20%{bottom:12px;}
+			    20%{bottom:20px;}
+			    40%{bottom:12px;}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="Baymax">
+			<div class="head">
+				<div class="cover top">
+					<div class="left">
+					</div>
+					<div class="right">
+					</div>
+				</div>
+				<div class="cover bottom">
+					<div class="left">
+					</div>
+					<div class="right">
+					</div>
+				</div>
+				<div class="eyes l">
+				</div>
+				<div class="eyes r">
+				</div>
+				<div class="mouse">
+				</div>
+			</div>
+			<div class="arm l">
+				<div class="hand l">
+				</div>
+				<div class="finger l1">
+				</div>
+				<div class="finger l2">
+				</div>
+				<div class="finger l3">
+				</div>
+			</div>
+			<div class="arm r">
+				<div class="hand r">
+				</div>
+				<div class="finger r1">
+				</div>
+				<div class="finger r2">
+				</div>
+				<div class="finger r3">
+				</div>
+			</div>
+			<div class="body">
+				<div class="heart">
+				</div>
+				<div class="belly">
+				</div>
+			</div>
+			<div class="leg l">
+			</div>
+			<div class="leg r">
+			</div>
+		</div>
+	</body>
+</html>

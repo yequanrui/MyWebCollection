@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JS Comparison Table</title>
+		<link rel="stylesheet" href="css/unified_comparison_table.css" type="text/css" media="all" title="simple">
+		<script src="../js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/unified_comparison_table.js"></script>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Equality in JavaScript</h3>
+			<div id="table"></div>
+			<div id="key"></div>
+			<br style="clear:both">
+		</div>
+	    <script type="text/javascript" src="js/values.js"></script>
+		<script>
+			buildUnifiedComparisonTable(values).appendTo("#table")
+			buildKeyTable().appendTo("#key")
+		</script>
+	</body>
+</html>

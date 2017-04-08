@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JS Comparison Table</title>
+		<link rel="stylesheet" href="../css/jquery-ui.min.css" media="all">
+		<link rel="stylesheet" href="css/comparison_table.css" media="all">
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/comparison_table.js"></script>
+	</head>
+	<body>
+		<div id="tabs">
+			<ul>
+				<li>
+					<a href="#two-equals">==</a>
+				</li>
+				<li>
+					<a href="#three-equals">===</a>
+				</li>
+				<li>
+					<a href="#if-statement">If()</a>
+				</li>
+			</ul>
+			<div id="two-equals">
+				<h2>== <smaller>(negated: !=)</smaller></h2>
+				<p class="description">
+					When using two equals signs for JavaScript equality testing, some funky conversions take place.
+				</p>
+			</div>
+			<div id="three-equals">
+				<h2>=== <smaller>(negated: !==)</smaller></h2>
+				<p class="description">
+					When using three equals signs for JavaScript equality testing, everything is <b>as is</b>. Nothing gets converted before being evaluated.
+				</p>
+			</div>
+			<div id="if-statement">
+				<h2>A standard IF statement. If(<i>value</i>) {/*- green -*/} else { /*- white -*/ }</h2>
+				<p>Note: This row does not match up with any of the rows in the other table.</p>
+			</div>
+			<div style="padding: 2px 20px">
+				<h4>Moral of the story:</h4>
+				<p>
+					Always use 3 equals unless you have a good reason to use 2.
+				</p>
+			</div>
+		</div>
+	    <script  type="text/javascript" src="js/values.js"></script>
+		<script>
+			buildComparisonTable(values, "==").appendTo("#two-equals")
+			buildComparisonTable(values, "===").appendTo("#three-equals")
+			buildComparisonTableForIf(values).appendTo("#if-statement")
+			$('#tabs').tabs();
+			$("<li><a href='unified_index.html'>New link: view everything in one table</a></li>").appendTo("#tabs ul");
+		</script>
+	</body>
+</html>

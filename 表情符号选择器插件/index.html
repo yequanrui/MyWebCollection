@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表情符号选择器插件</title>
+		<meta name="keywords" content="表情,符号,选择器,插件">
+		<meta name="description" content="表情符号选择器插件">
+		<style type="text/css">
+			*{margin:0;padding:0}
+			body{font:12px/100% "微软雅黑";color:#666;}
+			ul li{list-style:none;}
+			.open{font-size:16px;line-height:20px;}
+			.show{width:500px;height:210px;border:1px solid #ddd;border-radius:5px;box-shadow:0 0 5px rgba(0,0,0,0.2);font-size:16px;line-height:20px;}
+			.show img{padding:2px;}
+			#box{width:500px;height:210px;border:1px solid #ddd;border-radius:5px;box-shadow:0 0 5px rgba(0,0,0,0.2);}
+			#box .left{width:119px;height:210px;background:#f8f8f8;border-right:1px solid #ccc;float:left;}
+			#box .left ul li{background:#fff;font-size:14px;text-align:center;line-height:28px;position:relative;cursor:pointer;}
+			#box .left ul li.active{background:#efefef;font-weight:bold;}
+			#box .right{width:380px;height:210px;background:#fff;float:right;}
+			#box .right .list{height:210px;display:none;overflow-y:scroll;}
+			#box .right .list ul li{float:left;padding:2px;}
+		</style>
+	</head>
+	<body>
+		<div ContentEditable=true class="show"></div>
+		<a href="#" class="open">打开表情</a>
+		<div id="box">
+			<div class="left">
+				<ul>
+					<li class="active">小黄脸-默认表情</li>
+					<li>小黄脸-恶搞表情</li>
+					<li>小黄脸-微型恶搞</li>
+					<li>小黄脸-伪装恶搞</li>
+					<li>小黄脸-长脸恶搞</li>
+					<li>小黄脸-组合恶搞</li>
+				</ul>
+			</div>
+			<div class="right">
+				<div class="list" style="display:block;">
+					<ul>
+						<li><img src="img\默认表情\小黄脸_1.jpg" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_2.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_3.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_4.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_5.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_6.jpg" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_7.jpg" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_8.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_9.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_10.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_11.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_12.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_13.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_14.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_15.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_16.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_17.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_18.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_19.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_20.jpg" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_21.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_22.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_23.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_24.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_25.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_26.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_27.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_28.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_29.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_30.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_31.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_32.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_33.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_34.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_35.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_36.jpg" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_37.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_38.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_39.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_40.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_41.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_42.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_43.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_44.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_45.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_46.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_47.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_48.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_49.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_50.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_51.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_52.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_53.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_54.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_55.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_56.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_57.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_58.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_59.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_60.jpg" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_61.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_62.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_63.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_64.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_65.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_66.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_67.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_68.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_69.jpg" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_70.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_71.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_72.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_73.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_74.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_75.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_76.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_77.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_78.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_79.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_80.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_81.jpg" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_82.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_83.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_84.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_85.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_86.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_87.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_88.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_89.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_90.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_91.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_92.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_93.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_94.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_95.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_96.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_97.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_98.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_99.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_100.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_101.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_102.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_103.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_104.jpg" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_105.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_106.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_107.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_108.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_109.gif" title="[]" width="25" height="25"/></li>
+						<li><img src="img\默认表情\小黄脸_110.gif" title="[]" width="25" height="25"/></li>
+					</ul>
+				</div>
+				<div class="list">
+					<ul>
+						<li><img src="img\恶搞表情\恶搞表情_1.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\恶搞表情\恶搞表情_2.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\恶搞表情\恶搞表情_3.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\恶搞表情\恶搞表情_4.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\恶搞表情\恶搞表情_5.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\恶搞表情\恶搞表情_6.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\恶搞表情\恶搞表情_7.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\恶搞表情\恶搞表情_8.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\恶搞表情\恶搞表情_9.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\恶搞表情\恶搞表情_10.gif" title="[]" width="" height=""/></li>
+					</ul>
+				</div>
+				<div class="list">
+					<ul>
+						<li><img src="img\微型恶搞\微型恶搞_1.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\微型恶搞\微型恶搞_2.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\微型恶搞\微型恶搞_3.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\微型恶搞\微型恶搞_4.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\微型恶搞\微型恶搞_5.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\微型恶搞\微型恶搞_6.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\微型恶搞\微型恶搞_7.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\微型恶搞\微型恶搞_8.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\微型恶搞\微型恶搞_9.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\微型恶搞\微型恶搞_10.gif" title="[]" width="" height=""/></li>
+					</ul>
+				</div>
+				<div class="list">
+					<ul>
+						<li><img src="img\伪装恶搞\伪装恶搞_1.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\伪装恶搞\伪装恶搞_2.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\伪装恶搞\伪装恶搞_3.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\伪装恶搞\伪装恶搞_4.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\伪装恶搞\伪装恶搞_5.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\伪装恶搞\伪装恶搞_6.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\伪装恶搞\伪装恶搞_7.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\伪装恶搞\伪装恶搞_8.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\伪装恶搞\伪装恶搞_9.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\伪装恶搞\伪装恶搞_10.gif" title="[]" width="" height=""/></li>
+					</ul>
+				</div>
+				<div class="list">
+					<ul>
+						<li><img src="img\长脸恶搞\长脸恶搞_1.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_2.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_3.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_4.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_5.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_6.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_7.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_8.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_9.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_10.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_11.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_12.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_13.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_14.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_15.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_16.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_17.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_18.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_19.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\长脸恶搞\长脸恶搞_20.jpg" title="[]" width="" height=""/></li>
+					</ul>
+				</div>
+				<div class="list">
+					<ul>
+						<li><img src="img\组合恶搞\组合恶搞_1.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\组合恶搞\组合恶搞_2.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\组合恶搞\组合恶搞_3.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\组合恶搞\组合恶搞_4.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\组合恶搞\组合恶搞_5.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\组合恶搞\组合恶搞_6.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\组合恶搞\组合恶搞_7.jpg" title="[]" width="" height=""/></li>
+						<li><img src="img\组合恶搞\组合恶搞_8.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\组合恶搞\组合恶搞_9.gif" title="[]" width="" height=""/></li>
+						<li><img src="img\组合恶搞\组合恶搞_10.gif" title="[]" width="" height=""/></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#box").hide();
+				$(".open").click(function(){
+					$("#box").toggle("slow");
+				});
+				$(".left ul li").mouseover(function(){
+					var _index = $(this).index();
+					$(this).addClass("active").siblings().removeClass("active");
+					$(".right .list").eq(_index).show().siblings().hide();
+				});
+				$(".list").find("li").click(function(){
+					var img=$(this).find("img").clone();
+					$(".show").append(img);
+				});
+			});
+		</script>
+	</body>
+</html>

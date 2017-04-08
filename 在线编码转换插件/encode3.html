@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>在线编码转换</title>
+		<meta name="keywords" content="开源中国,在线工具,编码转换" />
+		<meta name="description" content="开源中国在线编码转换工具" />
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="css/basic.css" type="text/css" />
+		<link rel="stylesheet" href='js/bootstrap/css/bootstrap.min.css' />
+		<script type="text/javascript" src='js/jquery/jquery-1.7.2.js'></script>
+		<script type="text/javascript" src='js/jquery/jquery.cookies.2.2.0.min.js'></script>
+		<script src='js/bootstrap/js/bootstrap.min.js'></script>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="wrapper">
+			<script type="text/javascript" src="js/ad/tagd21f.js?date=20140625"></script>
+		</div>
+		<div id="mainContent" class="wrapper">
+			<div class="toolName">在线编码转换</div>
+			<div class="toolUsing clearfix">
+				<div class="toolsTab  clearfix">
+					<ul class="nav nav-tabs">
+						<li><a onclick="javascript:location.href='encode.html'">Native/Unicode</a></li>
+						<li><a onclick="javascript:location.href='encode2.html'">Native/UTF-8</a></li>
+						<li class='active'><a onclick="javascript:location.href='encode3.html'">Native/ASCII</a></li>
+						<li><a onclick="javascript:location.href='encode4.html'">URL转码</a></li>
+					</ul>
+				</div>
+				<div class="leftBar">
+					<div class="title">Native:</div>
+					<textarea name='cipher' id='n_source'>这是一个例子,this is a example</textarea>
+				</div>
+				<div class="operateLR">
+					<div class="OptDetail Button">
+						<label class="checkbox" style="margin-left:20px">
+							<input type="checkbox" name="ignoreLetter" id="ignoreLetter" checked="true"/>
+							不转换字母和数字
+						</label>
+						<button class="btn btn-primary" onclick="javascript:native2ascii();" style="margin:0 0 20px 30px">
+							ASCII -&gt;
+						</button>
+						<button class="btn btn-primary" onclick="javascript:ascii2native();" style="margin-left:30px">
+							&lt;- Native
+						</button>
+					</div>
+				</div>
+				<div class="rightBar">
+					<div class="title">ASCII:</div>
+					<textarea name='message' id='a_source' class='text_source'></textarea>
+				</div>
+				<script>
+					function native2ascii() {
+						var character = document.getElementById("n_source").value.split("");
+						var ascii = "";
+						for (var i = 0; i < character.length; i++) {
+							var code = Number(character[i].charCodeAt(0));
+							if (!document.getElementById("ignoreLetter").checked || code > 127) {
+								var charAscii = code.toString(16);
+								charAscii = new String("0000").substring(charAscii.length, 4) + charAscii;
+								ascii += "\\u" + charAscii;
+							} else {
+								ascii += character[i];
+							}
+						}
+						document.getElementById("a_source").value = ascii;
+					}
+					function ascii2native() {
+						var character = document.getElementById("a_source").value.split("\\u");
+						var native1 = character[0];
+						for (var i = 1; i < character.length; i++) {
+							var code = character[i];
+							native1 += String.fromCharCode(parseInt("0x" + code.substring(0, 4)));
+							if (code.length > 4) {
+								native1 += code.substring(4, code.length);
+							}
+						}
+						document.getElementById("n_source").value = native1;
+					}
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

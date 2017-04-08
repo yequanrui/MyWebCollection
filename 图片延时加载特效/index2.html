@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>网页图片延时加载技术</title>
+		<meta name="Keywords" content="图片延时加载,html,css,js">
+		<meta name="description" content="">
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			img{border:0;display:block;border-radius:2px;}
+			body{font-size:12px;color:#666;font-family:"微软雅黑";background:#f9f9f9;}
+			.pic{width:906px;height:1000px;margin:30px auto;}
+			.pic ul li{list-style:none;float:left;margin-right:12px;margin-bottom:15px;border-radius:2px;box-shadow:0 1px 3px 0 rgba(0,0,0,.3);}
+			.pic ul li p{width:288px;height:35px;text-align:center;line-height:35px;background:#fff;}
+			.pic ul li a:hover img{opacity:.8;filter:alpha(opacity=80);}
+		</style>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.lazyload.js"></script>
+		<script type="text/javascript">
+			var Img = "images/lazyload.gif";
+			jQuery.noConflict()(function(){
+				jQuery.noConflict()("img").lazyload({placeholder:Img,effect:"fadeIn"});
+			});
+		</script>
+	</head>
+	<body>
+		<center><h1>图片延时加载特效</h1></center>
+		<div class="pic">
+			<ul>
+				<li>
+					<a href="#"><img src="images/1.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/2.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/3.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/4.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/5.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/6.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/7.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/8.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/9.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/10.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/11.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/12.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/13.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/14.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/15.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/16.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/17.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/18.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/19.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/20.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/21.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/10.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/11.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/12.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/13.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/14.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/15.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/16.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/17.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/18.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/19.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/20.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/21.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/10.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/11.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/12.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/13.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/14.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/15.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/16.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/17.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/18.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/19.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/20.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+				<li>
+					<a href="#"><img src="images/21.jpg" alt="" width="288" height="180"/></a>
+					<p>绿丛小花精美摄影</p>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

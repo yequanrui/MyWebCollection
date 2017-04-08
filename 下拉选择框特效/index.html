@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>下拉选择框特效</title>
+		<meta name="keywords" content="下拉,选择框,特效">
+		<meta name="description" content="下拉选择框特效">
+		<style>
+			*{margin:0;padding:0;}
+			li{list-style:none;}
+			em,i{font-style:normal;}
+			img{border:none;}
+			a{text-decoration:none;}
+			body{background:url("../img/bg.png");}
+			.warp{width:320px;margin:30px auto;position:relative;}
+			.navBox{height:60px;background:#fff;box-shadow:0 1px 1px rgba(0,0,0,.1);font:20px/60px "微软雅黑";cursor:pointer;}
+			.navBox span{height:60px;padding-left:30px;display:inline-block;}
+			.navBox span img{float:left;}
+			.triangle{width:40px;height:40px;border-left:1px solid #ccc;position:absolute;top:10px;right:10px;}
+			.triangle i{
+				margin:-3px 0 0 -3px;position:absolute;top:50%;left:50%;
+				border:6px solid transparent;border-top-color:#999;
+				*height:0;*overflow:hidden;//这个是css中hack的写法，针对ie8以下的浏览器起作用
+			}
+			/*active*/
+			.nav_active{color:#06f;}
+			.nav_active .triangle i{
+				margin:-9px 0 0 -3px;position:absolute;top:50%;left:50%;
+				border:6px solid transparent;border-bottom-color:#09f;
+				*height:0;*overflow:hidden;
+			}
+			/*list*/
+			.navList{width:100%;position:absolute;left:0;top:65px;}
+			.navList li{height:60px;margin-bottom:5px;box-shadow:0 1px 1px rgba(0, 0, 0, .1);position:relative;filter:alpha(opacity=0);opacity:0;}
+			.navList li a{height:60px;background:#fff;padding-left:30px;font:20px/60px "微软雅黑";color:#333;display:block;transition:all .3s ease;}
+			.navList li a img{float:left;}
+			.navList li a:hover{background:#09f;color:#fff;transition:all .3s ease;}
+		</style>
+		<!--[if IE 6]>
+			<script type="text/javascript" src="../js/DD_belatedPNG_0.0.8a-min.js"></script>
+			<script type="text/javascript" src="../js/ie6Fixpng.js"></script>
+		<![endif]-->
+		<script>
+			function getStyle(obj, name) {
+				if (obj.currentStyle)
+					return obj.currentStyle[name];
+				else
+					return getComputedStyle(obj, false)[name];
+			}
+			function startMove(obj, json, fnEnd) {
+				clearInterval(obj.timer);
+				obj.timer = setInterval(function() {
+					var bStop = true;
+					for (var name in json) {
+						var iTarget = json[name];
+						if (name == 'opacity')
+							var cur = Math.round(parseFloat(getStyle(obj, name)) * 100);
+						else
+							var cur = parseInt(getStyle(obj, name));
+						var speed = (iTarget - cur) / 3;
+						speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+						if (name == 'opacity') {
+							obj.style.filter = 'alpha(opacity:' + (cur + speed) + ')';
+							obj.style.opacity = (cur + speed) / 100;
+						} else
+							obj.style[name] = cur + speed + 'px';
+						if (cur != iTarget)
+							bStop = false;
+					}
+					if (bStop) {
+						clearInterval(obj.timer);
+						if (fnEnd)
+							fnEnd();
+					}
+				}, 20);
+			}
+			window.onload = function() {
+				var oDiv = document.getElementById('div1');
+				var oNavBox = oDiv.children[0];
+				var oUl = oDiv.children[1];
+				var aLi = oUl.children;
+				var opened = false;
+				var ready = true;
+				for (var i = 0; i < aLi.length; i++) {
+					if (i % 2 == 1)
+						aLi[i].style.left = -aLi[i].offsetWidth + 'px';
+					else
+						aLi[i].style.left = aLi[i].offsetWidth + 'px';
+					aLi[i].style.display = 'none';
+				}
+				oNavBox.onclick = function() {
+					if (!ready)
+						return;
+					ready = false;
+					if (opened) {
+						oNavBox.className = 'navBox';
+						//收起来
+						var i = aLi.length - 1;
+						var timer = setInterval(function() {
+							var left = i % 2 ? -aLi[i].offsetWidth : aLi[i].offsetWidth;
+							(function(i) {
+								startMove(aLi[i], {
+									left: left,
+									opacity: 0
+								}, function() {
+									aLi[i].style.display = 'none';
+									if (i == 0)
+										ready = true;
+								});
+							})(i);
+							i--;
+							if (i == -1)
+								clearInterval(timer);
+						}, 77);
+					} else {
+						oNavBox.className = 'navBox nav_active';
+						//展开
+						var i = 0;
+						var timer = setInterval(function() {
+							aLi[i].style.display = 'block';
+							(function(i) {
+								startMove(aLi[i], {
+									left: 0,
+									opacity: 100
+								}, function() {
+									if (i == aLi.length - 1) ready = true;
+								});
+							})(i);
+							i++;
+							if (i == aLi.length)
+								clearInterval(timer);
+						}, 77);
+					}
+					if (opened)
+						opened = false;
+					else
+						opened = true;
+				};
+				//aLi加点击——字上去、收起来
+				for (var i = 0; i < aLi.length; i++) {
+					aLi[i].onclick = function() {
+						oNavBox.className = 'navBox';
+						var oSpan = oNavBox.children[0];
+						opened = false;
+						oSpan.innerHTML = this.children[0].innerHTML;
+						var i = aLi.length - 1;
+						var timer = setInterval(function() {
+							var left = i % 2 ? -aLi[i].offsetWidth : aLi[i].offsetWidth;
+							(function(i) {
+								startMove(aLi[i], {
+									left: left,
+									opacity: 0
+								}, function() {
+									aLi[i].style.display = 'none';
+								});
+							})(i);
+							i--;
+							if (i == -1)
+								clearInterval(timer);
+						}, 77);
+					};
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<div class="warp" id="div1">
+			<div class="navBox">
+		    	<span>请选择</span>
+		        <em class="triangle"><i></i></em>
+		    </div>
+		    <ul class="navList">
+		    	<li><a href="#"><img src="img/ico_01.png" alt="" />关于我们</a></li>
+		        <li><a href="#"><img src="img/ico_02.png" alt="" />联系我们</a></li>
+		        <li><a href="#"><img src="img/ico_03.png" alt="" />官网首页</a></li>
+		        <li><a href="#"><img src="img/ico_04.png" alt="" />课程案例</a></li>
+		        <li><a href="#"><img src="img/ico_05.png" alt="" />群组讨论</a></li>
+		        <li><a href="#"><img src="img/ico_06.png" alt="" />论坛答疑</a></li>
+		    </ul>
+		</div>
+	</body>
+</html>

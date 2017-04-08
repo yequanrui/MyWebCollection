@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html onselectstart="return false"><!--禁止选中元素-->
+	<head>
+		<meta charset="utf-8">
+		<title>多边形导航特效</title>
+		<meta name="keywords" content="多边形,导航,特效">
+		<meta name="description" content="多边形导航特效">
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{background:#ccc;background-repeat-x:initial;}
+			/*wrap start*/
+			#wrap{width:950px;height:100px;margin:30px auto 0;}
+			#wrap ul li{width:180px;height:105px;background:rgba(0,0,0,0.6);margin:30px 5px;float:left;list-style:none;position:relative;}
+			#wrap ul li:before{content:"";width:180px;height:105px;background:rgba(0,0,0,0.6);position:absolute;transform:rotate(60deg);}
+			#wrap ul li:after{content:"";width:180px;height:105px;background:rgba(0,0,0,0.6);position:absolute;transform:rotate(-60deg);}
+			#wrap ul li.l1{margin-left:100px;}
+			#wrap ul li.l2{margin-left:195px;}
+			#wrap ul li.l3{margin-left:290px;}
+			#wrap ul li.l4{margin-left:385px;}
+			#wrap img{width:80px;height:80px;margin:auto;position:absolute;top:0;left:0;bottom:0;right:0;z-index:1;transition:all 1s;}
+			#wrap img:hover{transform:scale(1.5) rotate(360deg);}
+			/*wrap end*/
+		</style>
+	</head>
+	<body>
+		<!--wrap start-->
+		<div id="wrap">
+			<ul>
+				<li><img alt="" src="img/AE_0.png" /></li>
+				<li><img alt="" src="img/Ai_0.png" /></li>
+				<li><img alt="" src="img/Br_0.png" /></li>
+				<li><img alt="" src="img/Ct_0.png" /></li>
+				<li><img alt="" src="img/Dw_0.png" /></li>
+				<li class="l1"><img alt="" src="img/En_0.png" /></li>
+				<li><img alt="" src="img/FB_0.png" /></li>
+				<li><img alt="" src="img/FC_0.png" /></li>
+				<li><img alt="" src="img/Fl_0.png" /></li>
+				<li class="l2"><img alt="" src="img/Fw_0.png" /></li>
+				<li><img alt="" src="img/ID_0.png" /></li>
+				<li><img alt="" src="img/OL_0.png" /></li>
+				<li class="l3"><img alt="" src="img/Pr_0.png" /></li>
+				<li><img alt="" src="img/Ps_0.png" /></li>
+				<li class="l4"><img alt="" src="img/Sb_0.png" /></li>
+			</ul>
+		</div>
+		<!--wrap end-->
+	</body>
+</html>

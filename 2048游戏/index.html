@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Document</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js" ></script>
+		<script type="text/javascript" src="js/my2048.js" ></script>
+	</head>
+	<body>
+		<div class="my2048">
+			<header>
+				<h1>my2048</h1>
+				<a href="javascript:newgame();" id="newgamebutton">重新开始</a>
+				<p>分数：<span id="score">0</span></p>
+			</header>
+			<div id="grid-container"> </div>
+			<footer>游戏说明：PC端键盘方向键控制↑→↓←<br>手机端左右上下滑屏控制！！</footer>
+		</div>
+		<script>
+			var my2048 = new my2048($("#grid-container"));
+			my2048.init();
+
+			function newgame() {
+				my2048.init();
+			}
+		</script>
+	</body>
+</html>

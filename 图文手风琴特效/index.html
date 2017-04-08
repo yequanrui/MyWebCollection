@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图文手风琴特效</title>
+		<meta name="keywords" content="图文,手风琴,特效">
+		<meta name="description" content="图文手风琴特效">
+		<style>
+			*{margin:0;padding:0;}
+			body{background:url("../img/bg.png");font:14px/1.5 "微软雅黑";color:#eee;}
+			.box{width:1180px;height:600px;margin:30px auto;background:#ddd;border-radius:5px;box-shadow:0 0 10px 1px #def;overflow:hidden;}
+			.box ul li{width:100px;height:600px;background:#f03;list-style:none;float:left;overflow:hidden;cursor:pointer;transition:all 1s;}
+			.box ul li:nth-child(1){background:#49b;}
+			.box ul li:nth-child(2){background:#4b9;}
+			.box ul li:nth-child(3){background:#9d3;}
+			.box ul li:nth-child(4){background:#333;}
+			.box ul li:nth-child(5){background:#e72;}
+			.box ul li:nth-child(6){background:#c48;}
+			.box ul li.active{width:680px;}
+			.box ul li.active .brief{transform:translateY(-400%);}
+			.box ul li.active .details{transform:translateY(-400px);}
+			.box ul li .brief{transition:all 1s;transform:translateY(0);}
+			.box ul li .details{text-align:center;transition:all 1s;transform:translateY(400%);}
+			.box ul li .details img{margin:50px auto 30px;}
+			.box ul li .details p{font-size:18px;line-height:30px;}
+			.box ul li .brief .img{background:url(img/icon.png) no-repeat;display:block;}
+			.box ul li .brief .txt{width:25px;margin:0  auto;font-size:24px;line-height:25px;display:block;}
+			.box ul li:nth-child(1) .brief .img{width:56px;height:113px;background-position:-482px -181px;margin:180px auto 20px;}
+			.box ul li:nth-child(2) .brief .img{width:51px;height:138px;background-position:0px -417px;margin:186px auto 28px;}
+			.box ul li:nth-child(3) .brief .img{width:64px;height:142px;background-position:-64px -413px;margin:189px auto 20px;}
+			.box ul li:nth-child(4) .brief .img{width:76px;height:96px;background-position:-136px -204px;margin:226px auto 26px;}
+			.box ul li:nth-child(5) .brief .img{width:53px;height:116px;background-position:-141px -420px;margin:209px auto 24px;}
+			.box ul li:nth-child(6) .brief .img{width:54px;height:104px;background-position:-172px -306px;margin:220px auto 25px;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul>
+				<li class="active">
+					<div class="brief">
+						<span class="img"></span>
+						<span class="txt">语音外呼</span>
+					</div>
+					<div class="details">
+						<img src="img/1.png"/>
+						<p>使用语音外呼的模式将指定的语音呼入至接听人，可通过这种方式为针对性的客户提供会议通知、活动通知并可通过API接口程序化控制呼出时间、呼出效果反馈</p>
+					</div>
+				</li>
+				<li>
+					<div class="brief">
+						<span class="img"></span>
+						<span class="txt">点击呼叫</span>
+					</div>
+					<div class="details">
+						<img src="img/2.png"/>
+						<p>通过App应用内按钮或浏览器网页按钮点击并发起IP通话、运营商线路同化服务，减少用户交互，提升用户体验</p>
+					</div>
+				</li>
+				<li>
+					<div class="brief">
+						<span class="img"></span>
+						<span class="txt">直播通话</span>
+					</div>
+					<div class="details">
+						<img src="img/3.png"/>
+						<p>无论是智能终端、浏览器模式，通过App或者网页发起通话，接通方为手机用户或固话用户，常见集成至与企业服务相关的移动应用、企业客服坐席</p>
+					</div>
+				</li>
+				<li>
+					<div class="brief">
+						<span class="img"></span>
+						<span class="txt">回拨通话</span>
+					</div>
+					<div class="details">
+						<img src="img/4.png"/>
+						<p>同时通过平台方发起主叫和被叫双方，定制通话方满足不同需求的客户服务，企业服务亦可根据具体业务需求为客户提供定制服务</p>
+					</div>
+				</li>
+				<li>
+					<div class="brief">
+						<span class="img"></span>
+						<span class="txt">互联网通话</span>
+					</div>
+					<div class="details">
+						<img src="img/5.png"/>
+						<p>基于互联网纯网络通话，无运营商和地域限制，拥有更清晰的语音质量，支持语音三方密钥的加密传输</p>
+					</div>
+				</li>
+				<li>
+					<div class="brief">
+						<span class="img"></span>
+						<span class="txt">语音会议</span>
+					</div>
+					<div class="details">
+						<img src="img/6.png"/>
+						<p>同时桥接多人基于IP、电话语音的会议服务，基于API控制会议时长、成员邀请、禁音、移除等功能</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$("ul li").click(function(){
+					$(this).addClass("active").siblings("li").removeClass("active")
+				});
+			});
+		</script>
+	</body>
+</html>

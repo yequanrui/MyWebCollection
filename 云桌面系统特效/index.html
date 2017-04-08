@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>云桌面系统特效</title>
+		<meta name="keywords" content="云桌面,系统,特效">
+		<meta name="description" content="云桌面系统特效">
+		<link rel="stylesheet" href="css/jquery.window.css" />
+		<style>
+			*{margin:0;padding:0;}
+			body{background:url("../img/bg.png");font:14px/2 "微软雅黑";color:#333;overflow:hidden;}
+			ul,li{list-style:none;}
+			.menu{width:200px;background-color:#fff;box-shadow:0 0 10px #fff;display:none;position:absolute;top:100px;left:500px;z-index:9999;}
+			.menu ul li{height:35px;border-bottom:1px solid #ddd;font:14px/35px "微软雅黑";color:#666;text-indent:15px;cursor:pointer;}
+			.icon{width:18px;height:18px;background:url("img/sm_icon.png");margin:10px 0 0 20px;display:inline-block;float:left;}
+			.icon-0{background-position:-396px -82px;}
+			.icon-1{background-position:-243px -21px;}
+			.icon-2{background-position:-294px -83px;}
+			.icon-3{background-position:-402px -20px;}
+			.icon-4{background-position:-263px -20px;}
+			.icon-5{background-position:-420px -20px;}
+			.icon-6{background-position:-306px -20px;}
+			.icon-7{background-position:-355px -83px;}
+			.menu ul li:hover{background:#647e7c;color:#fff;}
+			.menu ul li:hover .icon-0{background-position:-396px -100px;}
+			.menu ul li:hover .icon-1{background-position:-243px -41px;}
+			.menu ul li:hover .icon-2{background-position:-294px -101px;}
+			.menu ul li:hover .icon-3{background-position:-402px -41px;}
+			.menu ul li:hover .icon-4{background-position:-263px -41px;}
+			.menu ul li:hover .icon-5{background-position:-420px -41px;}
+			.menu ul li:hover .icon-6{background-position:-306px -41px;}
+			.menu ul li:hover .icon-7{background-position:-355px -101px;}
+			.title{width:100%;height:36px;background:linear-gradient(#678,#345);font-size:18px;color:#eee;text-indent:10px;cursor:move;}
+			.title span{font-size:16px;color:#ddd;}
+			.window{width:300px;height:300px;background:#eee;border:3px solid #cde;border-radius:5px;box-shadow:0 0 1em silver;position:absolute;overflow:hidden;}
+			.window .drag{border:5px solid transparent;border-bottom-color:#789;border-right-color:#789;position:absolute;right:0;bottom:0;cursor:se-resize;}
+			#bg{width:730px;height:360px;background:rgba(2,4,6,.8);margin-left:-365px;display:none;position:absolute;top:100px;left:50%;z-index:9998;}
+			#bg ul li{width:200px;height:125px;margin:10px 16px;border:5px solid #fff;float:left;}
+			.close{width:18px;height:18px;background:url("img/sm_icon.png");background-position:-102px -18px;float:right;position:absolute;top:10px;right:10px;cursor:pointer;}
+			.close:hover{background-position:-102px -0px;}
+		</style>
+	</head>
+	<body>
+		<div class="menu">
+			<ul>
+				<li><i class="icon icon-0"></i><span>新建窗口</span></li>
+				<li><i class="icon icon-1"></i><span>添加应用</span></li>
+				<li><i class="icon icon-2"></i><span>添加书签</span></li>
+				<li><i class="icon icon-3"></i><span>清除书签</span></li>
+				<li><i class="icon icon-4"></i><span>刷新页面</span></li>
+				<li><i class="icon icon-5"></i><span>重命名</span></li>
+				<li><i class="icon icon-6"></i><span>上传资料</span></li>
+				<li><i class="icon icon-7"></i><span>更换背景</span></li>
+			</ul>
+		</div>
+		<div id="bg">
+			<div class="title" id="title">桌面背景墙<i class="close"></i></div>
+			<ul>
+				<li><img src="img/bg/s_1.jpg" /></li>
+				<li><img src="img/bg/s_2.jpg" /></li>
+				<li><img src="img/bg/s_3.jpg" /></li>
+				<li><img src="img/bg/s_4.jpg" /></li>
+				<li><img src="img/bg/s_5.jpg" /></li>
+				<li><img src="img/bg/s_6.jpg" /></li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.window.js"></script>
+	<script>
+		$(function() {
+			//1、禁止浏览器窗口，自带的右键功能
+			document.oncontextmenu = function() {
+				return false;
+			}
+			// 当按下鼠标右键，把菜单显示出来
+			$(document).mousedown(function(e) {
+				var key = e.which; // 1、左键  2、中间滚轮  3、右键
+				var x = e.clientX; // 鼠标按下去，与浏览器窗口左边的距离
+				var y = e.clientY;
+				if (key == 3) {
+					$(".menu").css({
+						left: x,
+						top: y
+					}).show(); // 显示菜单
+				}
+			});
+			// 当鼠标在浏览器窗口任意位置，点击时，菜单隐藏
+			$(document).click(function() {
+				$(".menu").hide();
+			});
+			// 当鼠标点击当前菜单时，阻止冒泡事件
+			$(".menu").click(function(e) {
+				e.stopPropagation();
+			});
+			// 获取某个menu中的li
+			$(".menu ul li").click(function(e) {
+				var _index = $(this).index(); // 获取序列号
+				if (_index == 0) {
+					createWindow({ // 调用构造函数，创建窗口
+						width: 360,
+						height: 360,
+						x: parseInt(Math.random() * e.pageX),
+						y: parseInt(Math.random() * e.pageY)
+					});
+					$(".menu").hide();
+				}
+				if (_index == 4) {
+					location.reload(); // 刷新页面
+				}
+				if (_index == 7) {
+					$("#bg").show(); // 显示更换背景界面
+					$(".menu").hide();
+				}
+			});
+			// 点击关闭按钮
+			$("#bg .title .close").click(function() {
+				$("#bg").hide();
+			});
+			// 切换背景
+			$("#bg ul li").click(function() {
+				var simg = $(this).find("img").attr("src");
+				var bimg = simg.replace("s_", "");
+				$("body").css("background", "url(" + bimg + ") no-repeat").css("background-size", "cover");
+			});
+		});
+	</script>
+</html>

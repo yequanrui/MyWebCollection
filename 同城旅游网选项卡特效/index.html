@@ -1,0 +1,217 @@
+<!doctype html><!--声明当前页面 html页面-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"><!--声明当前编码集  国际编码 utf-8 中文编码 gbk bg2312-->
+		<!--网页三要素-->
+		<meta name="Keywords" content="关键词">
+		<meta name="Description" content="描述">
+		<title>同城旅游网选项卡特效-千凡</title><!--网页标签-->
+		<!-- css 层叠样式表  衣服 化妆品  修饰body 或者body里面的元素 -->
+		<style type="text/css">
+		*{margin:0px;/*外边距*/padding:0px;/*内边距*/}
+		body{background:#666;/*背景颜色*/}
+		#sle{
+			width:485px;/*宽*/
+			height:355px;/*高*/
+			background:#ff00cc;
+			margin:50px 30px;/*上下外边距 左右*/
+		}
+		#sle .sle-nav{
+			width:125px;
+			height:355px;
+			background:#38414c;
+			float:left;/*左浮动*/
+		}
+		#sle .sle-nav ul li{
+			width:125px;
+			height:44px;
+			/*border:1px solid red;粗细 线型 颜色*/
+			list-style:none;/*去掉默认列表样式 小圆点*/
+			line-height:44px;/*行高*/
+			color:#fff;
+			font-size:12px;
+			cursor:pointer;/*手指形状*/
+		}
+		#sle .sle-nav ul li.frist{
+			background:#fff;
+			color:#209ef6;
+		}
+		/*阿里图标*/
+		@font-face {font-family: 'iconfont';
+			src: url('iconfont/iconfont.eot'); /* IE9*/
+			src: url('iconfont/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+			url('iconfont/iconfont.woff') format('woff'), /* chrome、firefox */
+			url('iconfont/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+			url('iconfont/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+		}
+		.iconfont{
+			font-family:"iconfont" !important;
+			font-size:16px;font-style:normal;
+			-webkit-font-smoothing: antialiased;
+			-webkit-text-stroke-width: 0.2px;
+			-moz-osx-font-smoothing: grayscale;
+			margin-left:20px;
+			margin-right:5px;
+		}
+		#sle .sle-con{
+			width:360px;
+			height:355px;
+			background:#fff;
+			float:left;
+			position:relative;/* 相对定位 参照物*/
+		}
+		#sle .sle-con .content{
+			width:360px;
+			height:355px;
+			position:absolute;/*绝对定位*/
+			top:0;left:0;
+			display:none;/*不显示*/
+		}
+		#sle .sle-con .content .content-nav{
+			height:36px;
+			margin-left:20px;
+			border-bottom:2px solid #666;
+		}
+		#sle .sle-con .content .content-nav a{
+			color:#666;
+			text-decoration:none;/*去掉文本下划线*/
+			float:left;
+			line-height:36px;
+			padding:0 8px;
+		}
+		#sle .sle-con .content .content-nav a.sle{
+			
+			border-bottom:2px solid #50b400;
+		}
+		#sle .sle-con .content .content-con{
+			width:340px;
+			height:300px;
+			
+			margin-left:20px;
+		}
+		#sle .sle-con .content .content-con p{
+			margin-top:20px;
+		}
+		#sle .sle-con .content .content-con p .txt{
+			width:288px;
+			height:30px;
+		}
+		#sle .sle-con .content .content-con p .sub{
+			width:130px;
+			height:30px;
+			background:#ffcc00;
+			border:none;
+			color:#fff;
+			font-size:20px;
+			margin-left:158px;
+		}
+		#sle .sle-con .content .content-con dl{
+			width:340px;
+			height:60px;
+			margin-bottom:12px;
+		}
+		#sle .sle-con .content .content-con dt{
+			line-height:25px;
+			font-size:12px;
+			color:#868686;
+		}
+		#sle .sle-con .content .content-con dd{
+			float:left;
+			font-size:14px;
+			color:#666;
+			margin-right:12px;
+			line-height:25px;
+		}
+		</style>
+	</head>
+		
+	<body>
+	<div id="sle">
+		<div class="sle-nav">
+			<ul>
+				<li class="frist"><i class="iconfont">&#xe60d;</i>出境游</li>
+				<li><i class="iconfont">&#xe626;</i>国内游</li>
+				<li><i class="iconfont">&#xe61e;</i>周边游</li>
+				<li><i class="iconfont">&#xe634;</i>景点门票</li>
+				<li><i class="iconfont">&#xe628;</i>酒店</li>
+				<li><i class="iconfont">&#xe626;</i>机票</li>
+				<li><i class="iconfont">&#x3447;</i>火车票</li>
+				<li><i class="iconfont">&#xec93;</i>邮轮</li>
+			</ul>
+		</div>
+		<div class="sle-con">
+			<div class="content" style="display:block">
+				<div class="content-nav">
+					<a class="sle" href="">景点</a>
+					<a href="">酒店+景点</a>
+					<a href="">周边跟团游</a>
+					<a href="">当地玩乐</a>
+				</div>
+				<div class="content-con">
+					<form>
+						<p><input class="txt" type="text"  placeholder="手机/邮箱"/></p>
+						<p><input class="sub" type="submit" value="搜索" /></p>
+					</form>
+					<dl>
+						<dt>精选主题：</dt>
+						<dd>主题乐园</dd>
+						<dd>自然风光</dd>
+						<dd>水世界</dd>
+						<dd>名胜古迹</dd>
+					</dl>
+					<dl>
+						<dt>精选主题：</dt>
+						<dd>主题乐园</dd>
+						<dd>自然风光</dd>
+						<dd>水世界</dd>
+						<dd>名胜古迹</dd>
+					</dl>
+					<dl>
+						<dt>精选主题：</dt>
+						<dd>主题乐园</dd>
+						<dd>自然风光</dd>
+						<dd>水世界</dd>
+						<dd>名胜古迹</dd>
+					</dl>
+				</div>
+			</div>
+			<div class="content"><img src="images/pic1.png" width="340" height="355" /></div>
+			<div class="content"><img src="images/pic2.png" width="340" height="355" /></div>
+			<div class="content"><img src="images/pic3.png" width="340" height="355" /></div>
+			<div class="content"><img src="images/pic4.png" width="340" height="355" /></div>
+			<div class="content"><img src="images/pic5.png" width="340" height="355" /></div>
+			<div class="content"><img src="images/pic6.png" width="340" height="355" /></div>
+			<div class="content"><img src="images/pic7.png" width="340" height="355" /></div>
+		</div>
+	</div>
+		<!--
+			css语法   选择器{属性:值;属性:值;...}
+			div 盒子模型  有宽有高放内容长方形区域
+			命名  姓名=“张三”  
+				class="" 重复性 多个
+				id=""    名字唯一
+			命名规范
+				1.不能用中文
+				2.以字母开头，数字。下划线，横线
+				3.见名知义
+			浮动：脱离文档，漂浮起来
+		-->
+		<script src="js/jquery-2.1.4.js"></script>
+		<script>
+		//找到点击对象
+		var red = [ "rgb(32, 158, 246)",
+					"rgb(80, 180, 0)",
+					"rgb(255, 102, 0)",
+					"rgb(80, 180, 0)",
+					"rgb(255, 102, 0)",
+					"rgb(32, 158, 246)",
+					"rgb(80, 180, 0)",
+					"rgb(15, 197, 204)"];
+		$("#sle .sle-nav ul li").click(function(){
+			var _index = $(this).index();//获取当前索引
+			$(this).css({color:red[_index],background:"#fff"}).siblings().css({color:"#fff",background:"#38414c"});
+			$("#sle .sle-con .content").eq(_index).show().siblings().hide();
+		})
+		</script>
+	</body>
+</html>

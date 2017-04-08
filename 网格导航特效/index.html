@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网格导航特效</title>
+		<meta name="keywords" content="网格,导航,特效">
+		<meta name="description" content="网格导航特效">
+		<style>
+			*{margin:0;padding:0;}
+			li{list-style:none;}
+			img{border:none;}
+			body {overflow:hidden;}
+			em,i{font-style:normal;}
+			a{text-decoration:none;}
+			body{background:url("../img/bg.png");}
+			.imgListBox{width:800px;height:400px;margin:100px auto 0;position:relative;}
+			.list{width:100%;height:400px;position:relative;top:0;left:0;}
+			.list li{width:200px;height:200px;float:left;}
+			.list li a{margin:5px;background:url("img/border.jpg") center center no-repeat;display:block;}
+			.list li img{width:190px;height:190px;box-shadow:2px 2px 2px rgba(222,222,222,.2);filter:alpha(opacity=70);opacity:.7;display:block;}
+			.list li a:hover img{filter:alpha(opacity=100);opacity:1;}
+			/*翻页*/
+			.page{width:40px;height:70px;margin-top:-35px;position:absolute;top:50%;right:-80px;}
+			.prev{height:25px;background:url('img/page.png') 0 0 no-repeat;margin-bottom:20px;opacity:.7;display:block;}
+			.next{height:25px;background:url("img/page.png") 0 -25px no-repeat;opacity:0.7;display:block;}
+			.next:hover,.prev:hover{opacity:1;}
+			.prev_ie6,.next_ie6{width:100%;height:25px;background:red;position:absolute;z-index:3;display:none;_display:block;_filter:alpha(opacity=0);opacity:0;cursor:pointer;}
+			.prev_ie6{top:0;left:0;}
+			.next_ie6{bottom:0;left:0;}
+			.hidden{overflow:hidden;}
+		</style>
+		<!--[if IE 6]>
+			<script type="text/javascript" src="../js/DD_belatedPNG_0.0.8a-min.js"></script>
+			<script type="text/javascript" src="../js/ie6Fixpng.js"></script>
+		<![endif]-->
+		<script>
+			function getStyle(obj, name) {
+				if (obj.currentStyle)
+					return obj.currentStyle[name];
+				else
+					return getComputedStyle(obj, false)[name];
+			}
+			function startMove(obj, json, fnEnd) {
+				var MAX = 18;
+				clearInterval(obj.timer);
+				obj.timer = setInterval(function() {
+					var bStop = true;
+					for (var name in json) {
+						var iTarget = json[name];
+						if (name == 'opacity')
+							var cur = Math.round(parseFloat(getStyle(obj, name)) * 100);
+						else
+							var cur = parseInt(getStyle(obj, name));
+						var speed = (iTarget - cur) / 5;
+						speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+						if (Math.abs(speed) > MAX) speed = speed > 0 ? MAX : -MAX;
+						if (name == 'opacity') {
+							obj.style.filter = 'alpha(opacity:' + (cur + speed) + ')';
+							obj.style.opacity = (cur + speed) / 100;
+						} else
+							obj.style[name] = cur + speed + 'px';
+						if (cur != iTarget)
+							bStop = false;
+					}
+					if (bStop) {
+						clearInterval(obj.timer);
+						if (fnEnd)
+							fnEnd();
+					}
+				}, 20);
+			}
+			window.onload = function() {
+				//li变成绝对定位
+				var oDiv = document.getElementById('div1');
+				var oUl = oDiv.children[0];
+				var aLi = oUl.children;
+				var ready = true;
+				var now = 0; //第一个
+				for (var i = 0; i < aLi.length; i++) {
+					aLi[i].style.left = aLi[i].offsetLeft + 'px';
+					if (i >= 12) {
+						aLi[i].style.top = '400px';
+					} else {
+						aLi[i].style.top = parseInt(i / 4) * 200 + 'px';
+					}
+				}
+				for (var i = 0; i < aLi.length; i++) {
+					aLi[i].style.position = 'absolute';
+				}
+				for (var i = 0; i < 8; i++) {
+					aLi[i].style.filter = 'alpha(opacity:100)';
+					aLi[i].style.opacity = 1;
+				}
+				//让下面的图片都隐藏
+				for (var i = 8; i < aLi.length; i++) {
+					aLi[i].style.filter = 'alpha(opacity:0)';
+					aLi[i].style.opacity = 0;
+				}
+				oUl.className = 'list';
+				//按钮
+				var aBtn1 = oDiv.children[1].getElementsByTagName('a');
+				var aBtn2 = oDiv.children[1].getElementsByTagName('span');
+				//上一个
+				aBtn1[0].onclick = aBtn2[0].onclick = function() {
+					if (now == 0) {
+						return;
+					}
+					if (!ready) return;
+					ready = false;
+					var i = now + 8 - 1;
+					var timer = setInterval(function() {
+						if (i < now) //第一行
+						{
+							if (i == now - 4) {
+								startMove(aLi[i], {
+									top: 0,
+									opacity: 100
+								}, function() {
+									ready = true;
+								});
+							} else {
+								startMove(aLi[i], {
+									top: 0,
+									opacity: 100
+								});
+							}
+						} else if (i < now + 4) //第二行
+						{
+							startMove(aLi[i], {
+								top: 200
+							});
+						} else //第三行
+						{
+							startMove(aLi[i], {
+								top: 400,
+								opacity: 0
+							});
+						}
+						i--;
+						if (i == now - 5) {
+							now -= 4;
+							clearInterval(timer);
+						}
+					}, 40);
+					//now += 4;
+				};
+				//下一个
+				aBtn1[1].onclick = aBtn2[1].onclick = function() {
+						if (now >= aLi.length - 8) {
+							return;
+						}
+						if (!ready) return;
+						ready = false;
+						var i = now;
+						var timer = setInterval(function() {
+							if (i < now + 4) //第一行
+							{
+								startMove(aLi[i], {
+									top: -200,
+									opacity: 0
+								});
+							} else if (i < now + 8) //第二行
+							{
+								startMove(aLi[i], {
+									top: 0
+								});
+							} else //第三行
+							{
+								if (i == now + 11) {
+									startMove(aLi[i], {
+										top: 200,
+										opacity: 100
+									}, function() {
+										ready = true;
+									});
+								} else {
+									startMove(aLi[i], {
+										top: 200,
+										opacity: 100
+									});
+								}
+							}
+							i++;
+							if (i == now + 12) {
+								now += 4;
+								clearInterval(timer);
+							}
+						}, 40);
+					//now += 4;
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<div class="imgListBox" id="div1">
+			<ul class="list hidden">
+		    	<li><a href="#"><img src="img/photo/01.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/02.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/03.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/04.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/05.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/06.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/07.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/08.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/09.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/10.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/11.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/12.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/13.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/14.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/15.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/16.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/17.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/18.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/19.jpg" alt="" /></a></li>
+		    	<li><a href="#"><img src="img/photo/20.jpg" alt="" /></a></li>
+		    </ul>
+		    <div class="page">
+		    	<a href="#" class="prev"></a>
+		    	<a href="#" class="next"></a>
+		    	<span class="prev_ie6"></span>
+		        <span class="next_ie6"></span>
+		    </div>
+		</div>
+	</body>
+</html>

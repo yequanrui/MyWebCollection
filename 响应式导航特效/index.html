@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>响应式导航特效</title>
+		<meta name="keywords" content="响应式,导航,特效">
+		<meta name="description" content="响应式导航特效">
+		<style>
+			*{margin:0;padding:0;}
+			body{background:url("../img/bg.png");}
+			nav a:nth-child(1){background:#fff url("img/1.png") no-repeat top;}
+			nav a:nth-child(2){background:#fff url("img/2.png") no-repeat top}
+			nav a:nth-child(3){background:#fff url("img/3.png") no-repeat top}
+			nav a:nth-child(4){background:#fff url("img/4.png") no-repeat top}
+			nav a:nth-child(5){background:#fff url("img/5.png") no-repeat top}
+			nav a:nth-child(6){background:#fff url("img/6.png") no-repeat top}
+			nav a:nth-child(7){background:#fff url("img/7.png") no-repeat top}
+			nav a:nth-child(8){background:#fff url("img/8.png") no-repeat top}
+			nav a:hover{background-position:bottom;}
+			@media screen and (min-width:980px){
+				.head{width:100%;height:70px;}
+				a.logo{position:fixed;right:calc(50% + 430px);top:0;}
+				nav{width:860px;height:80px;background:#fff;margin:0 auto;}
+				nav a{width:100px;height:40px;margin:20px 0;display:inline-block;}
+			}
+			@media screen and (min-width:640px) and (max-width:980px){
+				a.logo{position:fixed;left:0;top:0;}
+				nav{width:80px;height:600px;background:#fff;margin-top:80px;padding-top:5px;}
+				nav a{height:40px;width:40px;margin:30px 20px;display:block;}
+			}
+			@media screen and (max-width:640px){
+				.head{width:256px;height:256px;position:fixed;left:20px;bottom:20px;}
+				a.logo{width:80px;height:80px;margin:auto;position:absolute;left:0;top:0;right:0;bottom:0;}
+				.head nav{width:256px;height:256px;background:rgba(0,0,0,.6);border-radius:50%;opacity:0;transform:scale(0.2) rotate(-270deg);transition:all .5s;}
+				nav:hover{opacity:1;transform:scale(1.1) rotate(0deg);}
+				nav a{width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;position:absolute;display:block;}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="head">
+			<a class="logo" href="#">
+				<img width="80" height="80" src="../img/fy_ol_0.png" />
+			</a>
+			<nav>
+				<a class="ico" href="#"></a>
+				<a class="ico" href="#"></a>
+				<a class="ico" href="#"></a>
+				<a class="ico" href="#"></a>
+				<a class="ico" href="#"></a>
+				<a class="ico" href="#"></a>
+				<a class="ico" href="#"></a>
+				<a class="ico" href="#"></a>
+			</nav>
+		</div>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js" ></script>
+		<script>
+			// JavaScript实现图标环形分布
+			/*var ico = document.querySelectorAll(".ico");
+			for(var i =0,l=ico.length;i<l;i++){
+				ico[i].style.left = (50-35*Math.cos(-0.5*Math.PI-2*(1/l)*i*Math.PI)).toFixed(4)+"%";
+				ico[i].style.top = (50-35*Math.sin(-0.5*Math.PI-2*(1/l)*i*Math.PI)).toFixed(4)+"%";
+			}*/
+			// JQuery实现图标环形分布
+			var ico = $(".ico");
+			var len = ico.length;
+			ico.each(function(i){
+				var _left = (50-35*Math.cos(-0.5*Math.PI-2*(1/len)*i*Math.PI)).toFixed(4)+"%";
+				var _top = (50-35*Math.sin(-0.5*Math.PI-2*(1/len)*i*Math.PI)).toFixed(4)+"%";
+				$(this).css({"left":_left,"top":_top});
+			});
+			// logo鼠标事件
+			$(".logo").find("img").mouseover(function(){
+				$(this).attr("src","../img/fy_ps_0.png");
+			}).mouseleave(function(){
+				$(this).attr("src","../img/fy_ol_0.png");
+			});
+		</script>
+	</body>
+</html>

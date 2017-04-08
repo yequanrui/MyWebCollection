@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html onselectstart="return false">
+	<head>
+		<meta charset="utf-8">
+		<title>3D立方体旋转特效</title>
+		<meta name="keywords" content="3D,立方体,旋转特效">
+		<meta name="description" content="3D立方体旋转特效">
+		<style type="text/css">
+			*{margin:0px;padding:0px;}
+			body{background:url("../img/bg.png");font:bold 14px/180% "微软雅黑";color:#444;}
+			#wrap{height:300px;margin-top:150px;perspective:800px;}
+			#wrap div.cube{width:200px;margin:auto;height:200px;position:relative;
+				transform-style:preserve-3d;transform:translateZ(-100px);animation:spin 4s infinite linear;}
+			@keyframes spin{
+				from{transform:rotateY(0deg);}
+				to{transform:rotateY(360deg);}
+			}
+			b{width:200px;height:200px;background:rgba(200,200,200,.2);box-shadow:inset 0px 0px 30px rgba(0,0,0,0.2);font-size:20px;line-height:200px;text-align:center;display:block;position:absolute;}
+			b:nth-child(1){left:0px;top:0px;transform:translateZ(100px);}
+			b:nth-child(2){left:0px;top:0px;transform:translateZ(-100px) rotateY(180deg);}
+			b:nth-child(3){top:-200px;left:0px;transform:translateZ(100px) rotateX(90deg);transform-origin:bottom;}
+			b:nth-child(4){left:0px;top:200px;transform:translateZ(100px) rotateX(-90deg);transform-origin:top;}
+			b:nth-child(5){left:-200px;top:0px;transform:translateZ(100px) rotateY(-90deg);transform-origin:right;}
+			b:nth-child(6){left:200px;top:0px;transform:translateZ(100px) rotateY(90deg);transform-origin:left;}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="cube">
+				<b>Front</b>
+				<b>Back</b>
+				<b>Top</b>
+				<b>Bottom</b>
+				<b>Left</b>
+				<b>Right</b>
+			</div>
+		</div>
+	</body>
+</html>

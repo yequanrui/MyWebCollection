@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>经典时钟插件</title>
+		<meta name="keywords" content="经典,时钟,插件">
+		<meta name="description" content="经典时钟插件">
+		<style>
+			*{margin:0;padding:0}
+			#centered{width:200px;margin:0 auto;}
+		</style>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js" ></script>
+		<script type="text/javascript" src="js/clock2.js"></script>
+		<script type="text/javascript" src="js/jQueryRotate.2.2.js"></script>
+	</head>
+	<body>
+		<div id="centered">
+			<div id="html5-clock"></div>
+		</div>
+		<script type="text/javascript">
+			var config = {
+				divId: "html5-clock",
+				useSecondHand: "true",
+				clockWidthAndHeight: "200",
+				clockFaceImg: "img/clockBg.png",
+				hourHandImg: "img/hourHand.png",
+				minuteHandImg: "img/minuteHand.png",
+				secondHandImg: "img/secondHand.png",
+				clockFaceHighResImg: "img/clockBgHighRes.png",
+				hourHandHighResImg: "img/hourHandHighRes.png",
+				minuteHandHighResImg: "img/minuteHandHighRes.png",
+				secondHandHighResImg: "img/secondHandHighRes.png",
+				smoothRotation: "false",
+				secondHandSpeed: "100"
+			};
+			var myhtml5Clock = new html5Clock(config);
+		</script>
+	</body>
+</html>

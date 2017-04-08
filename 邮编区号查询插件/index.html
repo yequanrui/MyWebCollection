@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>邮编区号查询插件</title>
+		<style>
+			*{margin:0;padding:0;font-family:"微软雅黑";}
+			body{background:url("../img/bg.png");color:#666;}
+			h2{margin:1% auto;text-align:center;}
+			.box{width:460px;background:#eee;margin:1% auto;border:1px solid #666;border-radius:5px;box-shadow:1px 1px 10px #fff;}
+			.box p{text-align:center;margin:10px auto;}
+			#datalist{width:90%;margin:10px auto;border-collapse:collapse;text-align:center;}
+			#datalist th{height:30px;background:linear-gradient(#789,#456);border:1px solid #ccc;color:#eee;}
+			#datalist tr:hover{background:linear-gradient(#3fdafb,#0ca7b8);}
+			#datalist td{border:1px solid #ccc;}
+		</style>
+		<script type="text/javascript" src="js/postarea.js"></script>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+	</head>
+	<body>
+		<div class="box">
+			<h2>全国邮编区号查询</h2>
+			<p>
+				<select id="sf" onchange="sfChange();"></select>
+				<select id="cs" onchange="csChange();"></select>
+				<input type="text" id="keyword" />
+				<input type="button" value="搜索" onclick="search();" />
+				<br />可输入省份、城市、区号、邮编进行搜索)
+			</p>
+			<table id="datalist">
+				<thead>
+					<tr>
+						<th>省份</th>
+						<th>市县</th>
+						<th>邮编</th>
+						<th>区号</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<script>
+			function csChange() {
+				var sf = $("#sf").val();
+				var cs = $("#cs").val();
+				var htmls = "";
+				for (var i = 0; i < sfArr.length; i++) {
+					//筛选省份
+					if (sf != "")
+						if (sfArr[i] != sf)
+							continue;
+					//筛选市县
+					for (var j = 0; j < csArr[i].length; j++) {
+						if (cs != "")
+							if (csArr[i][j][0] != cs)
+								continue;
+						htmls = htmls + "<tr><td>" + sfArr[i] + "</td><td>" + csArr[i][j][0] + "</td><td>" + csArr[i][j][1] + "</td><td>" + csArr[i][j][2] + "</td></tr>";
+					}
+				}
+				$("#datalist tbody").html(htmls);
+				tableInit();
+			}
+			function sfChange() {
+				var sf = $("#sf").val();
+				if (sf == "") {
+					alert("请选择省份");
+					return;
+				}
+				var htmls = "";
+				for (var i = 0; i < sfArr.length; i++) {
+					if (sf != "")
+						if (sfArr[i] != sf)
+							continue;
+					htmls = htmls + "<option value=''>全部</option>";
+					for (var j = 0; j < csArr[i].length; j++)
+						htmls = htmls + "<option value='" + csArr[i][j][0] + "'>" + csArr[i][j][0] + "</option>";
+					break;
+				}
+				$("#cs").html(htmls);
+				csChange();
+				tableInit();
+			}
+			function search() {
+				var keyword = $("#keyword").val();
+				if (keyword == "") {
+					alert("请输入关键字，可以是省份、市县名称或者邮编、区号");
+					return;
+				}
+				var htmls = "";
+				var isSFOK = false;
+				for (var i = 0; i < sfArr.length; i++) {
+					isSFOK = false;
+					//省份是否合适
+					if (sfArr[i].indexOf(keyword) != -1)
+						isSFOK = true;
+					for (var j = 0; j < csArr[i].length; j++) {
+						if (csArr[i][j][0].indexOf(keyword) != -1 || csArr[i][j][1].indexOf(keyword) != -1 || csArr[i][j][2].indexOf(keyword) != -1 || isSFOK)
+							htmls = htmls + "<tr><td>" + sfArr[i] + "</td><td>" + csArr[i][j][0] + "</td><td>" + csArr[i][j][1] + "</td><td>" + csArr[i][j][2] + "</td></tr>";
+					}
+				}
+				$("#datalist tbody").html(htmls);
+				tableInit();
+			}
+			function init() {
+				var htmls = "";
+				for (var i = 0; i < sfArr.length; i++)
+					htmls = htmls + "<option value='" + sfArr[i] + "'>" + sfArr[i] + "</option>";
+				$("#sf").html(htmls);
+				sfChange();
+			}
+			function tableInit() {
+				$("#datalist tr:odd").css("background-color", "#fff");
+				$("#datalist tr:even").css("background-color", "#eee");
+			}
+			init();
+		</script>
+	</body>
+</html>

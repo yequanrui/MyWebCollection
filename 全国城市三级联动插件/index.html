@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全国城市三级联动插件</title>
+		<meta name="keywords" content="全国城市,三级联动,插件">
+		<meta name="description" content="全国城市三级联动插件">
+		<style>
+			*{margin:0;padding:0;font-family:"微软雅黑";}
+			body{background:url("../img/bg.png");color:#666;}
+			h2{margin:1% auto;text-align:center;}
+			.box{width:700px;background:#eee;margin:1% auto;border:1px solid #666;border-radius:5px;box-shadow:1px 1px 10px #fff;}
+			.box div{width:640px;margin:0 auto;}
+			.box p{text-align:center;margin:10px auto;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<h2>全国城市三级联动</h2>
+			<div>
+				省级行政区（一级行政区）：省、自治区、直辖市、特别行政区<br />
+				地级行政区（二级行政区）：地区、盟、自治州、地级市（包含普通地级市和副省级市）<br />
+				县级行政区（三级行政区）：县、自治县、旗、自治旗、县级市、市辖区、林区、特区<br />
+				乡级行政区（四级行政区）：乡、民族乡、镇、街道、苏木、民族苏木<br />
+				村级行政区（五级行政区）：村、社区、嘎査<br />
+				组级行政区（六级行政区）：村民小组、社区居民小组
+			</div>
+			<p>
+				<select id="s_province" name="s_province"></select>  
+				<select id="s_city" name="s_city" ></select>  
+				<select id="s_county" name="s_county"></select>
+				<script type="text/javascript" src="js/area.js"></script>
+				<script>
+					areaInit();
+					var Gid = document.getElementById;
+					var showArea = function() {
+						Gid('show').innerHTML = "<h3>省" +
+							Gid('s_province').value + " - 市" +
+							Gid('s_city').value + " - 县/区" +
+							Gid('s_county').value + "</h3>"
+					}
+					Gid('s_county').setAttribute('onchange', 'showArea()');
+				</script>
+			</p>
+			<p>
+				<select id="c_province"></select>
+				<select id="c_city"></select>
+				<select id="c_area"></select>
+				<br /><br />
+				<select id="select1"></select>
+				<select id="select2"></select>
+				<select id="select3"></select>
+				<script type="text/javascript" src="js/address.js"></script>
+				<script>
+					addressInit('c_province', 'c_city', 'c_area', '广东省', '深圳市', '光明新区');
+					addressInit('select1', 'select2', 'select3');
+				</script>
+			</p>
+		</div>
+	</body>
+</html>

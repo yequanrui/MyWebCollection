@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>3D楼盘模型旋转特效</title>
+		<meta name="keywords" content="3D,楼盘,模型,旋转,特效">
+		<meta name="description" content="3D楼盘模型旋转特效">
+		<style>
+			html{width:100%;height:100%;min-width:400px;min-height:400px;position:relative;}
+			body{width:100%;background:url("../img/bg.png");margin:0;top:0;left:0;height:100%;perspective:500px;overflow:hidden;}
+			div,a,b,i{position:absolute;transform-style:preserve-3d;}
+			a,b,i{box-shadow:inset 0 0 1px rgb(35,49,51);}
+			a,b{background-position:center center;}
+			#demo{background:lightgray;box-shadow:0 0 0 10px darkgray;top:50%;left:50%;animation:spin 16s linear infinite;}
+			#demo div{}
+			#demo div a{width:100%;bottom:0;left:0;transform:rotateX(-90deg);transform-origin:0 100%;}
+			#demo div b{height:100%;top:0;left:100%;transform:rotateY(90deg);transform-origin:0 0;}
+			#demo div i{left:0;bottom:100%;transform:rotateX(90deg);transform-origin:0 100%;}
+			#demo a{background-color:rgba(176,208,223,0.9);}
+			#demo a>b{background-color:rgba(128,174,197,0.9);}
+			#demo a>b>b{background-color:rgba(176,208,223,0.9);}
+			#demo a>b>b>b{background-color:rgba(128,174,197,0.9);}
+			#demo i{background-color:rgba(237,248,254,0.9);}
+			div.a a,div.a b{background-image:url('img/1.png');}
+			div.b a,div.b b{background-image:url('img/2.png');}
+			div.c a,div.c b{background-image:url('img/3.png');}
+			div.d a,div.d b{background-image:url('img/4.png');}
+			div.e a,div.e b{background-image:url('img/5.png');}
+			@keyframes spin{
+				from{transform:rotateX(60deg) rotateZ(-180deg);}
+				to{transform:rotateX(60deg) rotateZ(180deg);}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<!--
+		    W - width, H - height, L - length
+		    <div> -> width: W, height: H
+		    <a>    -> height: L
+		    <b>    -> width: H
+		    <b>    -> width: W
+		    <b>    -> width: H
+		    <i>     -> width: H; height: W
+		    -->
+		</div>
+		<script>
+			var D = {
+				base: 5,
+				size: 50,
+				space: 5,
+				height: {
+					min: 10,
+					max: 100
+				},
+				type: ['a', 'b', 'c', 'd', 'e'],
+				bldg: '<a><b><b><b><i></i></b></b></b></a>',
+				Random: function(min, max) {
+					var value = Math.random() * (max - min) + min;
+					return Math.round(value);
+				},
+				Build: function() {
+					for (var x = 0; x < D.base; x++) {
+						for (var y = 0; y < D.base; y++) {
+							var e = D.data[x * D.base + y];
+							var w = D.Random(D.space, D.size - D.space);
+							var h = D.Random(D.space, D.size - D.space);
+							var l = D.Random(D.space / 2, D.size - w);
+							var t = D.Random(D.space / 2, D.size - h);
+							var z = D.Random(D.height.min, D.height.max);
+							var i = D.Random(0, D.type.length - 1);
+							var c = e.getElementsByTagName('*');
+							e.className = D.type[i];
+							e.style.width = w + 'px';
+							e.style.height = h + 'px';
+							e.style.left = x * D.size + l + 'px';
+							e.style.top = y * D.size + t + 'px';
+							c[0].style.height = z + 'px';
+							c[1].style.width = h + 'px';
+							c[2].style.width = w + 'px';
+							c[3].style.width = h + 'px';
+							c[4].style.width = h + 'px';
+							c[4].style.height = w + 'px';
+						}
+					}
+				},
+				Create: function() {
+					for (var i = 0; i < D.base * D.base; i++) {
+						var div = document.createElement('div');
+						div.innerHTML = D.bldg;
+						D.demo.appendChild(div);
+					}
+					D.data = D.demo.getElementsByTagName('div');
+				},
+				Init: function() {
+					var l = D.base * D.size;
+					D.demo = document.getElementById('demo');
+					D.demo.style.width = D.demo.style.height = l + 'px';
+					D.demo.style.marginTop = D.demo.style.marginLeft = -l / 2 + 'px';
+					D.demo.addEventListener('click', D.Build, false);
+				},
+				Run: function() {
+					D.Init();
+					D.Create();
+					D.Build();
+				}
+			};
+			D.Run();
+		</script>
+	</body>
+</html>

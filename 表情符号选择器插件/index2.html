@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>QQ表情插件</title>
+		<meta name="keywords" content="QQ,表情,插件">
+		<meta name="description" content="QQ表情插件">
+		<style>
+			*{margin:0;padding:0;}
+			body{font:14px/1.5 "微软雅黑";color:#333;text-align:center;}
+			div{margin:0 auto;text-align:left;}
+			input,textarea{font:14px/1 "微软雅黑";}
+			#show{width:600px;margin:20px auto 0;border:1px solid #ddd;border-radius:5px;box-shadow:0 0 5px rgba(0,0,0,0.2);}
+			.input{width:600px;height:60px;margin:10px auto 0;border:1px solid #ddd;border-radius:5px;box-shadow:0 0 5px rgba(0,0,0,0.2);resize:none;}
+			.comment{width:600px;position:relative;}
+			.emotion{width:42px;height:20px;background:url("img/icon.gif") no-repeat 2px 2px;padding-left:20px;cursor:pointer;}
+			.emotion:hover{background-position:2px -28px;}
+			.qqFace{background:#fff;margin-top:4px;border:1px #dfe6f6 solid;}
+			.qqFace table td{padding: 0px;}
+			.qqFace table td img{border:1px #fff solid;cursor:pointer;}
+			.qqFace table td img:hover{border:1px #06c solid;}
+			.btn{padding:.5em 2em;border:none;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.2);background:linear-gradient(#7db72f,#4e7d0e);color:#e8f0de;text-align:center;text-shadow:0 1px 1px rgba(0,0,0,.6);cursor:pointer;display:inline-block;position:absolute;right:0px;top:0;}
+			.btn:hover{background:linear-gradient(#6b9d28,#436b0c);}
+		</style>
+	</head>
+	<body>
+		<div id="show" ContentEditable=true></div>
+		<textarea class="input" id="saytext" name="saytext"></textarea>
+		<div class="comment">
+			<span class="emotion">表情</span>
+			<input type="button" class="btn" value="提交">
+		</div>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery.qqFace.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".emotion").qqFace({
+					id: "face", // 表情盒子的ID
+					assign: "saytext", // 给那个控件赋值
+					path: "face/" // 表情存放的路径
+				});
+				$(".btn").click(function() {
+					var str = $("#saytext").val();
+					$("#show").html(replace_em(str));
+				});
+			});
+			//查看结果
+			function replace_em(str) {
+				str = str.replace(/\</g, "&lt;");
+				str = str.replace(/\>/g, "&gt;");
+				str = str.replace(/\n/g, "<br/>");
+				str = str.replace(/\[em_([0-9]*)\]/g, "<img src='img/face/$1.gif' border='0' />");
+				return str;
+			}
+		</script>
+	</body>
+</html>

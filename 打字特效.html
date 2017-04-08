@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>打字特效</title>
+		<meta name="keywords" content="打字,特效">
+		<meta name="description" content="打字特效">
+		<style type="text/css">
+			*{margin:0;padding:0}
+			body{background:url("img/bg.png");font:14px/180% "微软雅黑";color:#eee;}
+			#txt{width:500px;margin:20px auto;background:#333;border:1px solid #123456;border-radius:5px;transition:all 1s ease;}
+			#txt:hover{background:#ddd;color:#333;transition:all 1s ease;}
+			input{width:50px;background:#333;color:#eee;margin:20px auto;border:none;border-radius:5px;font:16px/180% "微软雅黑";transition:all 1s ease;}
+			input:hover{background:#ddd;color:#333;transition:all 1s ease;}
+			#content{font:italic bold 40px/100% "微软雅黑";}
+		</style>
+	</head>
+	<body>
+		<div align="center">
+			<div id="txt" contenteditable="true">流星因为背负着太多别人的愿望才会陨落。它应该，找到属于自己的，不一样的轨道。</div><br />
+				<input type="button" value="提交" onclick="start()" /><br />
+				<em id="content"></em>
+		</div>
+		<script type="text/javascript">
+			var contentDom = document.getElementById("content");
+			var i = 0;
+			function start() {
+				var a = document.getElementById("txt").innerHTML;
+				if (i == a.length)
+					return;
+				contentDom.innerHTML += a.charAt(i);
+				i++;
+				setTimeout(start, 200);
+			};
+		</script>
+	</body>
+</html>

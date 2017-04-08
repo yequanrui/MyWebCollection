@@ -1,0 +1,80 @@
+body {
+	background: #272822;
+	margin: 0;
+	perspective: 600px;
+	-webkit-perspective: 600px;
+}
+/* Button container */
+.container {
+	margin: 15px auto;
+	width: 240px;
+	height: 240px;
+	transform: rotateX(40deg);
+	transform-style: preserve-3d;
+}
+/* Light gray bottom part */
+.base {
+	background: #bbb;
+	border-radius: 16px;
+	box-shadow: 0 -6px 0px #777777 inset;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+	position: relative;
+	transform-style: preserve-3d;
+	width: 240px;
+	height: 240px;
+}
+/* Clickable area containing both dark gray parts of button */
+.btn-wrapper {
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	-webkit-appearance: none;
+	transform-style: preserve-3d;
+}
+.btn-wrapper:active .btn {
+	transform: translateZ(1px);
+}
+.btn-wrapper:active .btn-side {
+	transform: translateZ(0);
+}
+.btn-wrapper:focus {
+	outline: none;
+}
+/* Top of button */
+.btn {
+	background: #444 linear-gradient(#888888, transparent 50%);
+	border-radius: 16px;
+	box-shadow: 0 0 5px #888888 inset;
+	color: #f80;
+	display: block;
+	font: 178.5px Asap;
+	font-weight: bold;
+	width: 210px;
+	height: 210px;
+	transform: translateZ(36px);
+	transition: all 0.05s;
+	text-align: center;
+	text-shadow: 0 0 24px #f80, 0 -2.4px 0 #222222, 0 2.4px 0 #ffbb33;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+/* Shown side of button */
+.btn-side {
+	background: #333333 linear-gradient(90deg, #666666, transparent 8%, transparent 92%, #666666);
+	border-radius: 0 0 12px 12px;
+	box-shadow: 0 -4.8px 4.8px #222 inset;
+	position: absolute;
+	bottom: 0;
+	transform: rotateX(-70deg);
+	transform-origin: 0 100%;
+	transition: all 0.05s;
+	width: 210px;
+	height: 31.5px;
+	z-index: 1;
+}

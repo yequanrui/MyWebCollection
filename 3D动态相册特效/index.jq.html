@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html onselectstart="return false"><!--禁止选中元素-->
+	<head>
+		<meta charset="utf-8">
+		<title>3D动态相册特效</title>
+		<meta name="keywords" content="3D,动态相册,特效">
+		<meta name="description" content="3D动态相册特效">
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{background:url("../img/bg.png");}
+			/*wrap start*/
+			#wrap{width:133px;height:200px;margin:200px auto 0;position:relative;transform-style:preserve-3d;transform:perspective(800px) rotateY(0deg) rotateX(-15deg);}
+			#wrap img{border-radius:5px;box-shadow:0px 0px 10px #eee;-webkit-box-reflect:below 10px -webkit-linear-gradient(top,rgba(0,0,0,0) 50%,rgba(0,0,0,1));position:absolute;}
+			#wrap p{width:1200px;height:1200px;background:-webkit-radial-gradient(center center,600px 600px,rgba(255,255,255,0.3),rgba(0,0,0,0));margin-top:-600px;margin-left:-600px;border-radius:600px;position:absolute;left:50%;top:100%;transform:rotateX(90deg);}
+			/*wrap end*/
+		</style>
+	</head>
+	<body>
+		<!--wrap start-->
+		<div id="wrap">
+			<img src="img/1.jpg" alt="隐藏猫" />
+			<img src="img/2.jpg" alt="萌狗" />
+			<img src="img/3.jpg" alt="茶杯狗" />
+			<img src="img/4.jpg" alt="大头狗" />
+			<img src="img/5.jpg" alt="兔子" />
+			<img src="img/6.jpg" alt="熊猫" />
+			<img src="img/7.jpg" alt="垃圾猫" />
+			<img src="img/8.jpg" alt="松鼠" />
+			<img src="img/9.jpg" alt="北极熊" />
+			<img src="img/10.jpg" alt="猫咪" />
+			<img src="img/11.jpg" alt="玩猫" />
+			<p></p>
+		</div>
+		<!--wrap end-->
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script>
+			$(function(){
+				var Deg = 360/$("#wrap img").size();/// 根据图片数量求出单张旋转角度
+				var rx = -15;// 初始化沿X轴旋转角度
+				var ry = 0;// 初始化沿Y轴旋转角度
+				$("#wrap img").each(function(i){
+					$(this).css({
+						"transform":"rotateY("+Deg*i+"deg) translateZ(350px)"
+					}).attr("ondragstart","return false");// 禁止拖动元素
+				});
+				$(document).mousedown(function(e){
+					var _x = e.clientX;// 鼠标按下时的横坐标
+					var _y = e.clientY;// 鼠标按下时的纵坐标
+					$(this).bind("mousemove",function(e){// 绑定鼠标移动
+						var x = e.clientX;// 当前鼠标的横坐标
+						var y = e.clientY;// 当前鼠标的纵坐标
+						var dx = x - _x;// 横坐标差值
+						var dy = y - _y;// 纵坐标差值
+						ry += dx*0.2;// 沿Y轴旋转角度
+						rx += dy*0.2;// 沿X轴旋转角度
+						$("#wrap").css({
+							"transform":"perspective(800px) rotateY("+ry+"deg) rotateX("+rx+"deg)"
+						});
+						_x = e.clientX;// 鼠标移动后的横坐标
+						_y = e.clientY;// 鼠标移动后的纵坐标
+					});
+				}).mouseup(function(){
+					$(this).unbind("mousemove");// 解除绑定鼠标移动
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>动态横幅特效</title>
+		<meta name="keywords" content="动态,横幅,特效">
+		<meta name="description" content="动态横幅特效">
+		<style>
+			*{margin:0;padding:0;}
+			body{background:url("../img/bg.png");font:12px/1.4 "微软雅黑";color:#eee;}
+			.list{margin:.2em auto;text-align:center;}
+			.list a{margin:.3em .5em;padding:.5em 1.2em;border:2px solid #789;border-radius:5px;outline:none;font-weight:700;font-size:110%;color:#eee;text-decoration:none;display:inline-block;}
+			.list a:hover{border-color:#def;}
+			.accordion{width:900px;height:378px;margin:10% auto 0;border-radius:5px;box-shadow:0 0 10px 1px #def;display:none;overflow:hidden;}
+			.accordion ul{padding:0;list-style:none;}
+			.accordion ul li{width:150px;height:378px;float:left;}
+			.accordion li img{height:378px;}
+			.slice{width:900px;height:360px;background:#abcdef;margin:10% auto 0;border-radius:5px;box-shadow:0 0 10px 1px #def;position:relative;perspective:800px;display:none;}
+			.slice .s1{background:url("img/1.png");}
+			.slice .s2{background:url("img/2.png");}
+			.slice .s3{background:url("img/3.png");}
+			.slice .s4{background:url("img/4.png");}
+			.slice ul{width:900px;height:360px;}
+			.slice ul li{width:225px;height:360px;list-style:none;float:left;position:relative;transform-style:preserve-3d;transition:1s;transform:translateZ(-180px);}
+			.slice ul li:nth-child(1){transition:1s 0s;}
+			.slice ul li:nth-child(2){transition:1s .2s;}
+			.slice ul li:nth-child(3){transition:1s .4s;}
+			.slice ul li:nth-child(4){transition:1s .6s;}
+			.slice ul li:nth-child(1) div{background-position:0;}
+			.slice ul li:nth-child(2) div{background-position:-222px;}
+			.slice ul li:nth-child(3) div{background-position:-447px;}
+			.slice ul li:nth-child(4) div{background-position:-672px;}
+			.slice ul li div{width:225px;height:360px;position:absolute;}
+			.slice ul li div:nth-child(1){bottom:360px;transform:translateZ(180px) rotateX(90deg);transform-origin:bottom;}
+			.slice ul li div:nth-child(2){top:360px;transform:translateZ(180px) rotateX(-90deg);transform-origin:top;}
+			.slice ul li div:nth-child(3){transform:translateZ(180px);}
+			.slice ul li div:nth-child(4){transform:translateZ(-180px) rotateX(180deg);}
+			.slice ol{width:115px;height:30px;list-style:none;position:absolute;right:-15px;bottom:-5px;}
+			.slice ol li{width:18px;height:18px;background:#123;border-radius:10px;box-shadow:1px 1px 11px #eee;text-align:center;float:left;cursor:pointer;}
+			.shade{width:1017px;height:523px;margin:50px auto;position:relative;display:none;}
+			.shade .bg{width:100%;height:100%;position:absolute;}
+			.shade .bg1{opacity:1;}
+			.shade .bg2{opacity:0;}
+			.shade ul{position:absolute;}
+			.shade ul li{width:337px;height:173px;border:1px solid #ccc;float:left;list-style:none;position:relative;}
+			.shade ul li img{display:none;position:absolute;z-index:1;}
+			.shade ul li:hover img{display:block;opacity:.8;}
+			.shade ul li .logo{display:block;left:-30px;}
+			.shade ul li div{margin:10px;font-family:"微软雅黑";color:#fff;position:absolute;z-index:2;}
+		</style>
+	</head>
+	<body>
+		<div class="list">
+			<a href="#" id="accordion">手风琴特效</a>
+			<a href="#" id="slice">盒子切割特效</a>
+			<a href="#" id="shade">盒子渐变特效</a>
+		</div>
+		<div class="accordion">
+			<ul>
+				<li><img src="img/1.png" /></li>
+				<li><img src="img/2.png" /></li>
+				<li><img src="img/3.png" /></li>
+				<li><img src="img/4.png" /></li>
+				<li><img src="img/5.png" /></li>
+				<li><img src="img/6.png" /></li>
+			</ul>
+		</div>
+		<div class="slice">
+			<ul>
+				<li>
+					<div class="s1"></div>
+					<div class="s2"></div>
+					<div class="s3"></div>
+					<div class="s4"></div>
+				</li>
+				<li>
+					<div class="s1"></div>
+					<div class="s2"></div>
+					<div class="s3"></div>
+					<div class="s4"></div>
+				</li>
+				<li>
+					<div class="s1"></div>
+					<div class="s2"></div>
+					<div class="s3"></div>
+					<div class="s4"></div>
+				</li>
+				<li style="z-index:-1;">
+					<div class="s1"></div>
+					<div class="s2"></div>
+					<div class="s3"></div>
+					<div class="s4"></div>
+				</li>
+			</ul>
+			<ol>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+			</ol>
+		</div>
+		<div class="shade">
+			<div class="bg bg1">
+				<img src="images/bg1.jpg" width="1017" height="523" alt="" />
+			</div>
+			<div class="bg bg2">
+				<img src="images/bg2.jpg" width="1017" height="523" alt="" />
+			</div>
+			<ul>
+				<li>
+					<img class="logo" src="images/logo.png" width="80" height="60" alt="" />
+				</li>
+				<li>
+					<div>
+						<p>青春</p>
+						YOUTH
+					</div>
+					<img src="images/1.jpg" width="100%" height="100%" alt="" />
+				</li>
+				<li>
+					<div>
+						<p>青春</p>
+						YOUTH
+					</div>
+					<img src="images/2.jpg" width="100%" height="100%" alt="" />
+				</li>
+				<li>
+					<div>
+						<p>青春</p>
+						YOUTH
+					</div>
+					<img src="images/3.jpg" width="100%" height="100%" alt="" />
+				</li>
+				<li>
+					<div>
+						<p>青春</p>
+						YOUTH
+					</div>
+					<img src="images/4.jpg" width="100%" height="100%" alt="" />
+				</li>
+				<li>
+					<div>
+						<p>青春</p>
+						YOUTH
+					</div>
+					<img src="images/5.jpg" width="100%" height="100%" alt="" />
+				</li>
+				<li>
+					<div>
+						<p>青春</p>
+						YOUTH
+					</div>
+					<img src="images/6.jpg" width="100%" height="100%" alt="" />
+				</li>
+				<li>
+					<div>
+						<p>青春</p>
+						YOUTH
+					</div>
+					<img src="images/7.jpg" width="100%" height="100%" alt="" />
+				</li>
+				<li>
+					<div>
+						<p>青春</p>
+						YOUTH
+					</div>
+					<img src="images/8.jpg" width="100%" height="100%" alt="" />
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script>
+			$(function() {
+				$("#accordion").click(function() {
+					$(".slice").hide();
+					$(".shade").hide();
+					$(".accordion").slideDown("slow").find("li").mouseover(function() {
+						$(this).animate({
+							width: "900px"
+						}).siblings().animate({
+							width: "0"
+						});
+					});
+					$(".accordion").mouseleave(function() {
+						$(this).find("li").animate({
+							width: "150px"
+						});
+					});
+				});
+				$("#slice").click(function() {
+					$(".accordion").hide();
+					$(".shade").hide();
+					$(".slice").slideDown("slow").find("ol li").click(function() {
+						var _index = $(this).index();
+						var _deg = -_index * 90 + "deg"
+						$(".slice ul li").css("transform", "translateZ(-180px) rotateX(" + _deg + ")")
+					});
+				});
+				$("#shade").click(function() {
+					$(".accordion").hide();
+					$(".slice").hide();
+					$(".shade").slideDown("slow");
+					var bg1 = $(".bg1");
+					var bg2 = $(".bg2");
+					function autoplay1() {
+						bg1.animate({
+							"opacity": 0
+						}, 2000);
+						bg2.animate({
+							"opacity": 1
+						}, 2000);
+					}
+					function autoplay2() {
+						bg1.animate({
+							"opacity": 1
+						}, 2000);
+						bg2.animate({
+							"opacity": 0
+						}, 2000);
+					}
+					setInterval(function() {
+						if (bg1.css("opacity") == 0)
+							autoplay2();
+						else if (bg1.css("opacity") == 1)
+							autoplay1();
+					}, 4000);
+				});
+			});
+		</script>
+	</body>
+</html>

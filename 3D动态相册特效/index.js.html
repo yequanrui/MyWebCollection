@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>3D动态相册特效</title>
+		<meta name="keywords" content="3D,动态相册,特效">
+		<meta name="description" content="3D动态相册特效">
+		<style>
+			*{margin:0;padding:0;}
+			body{background:url("../img/bg.png");overflow:hidden;}
+			#imgbg{width:1200px;height:1200px;background:radial-gradient(rgba(222,222,222,.2),rgba(1,1,1,.1));margin:-600px 0 0 -600px;border-radius:600px;position:absolute;left:50%;top:50%;transform:translateY(200px) rotateX(90deg);}
+			#img{width:200px;height:200px;margin:150px auto;position:relative;transform:perspective(1000px) rotateX(-10deg) rotateY(0deg);transform-style:preserve-3d;}
+			#img div.hid{width:153px;height:400px;background-size:100% 100%;margin:-90px 0 0 -67px;position:absolute;left:50%;top:50%;overflow:hidden;transition:1s all ease;transform:rotateY(0deg) translateZ(0px);}
+			#img div.img{width:133px;height:200px;margin:0;border-radius:5px;box-shadow:0 0 10px #eee;position:absolute;top:10px;left:10px;}
+			#img div.img .shadow{width:133px;height:200px;background-size:100% 100%;position:absolute;left:0;top:-102px;opacity:0.2;}
+			#img div .over{width:133px;height:100px;position:absolute;left:0;top:214px;transform:scale(1,-1);}
+		</style>
+	</head>
+	<body>
+		<div id="img">
+			<strong id="imgbg"></strong>
+		</div>
+		<script>
+			window.onload = function() {
+				var M = 11;
+				var oDiv = document.getElementById('img');
+				var aDiv = oDiv.getElementsByClassName('hid');
+				var x = -10;
+				var y = 0;
+				var speedX = 0;
+				var speedY = 0;
+				for (var i = 1; i <= M; i++) {
+					var oNewDiv = document.createElement('div');
+					oNewDiv.className = 'hid';
+					(function(oNewDiv, i) {
+						setTimeout(function() {
+							oNewDiv.style.WebkitTransform = 'rotateY(' + (360 * (i - 1) / M) + 'deg) translateZ(400px)';
+							oNewDiv.style.MozTransform = 'rotateY(' + (360 * (i - 1) / M) + 'deg) translateZ(400px)';
+							oNewDiv.style.msTransform = 'rotateY(' + (360 * (i - 1) / M) + 'deg) translateZ(400px)';
+							oNewDiv.style.OTransform = 'rotateY(' + (360 * (i - 1) / M) + 'deg) translateZ(400px)';
+							oNewDiv.style.transform = 'rotateY(' + (360 * (i - 1) / M) + 'deg) translateZ(400px)';
+							setTimeout(function() {
+								if (i == M) fixAll();
+								setTimeout(function() {
+									oNewDiv.style.WebkitTransition = 'none';
+									oNewDiv.style.MozTransition = 'none';
+									oNewDiv.style.msTransition = 'none';
+									oNewDiv.style.OTransition = 'none';
+									oNewDiv.style.transition = 'none';
+								}, 1000);
+							}, 3000);
+						}, (M + 3 - i) * 200);
+					})(oNewDiv, i);
+					oNewDiv.degY = 360 * (i - 1) / M;
+					oNewDiv.innerHTML = '<div class="img"><span class="over"><span class="shadow"></span></span></div>';
+					oNewDiv = oNewDiv.getElementsByClassName('img')[0];
+					oNewDiv.style.background = 'url(img/' + i + '.jpg)';
+					oNewDiv.getElementsByClassName('shadow')[0].style.background = '-webkit-linear-gradient(rgba(0,0,0,1) 40%, rgba(255,255,255,0)), url(img/' + i + '.jpg)';
+					oNewDiv.getElementsByClassName('shadow')[0].style.background = '-moz-linear-gradient(rgba(0,0,0,1) 40%, rgba(255,255,255,0)), url(img/' + i + '.jpg)';
+					oNewDiv.getElementsByClassName('shadow')[0].style.background = '-ms-linear-gradient(rgba(0,0,0,1) 40%, rgba(255,255,255,0)), url(img/' + i + '.jpg)';
+					oNewDiv.getElementsByClassName('shadow')[0].style.background = '-o-linear-gradient(rgba(0,0,0,1) 40%, rgba(255,255,255,0)), url(img/' + i + '.jpg)';
+					oNewDiv.getElementsByClassName('shadow')[0].style.backgroundSize = '100% 100%';
+					oNewDiv.style.backgroundSize = '100% 100%';
+					oDiv.appendChild(oNewDiv.parentNode);
+					(function() {
+						var oS = document.createElement('script');
+						oS.type = 'text/javascript';
+						oS.src = 'http://www.zhinengshe.com/zpi/zns_demo.php?id=3540';
+						document.body.appendChild(oS);
+					})();
+				}
+				document.onmousedown = function(ev) {
+					var oEvent = ev || event;
+					var mouseStartX = oEvent.clientX;
+					var mouseStartY = oEvent.clientY;
+					var startX = x;
+					var startY = y;
+					var lastX = mouseStartX;
+					var lastY = mouseStartY;
+					speedX = speedY = 0;
+					document.onmousemove = function(ev) {
+						var oEvent = ev || event;
+						y = startY + (oEvent.clientX - mouseStartX) / 10;
+						x = startX - (oEvent.clientY - mouseStartY) / 10;
+						speedX = (oEvent.clientX - lastX) / 5;
+						speedY = (oEvent.clientY - lastY) / 5;
+						fixAll();
+						lastX = oEvent.clientX;
+						lastY = oEvent.clientY;
+					};
+					document.onmouseup = function() {
+						document.onmousemove = null;
+						document.onmouseup = null;
+						startMove();
+					};
+					stopMove();
+					return false;
+				};
+				var timer = null;
+				function startMove() {
+					clearInterval(timer);
+					timer = setInterval(function() {
+						x -= speedY;
+						y += speedX;
+						speedY *= 0.93;
+						speedX *= 0.93;
+						if (Math.abs(speedX) < 0.1 && Math.abs(speedY) < 0.1)
+							stopMove();
+						fixAll();
+					}, 30);
+				}
+				function stopMove() {
+					clearInterval(timer);
+				}
+				function fixAll() {
+					oDiv.style.WebkitTransform = 'perspective(1000px) rotateX(' + x + 'deg) rotateY(' + y + 'deg)';
+					oDiv.style.MozTransform = 'perspective(1000px) rotateX(' + x + 'deg) rotateY(' + y + 'deg)';
+					oDiv.style.msTransform = 'perspective(1000px) rotateX(' + x + 'deg) rotateY(' + y + 'deg)';
+					oDiv.style.OTransform = 'perspective(1000px) rotateX(' + x + 'deg) rotateY(' + y + 'deg)';
+					oDiv.style.transform = 'perspective(1000px) rotateX(' + x + 'deg) rotateY(' + y + 'deg)';
+					for (var i = 0; i < aDiv.length; i++) {
+						var deg = aDiv[i].degY + y;
+						var a = (deg % 360 + 360) % 360;
+						a = Math.abs(180 - a);
+						var d = 0.1 + (a / 180) * 0.9;
+						if (d < 0.2) d = 0.2;
+						aDiv[i].style.opacity = d;
+						//aDiv[i].innerHTML=parseInt(a);
+					}
+				}
+			};
+		</script>
+	</body>
+</html>

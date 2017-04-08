@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html onselectstart="return false">
+	<head>
+		<meta charset="utf-8">
+		<title>质感细腻丝滑的按钮特效</title>
+		<meta name="keywords" content="质感,细腻,丝滑,按钮,特效">
+		<meta name="description" content="质感细腻丝滑的按钮特效">
+		<link rel="stylesheet" href="css/button.css" media="screen">
+	</head>
+	<body>
+		<button class="button brown">
+			<div class="shine"></div>Button</button>
+		<button class="button red">
+			<div class="shine"></div>Button</button>
+		<button class="button orange">
+			<div class="shine"></div>Button</button>
+		<br/>
+		<button class="button yellow">
+			<div class="shine"></div>Button</button>
+		<button class="button green">
+			<div class="shine"></div>Button</button>
+		<button class="button cyan">
+			<div class="shine"></div>Button</button>
+		<br/>
+		<button class="button blue">
+			<div class="shine"></div>Button</button>
+		<button class="button indigo">
+			<div class="shine"></div>Button</button>
+		<button class="button purple">
+			<div class="shine"></div>Button</button>
+		<br/>
+		<button class="button pink">
+			<div class="shine"></div>Button</button>
+		<button class="button gray">
+			<div class="shine"></div>Button</button>
+		<button class="button black">
+			<div class="shine"></div>Button</button>
+		<br/>
+		<button class="button" onclick="randSafeColor()">
+			<div class="shine"></div>安全色</button>
+		<input type="color" class="button" onchange="changeColor()" />
+		<button class="button">
+			<div class="shine"></div>自取色</button>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js" ></script>
+		<script>
+			var btn = $("button[class='button']");
+			// 随机取得WEB安全色值（总共216种）
+			function randSafeColor(){
+				var hex = new Array('FF', 'CC', '99', '66', '33', '00');
+				var color = "#" + hex[parseInt(Math.random()*5)] + hex[parseInt(Math.random()*5)] + hex[parseInt(Math.random()*5)];
+				btn.first().css("background-color", color);
+				btn.first().html("<div class='shine'></div>" + color);
+			}
+			// 通过颜色选择器选择色值
+			function changeColor() {
+				var color = $("input[type='color']").val();
+				btn.last().css("background-color", color);
+				btn.last().html("<div class='shine'></div>" + color);
+			}
+		</script>
+	</body>
+</html>
