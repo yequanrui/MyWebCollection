@@ -3,7 +3,7 @@ if (documentWidth > 500) {
   documentWidth = 500;
 }
 var gridContainerWidth = 0.92 * documentWidth;
-var cellWidht = 0.18 * documentWidth;
+var cellWidth = 0.18 * documentWidth;
 var cellSpace = 0.04 * documentWidth;
 function my2048(dom) {
   this.dom = dom;
@@ -36,20 +36,10 @@ my2048.prototype.initCell = function () {
     _t.board[i] = new Array();
     _t.hasConflicted[i] = new Array();
     for (var j = 0; j < 4; j++) {
-      _t.dom.append(
-        '<div class="' +
-          _t.grid +
-          '" id="' +
-          _t.grid +
-          "-" +
-          i +
-          "-" +
-          j +
-          '"></div>'
-      );
-      $("#" + _t.grid + "-" + i + "-" + j).css({
-        width: cellWidht,
-        height: cellWidht,
+      _t.dom.append(`<div class="${_t.grid}" id="${_t.grid}-${i}-${j}"></div>`);
+      $(`#${_t.grid}-${i}-${j}`).css({
+        width: cellWidth,
+        height: cellWidth,
         top: _t.getPosTop(i, j),
         left: _t.getPosLeft(i, j),
       });
@@ -62,40 +52,32 @@ my2048.prototype.initCell = function () {
 // 更新Number
 my2048.prototype.updateNumber = function () {
   var _t = this;
-  $("." + _t.number).remove();
+  $(`.${_t.number}`).remove();
   for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
       _t.dom.append(
-        '<div class="' +
-          _t.number +
-          '" id="' +
-          _t.number +
-          "-" +
-          i +
-          "-" +
-          j +
-          '"></div>'
+        `<div class="${_t.number}" id="${_t.number}-${i}-${j}"></div>`
       );
-      if (_t.board[i][j] == 0) {
-        $("#" + _t.number + "-" + i + "-" + j).css({
+      if (_t.board[i][j] === 0) {
+        $(`#${_t.number}-${i}-${j}`).css({
           width: 0,
           height: 0,
-          lineHeight: cellWidht + "px",
-          top: _t.getPosTop(i, j) + cellWidht / 2,
-          left: _t.getPosLeft(i, j) + cellWidht / 2,
+          lineHeight: `${cellWidth}px`,
+          top: _t.getPosTop(i, j) + cellWidth / 2,
+          left: _t.getPosLeft(i, j) + cellWidth / 2,
         });
       } else {
-        $("#" + _t.number + "-" + i + "-" + j).css({
-          width: cellWidht,
-          height: cellWidht,
-          lineHeight: cellWidht + "px",
+        $(`#${_t.number}-${i}-${j}`).css({
+          width: cellWidth,
+          height: cellWidth,
+          lineHeight: `${cellWidth}px`,
           top: _t.getPosTop(i, j),
           left: _t.getPosLeft(i, j),
-          "background-color": _t.getNumberBackgroundColor(_t.board[i][j]),
+          "background-color": _t.getNumberBgColor(_t.board[i][j]),
           color: _t.getNumberColor(_t.board[i][j]),
-          "font-size": _t.getNumberFontSize(_t.board[i][j]) + "px",
+          "font-size": `${_t.getNumberFontSize(_t.board[i][j])}px`,
         });
-        $("#" + _t.number + "-" + i + "-" + j).text(_t.board[i][j]);
+        $(`#${_t.number}-${i}-${j}`).text(_t.board[i][j]);
       }
       _t.hasConflicted[i][j] = false;
     }
@@ -107,11 +89,8 @@ my2048.prototype.generateOneNumber = function () {
   var randA = new Array();
   for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
-      if (_t.board[i][j] == 0) {
-        randA.push({
-          x: i,
-          y: j,
-        });
+      if (_t.board[i][j] === 0) {
+        randA.push({ x: i, y: j });
       }
     }
   }
@@ -130,56 +109,30 @@ my2048.prototype.generateOneNumber = function () {
 };
 // 获取Number顶部距离
 my2048.prototype.getPosTop = function (i, j) {
-  return cellSpace + i * (cellWidht + cellSpace);
+  return cellSpace + i * (cellWidth + cellSpace);
 };
 // 获取Number左边距离
 my2048.prototype.getPosLeft = function (i, j) {
-  return cellSpace + j * (cellWidht + cellSpace);
+  return cellSpace + j * (cellWidth + cellSpace);
 };
 // 获取Number背景颜色
-my2048.prototype.getNumberBackgroundColor = function (number) {
-  switch (number) {
-    case 2:
-      return "#eee4da";
-      break;
-    case 4:
-      return "#ede0c8";
-      break;
-    case 8:
-      return "#f2b179";
-      break;
-    case 16:
-      return "#f59563";
-      break;
-    case 32:
-      return "#f67c5f";
-      break;
-    case 64:
-      return "#f65e3b";
-      break;
-    case 128:
-      return "#edcf72";
-      break;
-    case 256:
-      return "#edcc61";
-      break;
-    case 512:
-      return "#9c0";
-      break;
-    case 1024:
-      return "#33b5e5";
-      break;
-    case 2048:
-      return "#09c";
-      break;
-    case 4096:
-      return "#a6c";
-      break;
-    case 8192:
-      return "#93c";
-      break;
-  }
-  return "black";
+var numBgMap = {
+  2: "#f2f5fc",
+  4: "#e9edfa",
+  8: "#beccfa",
+  16: "#96adfa",
+  32: "#7693f5",
+  64: "#5e7ce0",
+  128: "#526ecc",
+  256: "#465eb8",
+  512: "#3c51a6",
+  1024: "#344899",
+  2048: "#2a3c85",
+  4096: "#0f297a",
+  8192: "#031e64",
+};
+my2048.prototype.getNumberBgColor = function (number) {
+  return numBgMap[number] || "#000";
 };
 // 获取等级
 my2048.prototype.getGrade = function (number) {
@@ -201,13 +154,7 @@ my2048.prototype.getGrade = function (number) {
 };
 // 获取字大小
 my2048.prototype.getNumberFontSize = function (number) {
-  if (number <= 64) {
-    return 0.6 * cellWidht;
-  } else if (number <= 512) {
-    return 0.5 * cellWidht;
-  } else {
-    return 0.4 * cellWidht;
-  }
+  return (number <= 64 ? 0.6 : number <= 512 ? 0.5 : 0.4) * cellWidth;
 };
 // 获取分数
 my2048.prototype.getScore = function () {
@@ -215,10 +162,8 @@ my2048.prototype.getScore = function () {
   var max = 0;
   for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
-      if (_t.board[i][j] != 0) {
-        if (_t.board[i][j] >= max) {
-          max = _t.board[i][j];
-        }
+      if (_t.board[i][j] !== 0 && _t.board[i][j] >= max) {
+        max = _t.board[i][j];
       }
     }
   }
@@ -226,22 +171,21 @@ my2048.prototype.getScore = function () {
 };
 // 获取Number前景颜色
 my2048.prototype.getNumberColor = function (number) {
-  if (number <= 4) return "#776e65";
-  return "white";
+  return number <= 32 ? "#252b3a" : "#fff";
 };
 // number显示动画
 my2048.prototype.showNumberAnimation = function (i, j, randNumber) {
   var _t = this;
-  var numberCell = $("#" + _t.number + "-" + i + "-" + j);
+  var numberCell = $(`#${_t.number}-${i}-${j}`);
   numberCell.css({
-    "background-color": _t.getNumberBackgroundColor(randNumber),
+    "background-color": _t.getNumberBgColor(randNumber),
     color: _t.getNumberColor(randNumber),
   });
   numberCell.text(randNumber);
   numberCell.animate(
     {
-      width: cellWidht,
-      height: cellWidht,
+      width: cellWidth,
+      height: cellWidth,
       top: _t.getPosTop(i, j),
       left: _t.getPosLeft(i, j),
     },
@@ -251,12 +195,9 @@ my2048.prototype.showNumberAnimation = function (i, j, randNumber) {
 // number移动动画
 my2048.prototype.showMoveAnimation = function (fromx, fromy, tox, toy) {
   var _t = this;
-  var number = $("#" + _t.number + "-" + fromx + "-" + fromy);
+  var number = $(`#${_t.number}-${fromx}-${fromy}`);
   number.animate(
-    {
-      top: _t.getPosTop(tox, toy),
-      left: _t.getPosLeft(tox, toy),
-    },
+    { top: _t.getPosTop(tox, toy), left: _t.getPosLeft(tox, toy) },
     200
   );
 };
@@ -265,10 +206,11 @@ my2048.prototype.canMoveLeft = function () {
   var _t = this;
   for (var i = 0; i < 4; i++) {
     for (var j = 1; j < 4; j++) {
-      if (_t.board[i][j] != 0) {
-        if (_t.board[i][j - 1] == 0 || _t.board[i][j - 1] == _t.board[i][j]) {
-          return true;
-        }
+      if (
+        _t.board[i][j] !== 0 &&
+        (_t.board[i][j - 1] === 0 || _t.board[i][j - 1] === _t.board[i][j])
+      ) {
+        return true;
       }
     }
   }
@@ -279,10 +221,11 @@ my2048.prototype.canMoveRight = function () {
   var _t = this;
   for (var i = 0; i < 4; i++) {
     for (var j = 2; j >= 0; j--) {
-      if (_t.board[i][j] != 0) {
-        if (_t.board[i][j + 1] == 0 || _t.board[i][j + 1] == _t.board[i][j]) {
-          return true;
-        }
+      if (
+        _t.board[i][j] !== 0 &&
+        (_t.board[i][j + 1] === 0 || _t.board[i][j + 1] === _t.board[i][j])
+      ) {
+        return true;
       }
     }
   }
@@ -293,10 +236,11 @@ my2048.prototype.canMoveUp = function () {
   var _t = this;
   for (var i = 1; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
-      if (_t.board[i][j] != 0) {
-        if (_t.board[i - 1][j] == 0 || _t.board[i - 1][j] == _t.board[i][j]) {
-          return true;
-        }
+      if (
+        _t.board[i][j] !== 0 &&
+        (_t.board[i - 1][j] === 0 || _t.board[i - 1][j] === _t.board[i][j])
+      ) {
+        return true;
       }
     }
   }
@@ -307,10 +251,11 @@ my2048.prototype.canMoveDown = function () {
   var _t = this;
   for (var i = 2; i >= 0; i--) {
     for (var j = 0; j < 4; j++) {
-      if (_t.board[i][j] != 0) {
-        if (_t.board[i + 1][j] == 0 || _t.board[i + 1][j] == _t.board[i][j]) {
-          return true;
-        }
+      if (
+        _t.board[i][j] !== 0 &&
+        (_t.board[i + 1][j] === 0 || _t.board[i + 1][j] === _t.board[i][j])
+      ) {
+        return true;
       }
     }
   }
@@ -320,7 +265,7 @@ my2048.prototype.canMoveDown = function () {
 my2048.prototype.noBlockHorizontal = function (row, col1, col2) {
   var _t = this;
   for (var i = col1 + 1; i < col2; i++) {
-    if (_t.board[row][i] != 0) {
+    if (_t.board[row][i] !== 0) {
       return false;
     }
   }
@@ -330,7 +275,7 @@ my2048.prototype.noBlockHorizontal = function (row, col1, col2) {
 my2048.prototype.noBlockVertical = function (col, row1, row2) {
   var _t = this;
   for (var i = row1 + 1; i < row2; i++) {
-    if (_t.board[i][col] != 0) {
+    if (_t.board[i][col] !== 0) {
       return false;
     }
   }
@@ -343,13 +288,13 @@ my2048.prototype.moveLeft = function () {
     for (var j = 1; j < 4; j++) {
       if (_t.board[i][j] != 0) {
         for (var k = 0; k < j; k++) {
-          if (_t.board[i][k] == 0 && _t.noBlockHorizontal(i, j, k)) {
+          if (_t.board[i][k] === 0 && _t.noBlockHorizontal(i, j, k)) {
             _t.showMoveAnimation(i, j, i, k);
             _t.board[i][k] = _t.board[i][j];
             _t.board[i][j] = 0;
             continue;
           } else if (
-            _t.board[i][k] == _t.board[i][j] &&
+            _t.board[i][k] === _t.board[i][j] &&
             _t.noBlockHorizontal(i, k, j) &&
             !_t.hasConflicted[i][k]
           ) {
@@ -376,15 +321,15 @@ my2048.prototype.moveRight = function () {
   var _t = this;
   for (var i = 0; i < 4; i++) {
     for (var j = 2; j >= 0; j--) {
-      if (_t.board[i][j] != 0) {
+      if (_t.board[i][j] !== 0) {
         for (var k = 3; k > j; k--) {
-          if (_t.board[i][k] == 0 && _t.noBlockHorizontal(i, j, k)) {
+          if (_t.board[i][k] === 0 && _t.noBlockHorizontal(i, j, k)) {
             _t.showMoveAnimation(i, j, i, k);
             _t.board[i][k] = _t.board[i][j];
             _t.board[i][j] = 0;
             continue;
           } else if (
-            _t.board[i][k] == _t.board[i][j] &&
+            _t.board[i][k] === _t.board[i][j] &&
             _t.noBlockHorizontal(i, j, k) &&
             !_t.hasConflicted[i][k]
           ) {
@@ -411,15 +356,15 @@ my2048.prototype.moveUp = function () {
   var _t = this;
   for (var j = 0; j < 4; j++) {
     for (var i = 1; i < 4; i++) {
-      if (_t.board[i][j] != 0) {
+      if (_t.board[i][j] !== 0) {
         for (var k = 0; k < i; k++) {
-          if (_t.board[k][j] == 0 && _t.noBlockVertical(j, k, i)) {
+          if (_t.board[k][j] === 0 && _t.noBlockVertical(j, k, i)) {
             _t.showMoveAnimation(i, j, k, j);
             _t.board[k][j] = _t.board[i][j];
             _t.board[i][j] = 0;
             continue;
           } else if (
-            _t.board[k][j] == _t.board[i][j] &&
+            _t.board[k][j] === _t.board[i][j] &&
             _t.noBlockVertical(j, k, i) &&
             !_t.hasConflicted[k][j]
           ) {
@@ -448,13 +393,13 @@ my2048.prototype.moveDown = function () {
     for (var i = 2; i >= 0; i--) {
       if (_t.board[i][j] != 0) {
         for (var k = 3; k > i; k--) {
-          if (_t.board[k][j] == 0 && _t.noBlockVertical(j, i, k)) {
+          if (_t.board[k][j] === 0 && _t.noBlockVertical(j, i, k)) {
             _t.showMoveAnimation(i, j, k, j);
             _t.board[k][j] = _t.board[i][j];
             _t.board[i][j] = 0;
             continue;
           } else if (
-            _t.board[k][j] == _t.board[i][j] &&
+            _t.board[k][j] === _t.board[i][j] &&
             _t.noBlockVertical(j, i, k) &&
             !_t.hasConflicted[k][j]
           ) {
@@ -490,9 +435,9 @@ my2048.prototype.isgameover = function () {
 my2048.prototype.my2048Alert = function (json) {
   var _t = this;
   for (var i in json) {
-    if (i == "title") {
+    if (i === "title") {
       var title = json[i];
-    } else if (i == "subtitle") {
+    } else if (i === "subtitle") {
       var subtitle = json[i];
     }
   }
