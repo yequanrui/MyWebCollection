@@ -1,0 +1,203 @@
+.transition(@transition: all linear .25s) {
+  -webkit-transition: @transition;
+  -moz-transition: @transition;
+  -o-transition: @transition;
+  -ms-transition: @transition;
+  transition: @transition;
+}
+
+.transform(@transform: inherit) {
+  -webkit-transform: @transform;
+  -moz-transform: @transform;
+  -o-transform: @transform;
+  -ms-transform: @transform;
+  transform: @transform;
+}
+
+.transform-origin(@transform-origin: left top) {
+  -webkit-transform-origin: @transform-origin;
+  -moz-transform-origin: @transform-origin;
+  -o-transform-origin: @transform-origin;
+  -ms-transform-origin: @transform-origin;
+  transform-origin: @transform-origin;
+}
+
+.animation(@parameters) {
+  -webkit-animation: @parameters;
+  -moz-animation: @parameters;
+  -o-animation: @parameters;
+  -ms-animation: @parameters;
+  animation: @parameters;
+}
+
+.loveKeyframes(@multiply: 1, @direction: 1) {
+  0% {
+    font-size: 0;
+    opacity: 0;
+    padding-left: 5px / @multiply;
+  }
+  25% {
+    font-size: 8px * @multiply;
+    opacity: 1;
+    padding-left: (5px + 5px * @direction) / @multiply;
+  }
+  50% {
+    padding-left: (5px - 5px * @direction) / @multiply;
+  }
+  75% {
+    font-size: 18px * @multiply;
+    opacity: 1;
+    padding-left: (5px + 5px * @direction) / @multiply;
+  }
+  100% {
+    font-size: 28px * @multiply;
+    opacity: 0;
+    line-height: 28px * @multiply;
+    padding-left: 5px / @multiply;
+  }
+}
+
+@keyframes love1 {
+  .loveKeyframes;
+}
+@-moz-keyframes love1 {
+  .loveKeyframes;
+}
+@-webkit-keyframes love1 {
+  .loveKeyframes;
+}
+@-o-keyframes love1 {
+  .loveKeyframes;
+}
+@-ms-keyframes love1 {
+  .loveKeyframes;
+}
+@keyframes love2 {
+  .loveKeyframes(1.2, -1);
+}
+@-moz-keyframes love2 {
+  .loveKeyframes(1.2, -1);
+}
+@-webkit-keyframes love2 {
+  .loveKeyframes(1.2, -1);
+}
+@-o-keyframes love2 {
+  .loveKeyframes(1.2, -1);
+}
+@-ms-keyframes love2 {
+  .loveKeyframes(1.2, -1);
+}
+@keyframes love3 {
+  .loveKeyframes(2);
+}
+@-moz-keyframes love3 {
+  .loveKeyframes(2);
+}
+@-webkit-keyframes love3 {
+  .loveKeyframes(2);
+}
+@-o-keyframes love3 {
+  .loveKeyframes(2);
+}
+@-ms-keyframes love3 {
+  .loveKeyframes(2);
+}
+
+#hearts {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 300px;
+  height: 200px;
+  text-align: center;
+}
+
+.heart {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 30%;
+  vertical-align: bottom;
+  color: #FC7283;
+}
+
+.heart1 {
+  .heart;
+  height: 100px;
+  line-height: 100px;
+  margin-left: 210px;
+  opacity: 0;
+  .transform-origin(50% 100%);
+  .transform(rotate(-6deg));
+  .animation(love1 0.7s infinite ease-in-out);
+}
+.heart2 {
+  .heart;
+  height: 110px;
+  line-height: 110px;
+  margin-left: 180px;
+  opacity: 0;
+  .transform-origin(50% 100%);
+  .transform(rotate(6deg));
+  .animation(love3 0.7s infinite ease-in-out 0.3s);
+}
+.heart3 {
+  .heart;
+  height: 80px;
+  line-height: 80px;
+  margin-left: 150px;
+  opacity: 0;
+  .animation(love2 0.6s infinite ease-in-out 0.6s);
+}
+.heart4 {
+  .heart;
+  height: 90px;
+  margin-left: 120px;
+  line-height: 90px;
+  opacity: 0;
+  .transform-origin(50% 100%);
+  .transform(rotate(-6deg));
+  .animation(love1 0.7s infinite ease-in-out);
+}
+.heart5 {
+  .heart;
+  height: 100px;
+  margin-left: 90px;
+  line-height: 80px;
+  opacity: 0;
+  .transform-origin(50% 100%);
+  .transform(rotate(6deg));
+  .animation(love2 0.6s infinite ease-in-out 0.3s);
+}
+.heart6 {
+  .heart;
+  height: 110px;
+  margin-left: 60px;
+  line-height: 90px;
+  opacity: 0;
+  .animation(love3 0.7s infinite ease-in-out 0.6s);
+}
+.heart7 {
+  .heart;
+  height: 90px;
+  line-height: 90px;
+  margin-left: 30px;
+  opacity: 0;
+  .transform-origin(50% 100%);
+  .transform(rotate(6deg));
+  .animation(love2 0.7s infinite ease-in-out 0.3s);
+}
+.heart8 {
+  .heart;
+  height: 100px;
+  line-height: 100px;
+  opacity: 0;
+  .transform-origin(50% 100%);
+  .transform(rotate(-6deg));
+  .animation(love1 0.7s infinite ease-in-out);
+}

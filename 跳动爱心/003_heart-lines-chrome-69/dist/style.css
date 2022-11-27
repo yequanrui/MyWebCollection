@@ -1,0 +1,15 @@
+:root {
+  --bg: #051626;
+}
+
+html, body { 
+  height: 100%; 
+  margin: 0; 
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
