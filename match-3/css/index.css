@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+#app {
+  background: url('../img/bg.jpg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 500px;
+  height: 600px;
+  margin: 20px auto;
+  border-radius: 6px;
+  position: relative;
+}
+
+.imgGlobal {
+  border-radius: 4px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.imgGlobal.isSelect {
+  margin: 0 2px;
+}
+
+.imgFilter {
+  filter: brightness(30%);
+}
+
+#storageBox {
+  height: 54px;
+  width: 356px;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 35px;
+  left: 76px;
+}

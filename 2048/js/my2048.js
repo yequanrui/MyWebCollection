@@ -8,8 +8,8 @@ var cellSpace = 0.04 * documentWidth;
 function my2048(dom) {
   this.dom = dom;
   this.score = 0;
-  this.grid = "grid-cell";
-  this.number = "number-cell";
+  this.grid = 'grid-cell';
+  this.number = 'number-cell';
   this.board = new Array();
   this.hasConflicted = new Array();
   this.ismove = true;
@@ -22,7 +22,7 @@ my2048.prototype.init = function () {
   this.generateOneNumber();
   // 初始化分数
   this.score = 0;
-  $("#score").text("0");
+  $('#score').text('0');
 };
 // 初始化棋盘
 my2048.prototype.initCell = function () {
@@ -31,7 +31,7 @@ my2048.prototype.initCell = function () {
     width: gridContainerWidth,
     height: gridContainerWidth,
   });
-  _t.dom.html("");
+  _t.dom.html('');
   for (var i = 0; i < 4; i++) {
     _t.board[i] = new Array();
     _t.hasConflicted[i] = new Array();
@@ -55,9 +55,7 @@ my2048.prototype.updateNumber = function () {
   $(`.${_t.number}`).remove();
   for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
-      _t.dom.append(
-        `<div class="${_t.number}" id="${_t.number}-${i}-${j}"></div>`
-      );
+      _t.dom.append(`<div class="${_t.number}" id="${_t.number}-${i}-${j}"></div>`);
       if (_t.board[i][j] === 0) {
         $(`#${_t.number}-${i}-${j}`).css({
           width: 0,
@@ -73,9 +71,9 @@ my2048.prototype.updateNumber = function () {
           lineHeight: `${cellWidth}px`,
           top: _t.getPosTop(i, j),
           left: _t.getPosLeft(i, j),
-          "background-color": _t.getNumberBgColor(_t.board[i][j]),
+          'background-color': _t.getNumberBgColor(_t.board[i][j]),
           color: _t.getNumberColor(_t.board[i][j]),
-          "font-size": `${_t.getNumberFontSize(_t.board[i][j])}px`,
+          'font-size': `${_t.getNumberFontSize(_t.board[i][j])}px`,
         });
         $(`#${_t.number}-${i}-${j}`).text(_t.board[i][j]);
       }
@@ -117,39 +115,39 @@ my2048.prototype.getPosLeft = function (i, j) {
 };
 // 获取Number背景颜色
 var numBgMap = {
-  2: "#f2f5fc",
-  4: "#e9edfa",
-  8: "#beccfa",
-  16: "#96adfa",
-  32: "#7693f5",
-  64: "#5e7ce0",
-  128: "#526ecc",
-  256: "#465eb8",
-  512: "#3c51a6",
-  1024: "#344899",
-  2048: "#2a3c85",
-  4096: "#0f297a",
-  8192: "#031e64",
+  2: '#f2f5fc',
+  4: '#e9edfa',
+  8: '#beccfa',
+  16: '#96adfa',
+  32: '#7693f5',
+  64: '#5e7ce0',
+  128: '#526ecc',
+  256: '#465eb8',
+  512: '#3c51a6',
+  1024: '#344899',
+  2048: '#2a3c85',
+  4096: '#0f297a',
+  8192: '#031e64',
 };
 my2048.prototype.getNumberBgColor = function (number) {
-  return numBgMap[number] || "#000";
+  return numBgMap[number] || '#000';
 };
 // 获取等级
 my2048.prototype.getGrade = function (number) {
   if (number <= 8) {
-    return "吗的智障";
+    return '吗的智障';
   } else if (number <= 64) {
-    return "辣鸡";
+    return '辣鸡';
   } else if (number <= 256) {
-    return "一般般";
+    return '一般般';
   } else if (number <= 512) {
-    return "哎呦不错哦";
+    return '哎呦不错哦';
   } else if (number <= 1024) {
-    return "好腻害";
+    return '好腻害';
   } else if (number <= 2048) {
-    return "超神啊";
+    return '超神啊';
   } else if (number >= 4096) {
-    return "成仙";
+    return '成仙';
   }
 };
 // 获取字大小
@@ -171,14 +169,14 @@ my2048.prototype.getScore = function () {
 };
 // 获取Number前景颜色
 my2048.prototype.getNumberColor = function (number) {
-  return number <= 32 ? "#252b3a" : "#fff";
+  return number <= 32 ? '#252b3a' : '#fff';
 };
 // number显示动画
 my2048.prototype.showNumberAnimation = function (i, j, randNumber) {
   var _t = this;
   var numberCell = $(`#${_t.number}-${i}-${j}`);
   numberCell.css({
-    "background-color": _t.getNumberBgColor(randNumber),
+    'background-color': _t.getNumberBgColor(randNumber),
     color: _t.getNumberColor(randNumber),
   });
   numberCell.text(randNumber);
@@ -196,20 +194,14 @@ my2048.prototype.showNumberAnimation = function (i, j, randNumber) {
 my2048.prototype.showMoveAnimation = function (fromx, fromy, tox, toy) {
   var _t = this;
   var number = $(`#${_t.number}-${fromx}-${fromy}`);
-  number.animate(
-    { top: _t.getPosTop(tox, toy), left: _t.getPosLeft(tox, toy) },
-    200
-  );
+  number.animate({ top: _t.getPosTop(tox, toy), left: _t.getPosLeft(tox, toy) }, 200);
 };
 // 判断是否可向left移动
 my2048.prototype.canMoveLeft = function () {
   var _t = this;
   for (var i = 0; i < 4; i++) {
     for (var j = 1; j < 4; j++) {
-      if (
-        _t.board[i][j] !== 0 &&
-        (_t.board[i][j - 1] === 0 || _t.board[i][j - 1] === _t.board[i][j])
-      ) {
+      if (_t.board[i][j] !== 0 && (_t.board[i][j - 1] === 0 || _t.board[i][j - 1] === _t.board[i][j])) {
         return true;
       }
     }
@@ -221,10 +213,7 @@ my2048.prototype.canMoveRight = function () {
   var _t = this;
   for (var i = 0; i < 4; i++) {
     for (var j = 2; j >= 0; j--) {
-      if (
-        _t.board[i][j] !== 0 &&
-        (_t.board[i][j + 1] === 0 || _t.board[i][j + 1] === _t.board[i][j])
-      ) {
+      if (_t.board[i][j] !== 0 && (_t.board[i][j + 1] === 0 || _t.board[i][j + 1] === _t.board[i][j])) {
         return true;
       }
     }
@@ -236,10 +225,7 @@ my2048.prototype.canMoveUp = function () {
   var _t = this;
   for (var i = 1; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
-      if (
-        _t.board[i][j] !== 0 &&
-        (_t.board[i - 1][j] === 0 || _t.board[i - 1][j] === _t.board[i][j])
-      ) {
+      if (_t.board[i][j] !== 0 && (_t.board[i - 1][j] === 0 || _t.board[i - 1][j] === _t.board[i][j])) {
         return true;
       }
     }
@@ -251,10 +237,7 @@ my2048.prototype.canMoveDown = function () {
   var _t = this;
   for (var i = 2; i >= 0; i--) {
     for (var j = 0; j < 4; j++) {
-      if (
-        _t.board[i][j] !== 0 &&
-        (_t.board[i + 1][j] === 0 || _t.board[i + 1][j] === _t.board[i][j])
-      ) {
+      if (_t.board[i][j] !== 0 && (_t.board[i + 1][j] === 0 || _t.board[i + 1][j] === _t.board[i][j])) {
         return true;
       }
     }
@@ -293,16 +276,12 @@ my2048.prototype.moveLeft = function () {
             _t.board[i][k] = _t.board[i][j];
             _t.board[i][j] = 0;
             continue;
-          } else if (
-            _t.board[i][k] === _t.board[i][j] &&
-            _t.noBlockHorizontal(i, k, j) &&
-            !_t.hasConflicted[i][k]
-          ) {
+          } else if (_t.board[i][k] === _t.board[i][j] && _t.noBlockHorizontal(i, k, j) && !_t.hasConflicted[i][k]) {
             _t.showMoveAnimation(i, j, i, k);
             _t.board[i][k] += _t.board[i][j];
             _t.board[i][j] = 0;
             _t.hasConflicted[i][k] = true;
-            $("#score").text(_t.getScore());
+            $('#score').text(_t.getScore());
             continue;
           }
         }
@@ -328,16 +307,12 @@ my2048.prototype.moveRight = function () {
             _t.board[i][k] = _t.board[i][j];
             _t.board[i][j] = 0;
             continue;
-          } else if (
-            _t.board[i][k] === _t.board[i][j] &&
-            _t.noBlockHorizontal(i, j, k) &&
-            !_t.hasConflicted[i][k]
-          ) {
+          } else if (_t.board[i][k] === _t.board[i][j] && _t.noBlockHorizontal(i, j, k) && !_t.hasConflicted[i][k]) {
             _t.showMoveAnimation(i, j, i, k);
             _t.board[i][k] += _t.board[i][j];
             _t.board[i][j] = 0;
             _t.hasConflicted[i][k] = true;
-            $("#score").text(_t.getScore());
+            $('#score').text(_t.getScore());
             continue;
           }
         }
@@ -363,16 +338,12 @@ my2048.prototype.moveUp = function () {
             _t.board[k][j] = _t.board[i][j];
             _t.board[i][j] = 0;
             continue;
-          } else if (
-            _t.board[k][j] === _t.board[i][j] &&
-            _t.noBlockVertical(j, k, i) &&
-            !_t.hasConflicted[k][j]
-          ) {
+          } else if (_t.board[k][j] === _t.board[i][j] && _t.noBlockVertical(j, k, i) && !_t.hasConflicted[k][j]) {
             _t.showMoveAnimation(i, j, k, j);
             _t.board[k][j] += _t.board[i][j];
             _t.board[i][j] = 0;
             _t.hasConflicted[k][j] = true;
-            $("#score").text(_t.getScore());
+            $('#score').text(_t.getScore());
             continue;
           }
         }
@@ -398,16 +369,12 @@ my2048.prototype.moveDown = function () {
             _t.board[k][j] = _t.board[i][j];
             _t.board[i][j] = 0;
             continue;
-          } else if (
-            _t.board[k][j] === _t.board[i][j] &&
-            _t.noBlockVertical(j, i, k) &&
-            !_t.hasConflicted[k][j]
-          ) {
+          } else if (_t.board[k][j] === _t.board[i][j] && _t.noBlockVertical(j, i, k) && !_t.hasConflicted[k][j]) {
             _t.showMoveAnimation(i, j, k, j);
             _t.board[k][j] += _t.board[i][j];
             _t.board[i][j] = 0;
             _t.hasConflicted[k][j] = true;
-            $("#score").text(_t.getScore());
+            $('#score').text(_t.getScore());
             continue;
           }
         }
@@ -435,24 +402,22 @@ my2048.prototype.isgameover = function () {
 my2048.prototype.my2048Alert = function (json) {
   var _t = this;
   for (var i in json) {
-    if (i === "title") {
+    if (i === 'title') {
       var title = json[i];
-    } else if (i === "subtitle") {
+    } else if (i === 'subtitle') {
       var subtitle = json[i];
     }
   }
-  if ($("#my2048Alert").length > 0) {
-    $(".myAt-text-title").html("最高叠加分：<span>" + title + "</span>");
-    $(".myAt-text-subtitle").html(
-      "等级判定：<span>" + subtitle + "！！！</span>"
-    );
-    $(".myAt-text-close").on("click", function () {
-      $("#my2048Alert").addClass("hide").removeClass("show");
+  if ($('#my2048Alert').length > 0) {
+    $('.myAt-text-title').html('最高叠加分：<span>' + title + '</span>');
+    $('.myAt-text-subtitle').html('等级判定：<span>' + subtitle + '！！！</span>');
+    $('.myAt-text-close').on('click', function () {
+      $('#my2048Alert').addClass('hide').removeClass('show');
       _t.init();
     });
-    $("#my2048Alert").addClass("show").removeClass("hide");
+    $('#my2048Alert').addClass('show').removeClass('hide');
   } else {
-    var dom = $('<div id="my2048Alert">').addClass("hide");
+    var dom = $('<div id="my2048Alert">').addClass('hide');
     dom.html(
       '<div class="mask"></div>' +
         '<div class="myAt">' +
@@ -460,37 +425,30 @@ my2048.prototype.my2048Alert = function (json) {
         '<div class="myAt-text">' +
         '<div class="myAt-text-title">最高叠加分：<span>' +
         title +
-        "</span></div>" +
+        '</span></div>' +
         '<div class="myAt-text-subtitle">等级判定：<span>' +
         subtitle +
-        "！！！</span></div>" +
+        '！！！</span></div>' +
         '<a href="#" class="myAt-text-close button">再来</a>' +
-        "</div>" +
-        "</div>"
+        '</div>' +
+        '</div>'
     );
-    $("body").append(dom);
-    $(".myAt-text-close").on("click", function () {
-      $("#my2048Alert").addClass("hide").removeClass("show");
+    $('body').append(dom);
+    $('.myAt-text-close').on('click', function () {
+      $('#my2048Alert').addClass('hide').removeClass('show');
       _t.init();
     });
-    $("#my2048Alert").addClass("show").removeClass("hide");
+    $('#my2048Alert').addClass('show').removeClass('hide');
   }
 };
 my2048.prototype.nospace = function () {
   var _t = this;
-  for (var i = 0; i < 4; i++)
-    for (var j = 0; j < 4; j++) if (_t.board[i][j] == 0) return false;
+  for (var i = 0; i < 4; i++) for (var j = 0; j < 4; j++) if (_t.board[i][j] == 0) return false;
   return true;
 };
 my2048.prototype.nomove = function () {
   var _t = this;
-  if (
-    _t.canMoveLeft() ||
-    _t.canMoveRight() ||
-    _t.canMoveUp() ||
-    _t.canMoveDown()
-  )
-    return false;
+  if (_t.canMoveLeft() || _t.canMoveRight() || _t.canMoveUp() || _t.canMoveDown()) return false;
   return true;
 };
 // 键盘↑↓←→方向键事件
@@ -549,20 +507,19 @@ $(document).keydown(function (event) {
       break;
   }
 });
-document.addEventListener("touchstart", function (event) {
+document.addEventListener('touchstart', function (event) {
   startX = event.touches[0].pageX;
   startY = event.touches[0].pageY;
 });
-document.addEventListener("touchmove", function (event) {
+document.addEventListener('touchmove', function (event) {
   event.preventDefault();
 });
-document.addEventListener("touchend", function (event) {
+document.addEventListener('touchend', function (event) {
   endX = event.changedTouches[0].pageX;
   endY = event.changedTouches[0].pageY;
   var x = endX - startX;
   var y = endY - startY;
-  if (Math.abs(x) < documentWidth * 0.3 && Math.abs(y) < documentWidth * 0.3)
-    return;
+  if (Math.abs(x) < documentWidth * 0.3 && Math.abs(y) < documentWidth * 0.3) return;
   if (Math.abs(x) >= Math.abs(y)) {
     if (x > 0) {
       // right
