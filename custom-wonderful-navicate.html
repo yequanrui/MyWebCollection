@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css" rel="stylesheet">
+  <style>
+    .row {
+      display: flex;
+      flex-direction: row;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+    }
+    .wrap {
+      flex-wrap: wrap;
+    }
+    .no-wrap {
+      flex-wrap: nowrap !important;
+    }
+    .justify-start {
+      justify-content: flex-start;
+    }
+    .justify-end {
+      justify-content: flex-end;
+    }
+    .justify-center {
+      justify-content: center;
+    }
+    .justify-between {
+      justify-content: space-between;
+    }
+    .justify-around {
+      justify-content: space-around;
+    }
+    .justify-evenly {
+      justify-content: space-evenly;
+    }
+    .items-start {
+      align-items: flex-start;
+    }
+    .items-end {
+      align-items: flex-end;
+    }
+    .items-center {
+      align-items: center;
+    }
+    .self-start {
+      align-self: flex-start;
+    }
+    .self-end {
+      align-self: flex-end;
+    }
+    .self-center {
+      align-self: center;
+    }
+    .full-width {
+      width: 100% !important;
+    }
+
+    .full-height {
+      height: 100% !important;
+    }
+
+    .fat {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .col {
+      flex: 1;
+    }
+    .col-auto {
+      width: auto;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #333;
+    }
+
+    ul,
+    li {
+      list-style: none;
+    }
+
+    #app {
+      width: 375px;
+      height: 750px;
+      border-radius: 20px;
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+      background: #e5e7f2;
+      padding: 70px 0;
+    }
+    .title {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background: white;
+      height: 70px;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .title h4 {
+      margin-right: 20%;
+    }
+
+    .title .operate {
+      width: 86px;
+      height: 30.37px;
+      border-radius: 16px;
+      background-color: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(234, 234, 234, 1);
+      margin-right: 20px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .inner .side {
+      width: 20%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .inner .main {
+      width: 80%;
+      height: 100%;
+      padding: 15px;
+    }
+
+    .top {
+      height: 0;
+      width: 100%;
+      background: white;
+      border-bottom-right-radius: 20px;
+      transition: .25s linear;
+    }
+
+    .side > .middle {
+      height: 6%;
+      width: 100%;
+    }
+
+    .side .bottom {
+      height: 100%;
+      width: 100%;
+      background: white;
+      border-top-right-radius: 20px;
+    }
+
+    .side .flag {
+      position: absolute;
+      left: 0;
+      width: 4px;
+      height: 16px;
+      background-color: rgba(77, 169, 255, 1);
+      border-bottom-right-radius: 6px; 
+      border-top-right-radius: 6px;
+      transition: .25s linear;
+    }
+
+    .list-item {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 6%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: .3s linear;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+    }
+
+    #app .tabbar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 70px;
+      /* background: rgba(255, 255, 255, .8); */
+      /* box-shadow: 0 1px 1px 0px rgba(0, 0, 0, .1), 0 0px 0px rgba(0, 0, 0, .1), 0 0px 10px rgba(0, 0, 0, .1); */
+      /* backdrop-filter: 50px; */
+    }
+    .tabbar li {
+      color: #d5d5d5;
+      transition: .1s linear;
+      z-index: 3;
+      /* background: white; */
+    }
+    .tabbar li i {
+      font-size: 20px;
+    }
+    .tabbar li span {
+      margin-top: 5px;
+      font-size: 10px;
+    }
+    .active {
+      color: #3f95ff !important;
+    }
+
+    .tabbar .left,
+    .tabbar .right {
+      background: white;
+      position: absolute;
+      bottom: 0;
+      height: 100%;
+      width: 45%;
+      z-index: 1;
+    }
+    .tabbar .left {
+      left: 0;
+      border-top-right-radius: 40px;
+    }
+    .tabbar .right {
+      right: 0;
+      border-top-left-radius: 40px;
+    }
+
+    .center-icon {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: -45px;
+      width: 57px;
+      height: 57px;
+      background: #e5e7f2;
+      border-radius: 50%;
+      backdrop-filter: 20px;
+    }
+    .c-icon {
+      background: white;
+      border-radius: 50%;
+      border: 1px solid #3f95ff;
+    }
+    .radius-item {
+      position: relative;
+      background: white;
+      margin-top: 21px;
+      padding-bottom: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="title">
+      <h4>商城</h4>
+      <div class="operate">
+        <i class="fas fa-ellipsis-h"></i>
+        <i class="far fa-dot-circle"></i>
+      </div>
+    </div>
+    <div class="inner fat row no-wrap justify-between">
+
+      <div class="side full-height">
+        <div class="flag"></div>
+        <div class="top"></div>
+        <div class="middle"></div>
+        <div class="bottom"></div>
+      </div>
+  
+      <div class="main"></div>
+    </div>
+
+
+    <div class="tabbar row justify-between full-width">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+  </div>
+
+  <script>
+    const appEl = document.querySelector('#app');
+    const topEl = document.querySelector('.top');
+    const mainEl = document.querySelector('.main');
+    const flagEl = document.querySelector('.flag');
+    const tabbarEl = document.querySelector('.tabbar');
+    const innerEl = document.querySelector('.inner');
+    const sideEl = document.querySelector('.inner .side');
+    const operateEl = document.querySelector('.operate');
+
+
+    const list = [
+      { content: '促销', top: '0' },
+      { content: '服装', top: '6%' },
+      { content: '日用品', top: '12%' },
+      { content: '视频', top: '18%' },
+      { content: '超市', top: '24%' },
+      { content: '家居', top: '30%' },
+      { content: '文创', top: '36%' },
+      { content: '辅料', top: '42%' },
+      { content: '玩具盒', top: '48%' }
+    ];
+
+    // 初始化一些东西
+    const init = () => {
+      mainEl.textContent = list[0].content;
+      flagEl.style.top = parseFloat(list[0].top) + 2 + '%';
+    };
+
+    // 生成列表
+    const generateList = () => {
+      const frag = document.createDocumentFragment();
+      list.forEach((item, index) => {
+        const itemEl = document.createElement('li');
+        itemEl.textContent = item.content;
+        itemEl.className = 'list-item';
+        itemEl.style.top = item.top;
+        itemEl.addEventListener('mouseenter', (e) => mouseenter(e, item, index));
+        if (index < 1) itemEl.style.fontWeight = 'bold';
+        frag.appendChild(itemEl);
+      });
+      sideEl.insertBefore(frag, topEl);
+    };
+
+    // 清除脏样式
+    const cleanDirtyStyle = (type) => {
+      const types = {
+        'nav': () => [...sideEl.children].forEach(children => children.style.fontWeight = ''),
+        'tabbar': () => [...tabbarEl.children].forEach(children => children.classList.remove('active'))
+      };
+      types[type]();
+    }
+    
+    // 鼠标进入做的事情
+    const mouseenter = ({ target }, item, index) => {
+      cleanDirtyStyle('nav');
+      target.style.fontWeight = 'bold';
+      topEl.style.height = index * 6 + '%';
+      flagEl.style.top = parseFloat(item.top) + 2 + '%';
+      mainEl.textContent = item.content;
+    };
+
+    // 样式钩子
+    const styleHook = (liEl, iEl, spanEl) => {
+      iEl.style.opacity = '0';
+      liEl.classList.add('radius-item');
+      const centerIconEl = document.createElement('div');
+      centerIconEl.className = 'center-icon row justify-center items-center';
+      const iconEl = document.createElement('i');
+      iconEl.style.fontSize = '40px';
+      iconEl.className = 'fas fa-plus-circle active c-icon';
+      centerIconEl.appendChild(iconEl);
+      liEl.appendChild(centerIconEl);
+    }
+
+    // 生成tabbar
+    const generateTabbar = (center = false) => {
+      const tabbars = [
+        { content: '首页', icon: 'fa-home' },
+        { content: '商城', icon: 'fa-store' },
+        { content: '定制', icon: 'fa-plus-circle' },
+        { content: '报价', icon: 'fa-tags' },
+        { content: '我的', icon: 'fa-user' }
+      ];
+      const frag = document.createDocumentFragment();
+      tabbars.forEach((bar, index) => {
+        // 创建li
+        const liEl = document.createElement('li');
+        liEl.className = 'column items-center justify-center col';
+        if (index < 1) liEl.classList.add('active');
+        liEl.addEventListener('click', (e) => click(e, bar, index));
+
+        // 创建i
+        const iEl = document.createElement('i');
+        iEl.className = `fas ${bar.icon}`;
+
+        // 创建span
+        const spanEl = document.createElement('span');
+        spanEl.textContent = bar.content;
+
+        if (index === 2 && center) styleHook(liEl, iEl, spanEl);
+
+        liEl.appendChild(iEl);
+        liEl.appendChild(spanEl);
+        frag.appendChild(liEl);
+      });
+      tabbarEl.appendChild(frag);
+    };
+
+    // tabbar点击
+    const click = ({ currentTarget }, item, index) => {
+      cleanDirtyStyle('tabbar');
+      currentTarget.classList.add('active');
+    }
+
+    const generateCloseEvent = () => {
+      operateEl.addEventListener('mousedown', mousedown);
+      operateEl.addEventListener('mouseup', mouseup);
+    };
+
+    // 关闭按钮鼠标按下
+    const mousedown = ({ target }) => {
+      const nodeName = target.nodeName.toLowerCase();
+      if (nodeName === 'i') {
+        target.classList.replace('fa-dot-circle', 'fa-times-circle');
+      } else {
+        target.children[1].classList.replace('fa-dot-circle', 'fa-times-circle');
+      }
+    };
+
+    // 关闭按钮鼠标抬起
+    const mouseup = ({ target }) => {
+      const nodeName = target.nodeName.toLowerCase();
+      if (nodeName === 'i') {
+        target.classList.replace('fa-times-circle', 'fa-dot-circle');
+      } else {
+        target.children[1].classList.replace('fa-times-circle', 'fa-dot-circle');
+      }
+    }
+
+    window.onload = () => {
+      generateList();
+      generateTabbar(true);
+      generateCloseEvent();
+      init();
+    };
+
+  </script>
+
+</body>
+
+</html>

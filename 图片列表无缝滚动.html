@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        --bgcolor--: #001c30;
+        min-block-size: 100vh;
+        display: grid;
+        place-items: center;
+        background-color: var(--bgcolor--);
+        overflow: hidden;
+      }
+      .contianer {
+        max-width: 50rem;
+        min-width: 50rem;
+        overflow: hidden;
+        position: relative;
+      }
+      .contianer::before,
+      .contianer::after {
+        content: "";
+        width: 100px;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+      }
+      .contianer::before {
+        background: linear-gradient(
+          -90deg,
+          transparent,
+          var(--bgcolor--) 80%,
+          var(--bgcolor--) 20%,
+          transparent
+        );
+        left: -5%;
+        top: 0%;
+      }
+      .contianer::after {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--bgcolor--) 80%,
+          var(--bgcolor--) 20%,
+          transparent
+        );
+        right: -5%;
+        top: 0%;
+      }
+      .ul-list {
+        margin: 0;
+        padding-inline: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .ul-list li {
+        line-height: 1;
+        width: 12rem;
+        background: #10ac84;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        color: #fff;
+        text-align: center;
+      }
+      .ul-list li img {
+        border-radius: 0.5rem;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+      }
+      .contianer[data-animated="true"] .scroll_item {
+        width: max-content;
+        flex-wrap: nowrap;
+        animation: scroll var(--animation-duration, 30s)
+          var(--animation-direction, forwards) linear infinite;
+      }
+      .contianer[data-reverse="true"] {
+        --animation-direction: reverse;
+      }
+      @keyframes scroll {
+        to {
+          transform: translate(calc(-50% - 0.5rem));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contianer" data-reverse="true">
+      <h2 style="color: #fff">布依前端--图片列表滚动案例</h2>
+      <ul class="ul-list scroll_item">
+        <li>
+          <img src="https://picsum.photos/id/37/367/267" alt="" srcset="" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/55/367/267" alt="" srcset="" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/57/367/267" alt="" srcset="" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/58/367/267" alt="" srcset="" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/55/367/267" alt="" srcset="" />
+        </li>
+        <li>
+          <img src="https://picsum.photos/id/60/367/267" alt="" srcset="" />
+        </li>
+      </ul>
+    </div>
+  </body>
+
+  <script>
+    const scroller = document.querySelector(".contianer");
+    excutionAnimate();
+    function excutionAnimate() {
+      if (scroller) {
+        scroller.setAttribute("data-animated", true);
+        const scrollerInner = scroller.querySelector(".scroll_item");
+        const children = Array.from(scrollerInner.children);
+        children.forEach((item) => {
+          const Item = item.cloneNode(true);
+          Item.setAttribute("aria-hidden", true);
+          scrollerInner.appendChild(Item);
+        });
+      }
+    }
+  </script>
+</html>
