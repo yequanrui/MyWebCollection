@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数字日历</title>
+    <link rel="stylesheet" href="dycalendar.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url(../public/style/font/Poppins.css);
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+      }
+      section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #edf1f4;
+      }
+      .box {
+        position: relative;
+      }
+      .container {
+        position: relative;
+        min-width: 400px;
+        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      #dycalendar {
+        width: 100%;
+        padding: 30px 30px 0;
+      }
+      #dycalendar table {
+        width: 100%;
+        border-spacing: 15px;
+        margin-top: 40px;
+      }
+      #dycalendar table tr:nth-child(1) td {
+        background: #2196f3;
+        color: #fff;
+        border-radius: 10px;
+        font-weight: 600;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+        border: 2px solid #edf1f4;
+      }
+      #dycalendar table tr:nth-child(1) td:nth-child(1) {
+        background: #f44336;
+      }
+      #dycalendar table td {
+        color: #777;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-weight: 500;
+        border-radius: 10px;
+        font-size: 1.25em;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(255, 255, 255, 1);
+      }
+      #dycalendar table td:hover {
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px rgba(255, 255, 255, 1);
+      }
+      #dycalendar table td:first-child {
+        color: #f44336;
+      }
+      .dycalendar-month-container .dycalendar-target-date {
+        background: #2196f3;
+        color: #fff !important;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(255, 255, 255, 1) !important;
+        border: 2px solid #edf1f4;
+      }
+      .dycalendar-prev-next-btn.prev-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 2em;
+        left: 15px;
+        color: #777;
+        background: #edf1f4;
+        border-radius: 10px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(255, 255, 255, 1);
+      }
+      .dycalendar-prev-next-btn.next-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 2em;
+        right: 15px;
+        color: #777;
+        background: #edf1f4;
+        border-radius: 10px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(255, 255, 255, 1);
+      }
+      .dycalendar-prev-next-btn.prev-btn:active,
+      .dycalendar-prev-next-btn.next-btn:active {
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px rgba(255, 255, 255, 1);
+      }
+      .dycalendar-span-month-year {
+        color: #2196f3;
+        font-size: 2em;
+        font-weight: 400;
+      }
+    </style>
+    <style>
+      .dycalendar-container {
+        display: inline-block;
+        border: 1px solid #eee;
+      }
+      .dycalendar-container.round-edge {
+        border-radius: 5%;
+        -o-border-radius: 5%;
+        -moz-border-radius: 5%;
+        -webkit-border-radius: 5%;
+      }
+      .dycalendar-day-container {
+        padding: 10px;
+        text-align: center;
+        font-family: Arial;
+      }
+      .dycalendar-day-container div {
+        padding: 0;
+        margin-bottom: 10px;
+      }
+      .dycalendar-day-container .dycalendar-span-day {
+        font-size: 110%;
+      }
+      .dycalendar-day-container .dycalendar-span-date {
+        font-size: 250%;
+      }
+      .dycalendar-day-container .dycalendar-span-month-year {
+        font-size: 90%;
+      }
+      .dycalendar-month-container {
+        padding: 10px;
+        text-align: center;
+        font-family: Arial;
+      }
+      .dycalendar-month-container div {
+        padding: 0;
+        margin-bottom: 10px;
+      }
+      .dycalendar-month-container .dycalendar-header {
+        position: relative;
+      }
+      .dycalendar-month-container .dycalendar-header .dycalendar-prev-next-btn {
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+      }
+      .dycalendar-month-container .dycalendar-header .dycalendar-prev-next-btn.prev-btn {
+        left: 0;
+      }
+      .dycalendar-month-container .dycalendar-header .dycalendar-prev-next-btn.next-btn {
+        right: 0;
+      }
+      .dycalendar-month-container .dycalendar-span-month-year {
+        margin: 5px;
+        cursor: pointer;
+      }
+      .dycalendar-month-container .dycalendar-body table tr td {
+        padding: 5px;
+      }
+      .dycalendar-month-container .dycalendar-today-date,
+      .dycalendar-month-container .dycalendar-target-date {
+        background-color: #111;
+        color: #fff;
+        border-radius: 2px;
+      }
+      .dycalendar-container.gradient {
+        background: #fff;
+        background: linear-gradient(#fff, #d3d3d3);
+        background: -o-linear-gradient(#fff, #d3d3d3);
+        background: -moz-linear-gradient(#fff, #d3d3d3);
+        background: -webkit-linear-gradient(#fff, #d3d3d3);
+      }
+      .dycalendar-container.skin-black {
+        color: #fff;
+        background-color: #111;
+        border: 0;
+      }
+      .dycalendar-container.skin-black.gradient {
+        background: #111;
+        background: linear-gradient(#555, #111);
+        background: -o-linear-gradient(#555, #111);
+        background: -moz-linear-gradient(#555, #111);
+        background: -webkit-linear-gradient(#555, #111);
+      }
+      .dycalendar-container.skin-black .dycalendar-today-date,
+      .dycalendar-container.skin-black .dycalendar-target-date {
+        background-color: #fff;
+        color: #111;
+        border-radius: 2px;
+      }
+      .dycalendar-container.skin-blue {
+        color: #fff;
+        background-color: #3c99d3;
+        border: 0;
+      }
+      .dycalendar-container.skin-blue.gradient {
+        background: #3c99d3;
+        background: linear-gradient(#5ebbf5, #3c99d3);
+        background: -o-linear-gradient(#5ebbf5, #3c99d3);
+        background: -moz-linear-gradient(#5ebbf5, #3c99d3);
+        background: -webkit-linear-gradient(#5ebbf5, #3c99d3);
+      }
+      .dycalendar-container.skin-blue .dycalendar-today-date,
+      .dycalendar-container.skin-blue .dycalendar-target-date {
+        background-color: #fff;
+        color: #3c99d3;
+        border-radius: 2px;
+      }
+      .dycalendar-container.skin-green {
+        color: #fff;
+        background-color: #2bb063;
+        border: 0;
+      }
+      .dycalendar-container.skin-green.gradient {
+        background: #2bb063;
+        background: linear-gradient(#3dd175, #2bb063);
+        background: -o-linear-gradient(#3dd175, #2bb063);
+        background: -moz-linear-gradient(#3dd175, #2bb063);
+        background: -webkit-linear-gradient(#3dd175, #2bb063);
+      }
+      .dycalendar-container.skin-green .dycalendar-today-date,
+      .dycalendar-container.skin-green .dycalendar-target-date {
+        background-color: #fff;
+        color: #2bb063;
+        border-radius: 2px;
+      }
+      .dycalendar-container.skin-purple {
+        color: #fff;
+        background-color: #975ea4;
+        border: 0;
+      }
+      .dycalendar-container.skin-purple.gradient {
+        background: #975ea4;
+        background: linear-gradient(#ca82d7, #975ea4);
+        background: -o-linear-gradient(#ca82d7, #975ea4);
+        background: -moz-linear-gradient(#ca82d7, #975ea4);
+        background: -webkit-linear-gradient(#ca82d7, #975ea4);
+      }
+      .dycalendar-container.skin-purple .dycalendar-today-date,
+      .dycalendar-container.skin-purple .dycalendar-target-date {
+        background-color: #fff;
+        color: #975ea4;
+        border-radius: 2px;
+      }
+      .dycalendar-container.skin-red {
+        color: #fff;
+        background-color: #e94d40;
+        border: 0;
+      }
+      .dycalendar-container.skin-red.gradient {
+        background: #e94d40;
+        background: linear-gradient(#fb6f62, #e94d40);
+        background: -o-linear-gradient(#fb6f62, #e94d40);
+        background: -moz-linear-gradient(#fb6f62, #e94d40);
+        background: -webkit-linear-gradient(#fb6f62, #e94d40);
+      }
+      .dycalendar-container.skin-red .dycalendar-today-date,
+      .dycalendar-container.skin-red .dycalendar-target-date {
+        background-color: #fff;
+        color: #e94d40;
+        border-radius: 2px;
+      }
+      .dycalendar-container.skin-spacegray {
+        color: #fff;
+        background-color: #343d46;
+        border: 0;
+      }
+      .dycalendar-container.skin-spacegray.gradient {
+        background: #343d46;
+        background: linear-gradient(#454e57, #343d46);
+        background: -o-linear-gradient(#454e57, #343d46);
+        background: -moz-linear-gradient(#454e57, #343d46);
+        background: -webkit-linear-gradient(#454e57, #343d46);
+      }
+      .dycalendar-container.skin-spacegray .dycalendar-today-date,
+      .dycalendar-container.skin-spacegray .dycalendar-target-date {
+        background-color: #fff;
+        color: #343d46;
+        border-radius: 2px;
+      }
+      .dycalendar-container.shadow-default {
+        -o-box-shadow: 0 4px 4px 0 rgba(50, 50, 50, 0.4);
+        -moz-box-shadow: 0 4px 4px 0 rgba(50, 50, 50, 0.4);
+        -webkit-box-shadow: 0 4px 4px 0 rgba(50, 50, 50, 0.4);
+        box-shadow: 0 4px 4px 0 rgba(50, 50, 50, 0.4);
+      }
+      .dycalendar-container.shadow-black {
+        -o-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+        -webkit-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.4);
+      }
+      .dycalendar-container.shadow-blue {
+        -o-box-shadow: 0 4px 4px 0 rgba(60, 153, 211, 0.4);
+        -moz-box-shadow: 0 4px 4px 0 rgba(60, 153, 211, 0.4);
+        -webkit-box-shadow: 0 4px 4px 0 rgba(60, 153, 211, 0.4);
+        box-shadow: 0 4px 4px 0 rgba(60, 153, 211, 0.4);
+      }
+      .dycalendar-container.shadow-green {
+        -o-box-shadow: 0 4px 4px 0 rgba(43, 176, 99, 0.4);
+        -moz-box-shadow: 0 4px 4px 0 rgba(43, 176, 99, 0.4);
+        -webkit-box-shadow: 0 4px 4px 0 rgba(43, 176, 99, 0.4);
+        box-shadow: 0 4px 4px 0 rgba(43, 176, 99, 0.4);
+      }
+      .dycalendar-container.shadow-purple {
+        -o-box-shadow: 0 4px 4px 0 rgba(151, 94, 164, 0.4);
+        -moz-box-shadow: 0 4px 4px 0 rgba(151, 94, 164, 0.4);
+        -webkit-box-shadow: 0 4px 4px 0 rgba(151, 94, 164, 0.4);
+        box-shadow: 0 4px 4px 0 rgba(151, 94, 164, 0.4);
+      }
+      .dycalendar-container.shadow-red {
+        -o-box-shadow: 0 4px 4px 0 rgba(233, 77, 64, 0.4);
+        -moz-box-shadow: 0 4px 4px 0 rgba(233, 77, 64, 0.4);
+        -webkit-box-shadow: 0 4px 4px 0 rgba(233, 77, 64, 0.4);
+        box-shadow: 0 4px 4px 0 rgba(233, 77, 64, 0.4);
+      }
+      .dycalendar-container.shadow-spacegray {
+        -o-box-shadow: 0 4px 4px 0 rgba(52, 61, 70, 1);
+        -moz-box-shadow: 0 4px 4px 0 rgba(52, 61, 70, 1);
+        -webkit-box-shadow: 0 4px 4px 0 rgba(52, 61, 70, 1);
+        box-shadow: 0 4px 4px 0 rgba(52, 61, 70, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="box">
+        <div class="container">
+          <div id="dycalendar"></div>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script>
+    (function (global) {
+      'use strict';
+      var dycalendar = {},
+        document = global.document,
+        START_YEAR = 1900,
+        END_YEAR = 9999,
+        monthName = {
+          full: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          mmm: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        },
+        dayName = {
+          full: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          d: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+          dd: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+          ddd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        };
+      function createMonthTable(data, option) {
+        var table, tr, td, r, c, count;
+        table = document.createElement('table');
+        tr = document.createElement('tr');
+        for (c = 0; c <= 6; c = c + 1) {
+          td = document.createElement('td');
+          td.innerHTML = 'SMTWTFS'[c];
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+        tr = document.createElement('tr');
+        for (c = 0; c <= 6; c = c + 1) {
+          if (c === data.firstDayIndex) {
+            break;
+          }
+          td = document.createElement('td');
+          tr.appendChild(td);
+        }
+        count = 1;
+        while (c <= 6) {
+          td = document.createElement('td');
+          td.innerHTML = count;
+          if (data.today.date === count && data.today.monthIndex === data.monthIndex && option.highlighttoday === true) {
+            td.setAttribute('class', 'dycalendar-today-date');
+          }
+          if (option.date === count && option.month === data.monthIndex && option.highlighttargetdate === true) {
+            td.setAttribute('class', 'dycalendar-target-date');
+          }
+          tr.appendChild(td);
+          count = count + 1;
+          c = c + 1;
+        }
+        table.appendChild(tr);
+        for (r = 3; r <= 7; r = r + 1) {
+          tr = document.createElement('tr');
+          for (c = 0; c <= 6; c = c + 1) {
+            if (count > data.totaldays) {
+              table.appendChild(tr);
+              return table;
+            }
+            td = document.createElement('td');
+            td.innerHTML = count;
+            if (data.today.date === count && data.today.monthIndex === data.monthIndex && option.highlighttoday === true) {
+              td.setAttribute('class', 'dycalendar-today-date');
+            }
+            if (option.date === count && option.month === data.monthIndex && option.highlighttargetdate === true) {
+              td.setAttribute('class', 'dycalendar-target-date');
+            }
+            count = count + 1;
+            tr.appendChild(td);
+          }
+          table.appendChild(tr);
+        }
+        return table;
+      }
+      function drawCalendarMonthTable(data, option) {
+        var table, div, container, elem;
+        table = createMonthTable(data, option);
+        container = document.createElement('div');
+        container.setAttribute('class', 'dycalendar-month-container');
+        div = document.createElement('div');
+        div.setAttribute('class', 'dycalendar-header');
+        div.setAttribute('data-option', JSON.stringify(option));
+        if (option.prevnextbutton === 'show') {
+          elem = document.createElement('span');
+          elem.setAttribute('class', 'dycalendar-prev-next-btn prev-btn');
+          elem.setAttribute('data-date', option.date);
+          elem.setAttribute('data-month', option.month);
+          elem.setAttribute('data-year', option.year);
+          elem.setAttribute('data-btn', 'prev');
+          elem.innerHTML = '&lt;';
+          div.appendChild(elem);
+        }
+        elem = document.createElement('span');
+        elem.setAttribute('class', 'dycalendar-span-month-year');
+        if (option.monthformat === 'mmm') {
+          elem.innerHTML = data.monthName + ' ' + data.year;
+        } else if (option.monthformat === 'full') {
+          elem.innerHTML = data.monthNameFull + ' ' + data.year;
+        }
+        div.appendChild(elem);
+        if (option.prevnextbutton === 'show') {
+          elem = document.createElement('span');
+          elem.setAttribute('class', 'dycalendar-prev-next-btn next-btn');
+          elem.setAttribute('data-date', option.date);
+          elem.setAttribute('data-month', option.month);
+          elem.setAttribute('data-year', option.year);
+          elem.setAttribute('data-btn', 'next');
+          elem.innerHTML = '&gt;';
+          div.appendChild(elem);
+        }
+        container.appendChild(div);
+        div = document.createElement('div');
+        div.setAttribute('class', 'dycalendar-body');
+        div.appendChild(table);
+        container.appendChild(div);
+        return container;
+      }
+      function drawCalendarDay(data, option) {
+        var div, container, elem;
+        container = document.createElement('div');
+        container.setAttribute('class', 'dycalendar-day-container');
+        div = document.createElement('div');
+        div.setAttribute('class', 'dycalendar-header');
+        elem = document.createElement('span');
+        elem.setAttribute('class', 'dycalendar-span-day');
+        if (option.dayformat === 'ddd') {
+          elem.innerHTML = dayName.ddd[data.targetedDayIndex];
+        } else if (option.dayformat === 'full') {
+          elem.innerHTML = dayName.full[data.targetedDayIndex];
+        }
+        div.appendChild(elem);
+        container.appendChild(div);
+        div = document.createElement('div');
+        div.setAttribute('class', 'dycalendar-body');
+        elem = document.createElement('span');
+        elem.setAttribute('class', 'dycalendar-span-date');
+        elem.innerHTML = data.date;
+        div.appendChild(elem);
+        container.appendChild(div);
+        div = document.createElement('div');
+        div.setAttribute('class', 'dycalendar-footer');
+        elem = document.createElement('span');
+        elem.setAttribute('class', 'dycalendar-span-month-year');
+        if (option.monthformat === 'mmm') {
+          elem.innerHTML = data.monthName + ' ' + data.year;
+        } else if (option.monthformat === 'full') {
+          elem.innerHTML = data.monthNameFull + ' ' + data.year;
+        }
+        div.appendChild(elem);
+        container.appendChild(div);
+        return container;
+      }
+      function extendSource(source, defaults) {
+        var property;
+        for (property in defaults) {
+          if (source.hasOwnProperty(property) === false) {
+            source[property] = defaults[property];
+          }
+        }
+        return source;
+      }
+      function getCalendar(year, month, date) {
+        var dateObj = new Date(),
+          dateString,
+          result = {},
+          idx;
+        if (year < START_YEAR || year > END_YEAR) {
+          global.console.error('Invalid Year');
+          return false;
+        }
+        if (month > 11 || month < 0) {
+          global.console.error('Invalid Month');
+          return false;
+        }
+        if (date > 31 || date < 1) {
+          global.console.error('Invalid Date');
+          return false;
+        }
+        result.year = year;
+        result.month = month;
+        result.date = date;
+        result.today = {};
+        dateString = dateObj.toString().split(' ');
+        idx = dayName.ddd.indexOf(dateString[0]);
+        result.today.dayIndex = idx;
+        result.today.dayName = dateString[0];
+        result.today.dayFullName = dayName.full[idx];
+        idx = monthName.mmm.indexOf(dateString[1]);
+        result.today.monthIndex = idx;
+        result.today.monthName = dateString[1];
+        result.today.monthNameFull = monthName.full[idx];
+        result.today.date = dateObj.getDate();
+        result.today.year = dateString[3];
+        dateObj.setDate(1);
+        dateObj.setMonth(month);
+        dateObj.setFullYear(year);
+        dateString = dateObj.toString().split(' ');
+        idx = dayName.ddd.indexOf(dateString[0]);
+        result.firstDayIndex = idx;
+        result.firstDayName = dateString[0];
+        result.firstDayFullName = dayName.full[idx];
+        idx = monthName.mmm.indexOf(dateString[1]);
+        result.monthIndex = idx;
+        result.monthName = dateString[1];
+        result.monthNameFull = monthName.full[idx];
+        dateObj.setFullYear(year);
+        dateObj.setMonth(month + 1);
+        dateObj.setDate(0);
+        result.totaldays = dateObj.getDate();
+        dateObj.setFullYear(year);
+        dateObj.setMonth(month);
+        dateObj.setDate(date);
+        dateString = dateObj.toString().split(' ');
+        idx = dayName.ddd.indexOf(dateString[0]);
+        result.targetedDayIndex = idx;
+        result.targetedDayName = dateString[0];
+        result.targetedDayFullName = dayName.full[idx];
+        return result;
+      }
+      function onClick() {
+        document.body.onclick = function (e) {
+          e = global.event || e;
+          var targetDomObject = e.target || e.srcElement,
+            date,
+            month,
+            year,
+            btn,
+            option,
+            dateObj;
+          if (targetDomObject && targetDomObject.classList && targetDomObject.classList.contains('dycalendar-prev-next-btn')) {
+            date = parseInt(targetDomObject.getAttribute('data-date'));
+            month = parseInt(targetDomObject.getAttribute('data-month'));
+            year = parseInt(targetDomObject.getAttribute('data-year'));
+            btn = targetDomObject.getAttribute('data-btn');
+            option = JSON.parse(targetDomObject.parentElement.getAttribute('data-option'));
+            if (btn === 'prev') {
+              month = month - 1;
+              if (month < 0) {
+                year = year - 1;
+                month = 11;
+              }
+            } else if (btn === 'next') {
+              month = month + 1;
+              if (month > 11) {
+                year = year + 1;
+                month = 0;
+              }
+            }
+            option.date = date;
+            option.month = month;
+            option.year = year;
+            drawCalendar(option);
+          }
+          if (targetDomObject && targetDomObject.classList && targetDomObject.classList.contains('dycalendar-span-month-year')) {
+            option = JSON.parse(targetDomObject.parentElement.getAttribute('data-option'));
+            dateObj = new Date();
+            option.date = dateObj.getDate();
+            option.month = dateObj.getMonth();
+            option.year = dateObj.getFullYear();
+            drawCalendar(option);
+          }
+        };
+      }
+      dycalendar.draw = function (option) {
+        if (typeof option === 'undefined') {
+          global.console.error('Option missing');
+          return false;
+        }
+        var self = this,
+          dateObj = new Date(),
+          defaults = {
+            type: 'day',
+            month: dateObj.getMonth(),
+            year: dateObj.getFullYear(),
+            date: dateObj.getDate(),
+            monthformat: 'full',
+            dayformat: 'full',
+            highlighttoday: false,
+            highlighttargetdate: false,
+            prevnextbutton: 'hide',
+          };
+        option = extendSource(option, defaults);
+        drawCalendar(option);
+      };
+      function drawCalendar(option) {
+        var calendar,
+          calendarHTML,
+          targetedElementBy = 'id',
+          targetElem,
+          i,
+          len,
+          elemArr;
+        if (option.target[0] === '#') {
+          targetedElementBy = 'id';
+        } else if (option.target[0] === '.') {
+          targetedElementBy = 'class';
+        }
+        targetElem = option.target.substring(1);
+        switch (option.type) {
+          case 'day':
+            calendar = getCalendar(option.year, option.month, option.date);
+            calendarHTML = drawCalendarDay(calendar, option);
+            break;
+          case 'month':
+            calendar = getCalendar(option.year, option.month, option.date);
+            calendarHTML = drawCalendarMonthTable(calendar, option);
+            break;
+          default:
+            global.console.error('Invalid type');
+            return false;
+        }
+        if (targetedElementBy === 'id') {
+          document.getElementById(targetElem).innerHTML = calendarHTML.outerHTML;
+        } else if (targetedElementBy === 'class') {
+          elemArr = document.getElementsByClassName(targetElem);
+          for (i = 0, len = elemArr.length; i < len; i = i + 1) {
+            elemArr[i].innerHTML = calendarHTML.outerHTML;
+          }
+        }
+      }
+      onClick();
+      global.dycalendar = dycalendar;
+    })(typeof window !== 'undefined' ? window : this);
+  </script>
+  <script>
+    dycalendar.draw({
+      target: '#dycalendar',
+      type: 'month',
+      highlighttargetdate: true,
+      prevnextbutton: 'show',
+    });
+  </script>
+</html>

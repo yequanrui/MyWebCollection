@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>苹果消息折叠效果</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      ul {
+        list-style: none;
+      }
+      body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        padding-top: 80px;
+        background: url(./img/bg.png);
+        background-size: cover;
+        perspective: 1000px;
+      }
+      ul {
+        position: relative;
+        width: 400px;
+        transform-style: preserve-3d;
+        cursor: pointer;
+      }
+      ul li {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(20px);
+        transition: 0.6s;
+      }
+      ul li .title {
+        display: flex;
+        justify-content: space-between;
+      }
+      ul li .title i {
+        font-size: 18px;
+        color: #4acfae;
+      }
+      ul li .title .time {
+        color: #666;
+      }
+      ul li:nth-child(2) {
+        z-index: -1;
+        color: transparent;
+        transform: translateY(8px) translateZ(-24px);
+        background: rgba(255, 255, 255, 0.6);
+      }
+      ul li:nth-child(3) {
+        z-index: -2;
+        color: transparent;
+        transform: translateY(16px) translateZ(-48px);
+        background: rgba(255, 255, 255, 0.5);
+      }
+      ul li:nth-child(4) {
+        z-index: -3;
+        color: transparent;
+        transform: translateY(24px) translateZ(-72px);
+      }
+      ul.active li {
+        color: #000;
+        background: rgba(255, 255, 255, 0.7);
+      }
+      ul.active li:nth-child(2) {
+        transform: translateY(calc(100% + 8px));
+      }
+      ul.active li:nth-child(3) {
+        transform: translateY(calc(200% + 16px));
+      }
+      ul.active li:nth-child(4) {
+        transform: translateY(calc(300% + 24px));
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <div class="title">
+          <div><i class="iconfont icon-weixin"></i> 微信</div>
+          <div class="time">30分钟前</div>
+        </div>
+        <h4>阿飞</h4>
+        <div>我die了</div>
+      </li>
+      <li>
+        <div class="title">
+          <div><i class="iconfont icon-weixin"></i> 微信</div>
+          <div class="time">50分钟前</div>
+        </div>
+        <h4>阿强</h4>
+        <div>兄弟我看上你媳妇了</div>
+      </li>
+      <li>
+        <div class="title">
+          <div><i class="iconfont icon-weixin"></i> 微信</div>
+          <div class="time">1小时前</div>
+        </div>
+        <h4>阿珍</h4>
+        <div>鹏哥对不起，我爱上了阿强</div>
+      </li>
+      <li>
+        <div class="title">
+          <div><i class="iconfont icon-weixin"></i> 微信</div>
+          <div class="time">2小时前</div>
+        </div>
+        <h4>阿雅</h4>
+        <div>转账1000万元</div>
+      </li>
+    </ul>
+    <script>
+      const ul = document.querySelector('ul');
+      ul.addEventListener('click', () => {
+        ul.classList.toggle('active');
+      });
+    </script>
+  </body>
+</html>

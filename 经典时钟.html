@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>经典时钟</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <style>
+      :root {
+        --container-size: 400px;
+        --clock-size: calc(var(--container-size) * 0.8);
+        --clock-top-color: #00a6ae;
+        --clock-bottom-color: #005187;
+        --hours-hand-color: #2c2b2c;
+        --minutes-hand-color: #e4e3e4;
+        --seconds-hand-color: #f0ffff;
+        --background-color: #006785;
+        --border-width: 12px;
+        --padding-size: 20px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        background-color: var(--background-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        height: var(--container-size);
+        width: var(--container-size);
+        border: var(--border-width) solid #f5f4f6;
+        border-radius: 40px;
+        box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
+        position: relative;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .clock {
+        position: relative;
+        height: var(--clock-size);
+        width: var(--clock-size);
+        border-radius: 25px;
+        background-image: linear-gradient(var(--clock-top-color), var(--clock-bottom-color));
+        box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.25) inset;
+      }
+      .clock .indicators {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+      .clock .indicators .indicator {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        height: 24px;
+        width: 24px;
+        opacity: 0.75;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 900;
+        color: #ffffff;
+      }
+      .clock .indicators .indicator:nth-child(1) {
+        transform: rotate(0deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(1) span {
+        transform: rotate(0deg);
+      }
+      .clock .indicators .indicator:nth-child(2) {
+        transform: rotate(30deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(2) span {
+        transform: rotate(-30deg);
+      }
+      .clock .indicators .indicator:nth-child(3) {
+        transform: rotate(60deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(3) span {
+        transform: rotate(-60deg);
+      }
+      .clock .indicators .indicator:nth-child(4) {
+        transform: rotate(90deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(4) span {
+        transform: rotate(-90deg);
+      }
+      .clock .indicators .indicator:nth-child(5) {
+        transform: rotate(120deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(5) span {
+        transform: rotate(-120deg);
+      }
+      .clock .indicators .indicator:nth-child(6) {
+        transform: rotate(150deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(6) span {
+        transform: rotate(-150deg);
+      }
+      .clock .indicators .indicator:nth-child(7) {
+        transform: rotate(180deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(7) span {
+        transform: rotate(-180deg);
+      }
+      .clock .indicators .indicator:nth-child(8) {
+        transform: rotate(210deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(8) span {
+        transform: rotate(-210deg);
+      }
+      .clock .indicators .indicator:nth-child(9) {
+        transform: rotate(240deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(9) span {
+        transform: rotate(-240deg);
+      }
+      .clock .indicators .indicator:nth-child(10) {
+        transform: rotate(270deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(10) span {
+        transform: rotate(-270deg);
+      }
+      .clock .indicators .indicator:nth-child(11) {
+        transform: rotate(300deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(11) span {
+        transform: rotate(-300deg);
+      }
+      .clock .indicators .indicator:nth-child(12) {
+        transform: rotate(330deg) translatey(calc(var(--clock-size) * 0.45 * -1));
+      }
+      .clock .indicators .indicator:nth-child(12) span {
+        transform: rotate(-330deg);
+      }
+      .clock .hands {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+      .clock .hands::before,
+      .clock .hands::after {
+        content: '';
+        position: absolute;
+        height: 10px;
+        width: 10px;
+        left: 50%;
+        transform: translatex(-50%) translatey(-50%);
+        border-radius: 500px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+        top: 50%;
+        z-index: 4;
+      }
+      .clock .hands::before {
+        background-color: var(--seconds-hand-color);
+        height: 24px;
+        width: 24px;
+      }
+      .clock .hands::after {
+        height: 10px;
+        width: 10px;
+        background-color: var(--hours-hand-color);
+      }
+      .clock .hands .hand {
+        position: absolute;
+        left: 0;
+        right: 0;
+        transform-origin: bottom;
+        margin: auto;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+        transition: all cubic-bezier(1, 0.9, 0.37, 0.97) 0.15s;
+      }
+      .clock .hands .hand.hours {
+        --height: calc(var(--clock-size) * 0.35);
+        width: 24px;
+        height: var(--height);
+        background-color: var(--hours-hand-color);
+        border-radius: 20px;
+        top: calc((var(--clock-size) / 2) - var(--height));
+        z-index: 1;
+      }
+      .clock .hands .hand.minutes {
+        --height: calc(var(--clock-size) * 0.45);
+        z-index: 2;
+        width: 14px;
+        height: var(--height);
+        background-color: var(--minutes-hand-color);
+        border-radius: 20px;
+        top: calc((var(--clock-size) / 2) - var(--height));
+      }
+      .clock .hands .hand.seconds {
+        --height: calc(var(--clock-size) * 0.45);
+        z-index: 3;
+        width: 4px;
+        height: var(--height);
+        background-color: var(--seconds-hand-color);
+        border-radius: 4px;
+        top: calc((var(--clock-size) / 2) - var(--height));
+      }
+      .link {
+        color: #ffffff;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 8px;
+        font-weight: 700;
+        background-color: #000000;
+        text-decoration: none;
+        font-size: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="clock">
+        <div class="indicators">
+          <div class="indicator">
+            <span>12</span>
+          </div>
+          <div class="indicator">
+            <span>1</span>
+          </div>
+          <div class="indicator">
+            <span>2</span>
+          </div>
+          <div class="indicator">
+            <span>3</span>
+          </div>
+          <div class="indicator">
+            <span>4</span>
+          </div>
+          <div class="indicator">
+            <span>5</span>
+          </div>
+          <div class="indicator">
+            <span>6</span>
+          </div>
+          <div class="indicator">
+            <span>7</span>
+          </div>
+          <div class="indicator">
+            <span>8</span>
+          </div>
+          <div class="indicator">
+            <span>9</span>
+          </div>
+          <div class="indicator">
+            <span>10</span>
+          </div>
+          <div class="indicator">
+            <span>11</span>
+          </div>
+        </div>
+        <div class="hands">
+          <div class="hand hours" id="hoursHand"></div>
+          <div class="hand minutes" id="minutesHand"></div>
+          <div class="hand seconds" id="secondsHand"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function getElapsedTimeInMilliseconds() {
+      const startDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+      const endDate = new Date();
+      return endDate - startDate;
+    }
+    function Time() {
+      let secondsHand = document.querySelector('#secondsHand');
+      let minutesHand = document.querySelector('#minutesHand');
+      let hoursHand = document.querySelector('#hoursHand');
+      setInterval(function () {
+        let angles = generateAngles(getElapsedTimeInMilliseconds());
+        secondsHand.style.transform = `rotate(${angles.secondsAngle}deg)`;
+        minutesHand.style.transform = `rotate(${angles.minuesAngle}deg)`;
+        hoursHand.style.transform = `rotate(${angles.hoursAngle}deg)`;
+      }, 1000);
+    }
+    Time();
+    function generateAngles(milliseconds) {
+      return {
+        secondsAngle: (milliseconds / 1000) * 6,
+        minuesAngle: (milliseconds / 1000 / 60) * 6,
+        hoursAngle: (milliseconds / 1000 / 60 / 60) * 30,
+      };
+    }
+  </script>
+</html>

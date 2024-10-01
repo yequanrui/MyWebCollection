@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数字时钟</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <style>
+      body {
+        background-color: #1098f7;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+      .container {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      h1 {
+        font-size: 5rem;
+        margin: 0;
+        margin-bottom: 1rem;
+        color: #ffffff;
+      }
+      .clockContainer {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .clockContainer .divider {
+        display: inline-flex;
+        width: 2rem;
+        height: 10rem;
+        position: relative;
+      }
+      .clockContainer .divider::before,
+      .clockContainer .divider::after {
+        content: '';
+        position: absolute;
+        height: 2rem;
+        width: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #ffffff;
+        border-radius: 4px;
+      }
+      .clockContainer .divider::before {
+        top: 20%;
+      }
+      .clockContainer .divider::after {
+        bottom: 20%;
+      }
+      .digit {
+        height: 10rem;
+        width: 6rem;
+        background-color: #ffffff;
+        position: relative;
+        margin: 1rem;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .digit::after,
+      .digit::before {
+        content: '';
+        position: absolute;
+        height: 2rem;
+        width: 2rem;
+        background-color: #1098f7;
+        transition: all ease-in-out 0.5s;
+      }
+      .digit::before {
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .digit::after {
+        bottom: 20%;
+        right: 50%;
+        transform: translateX(50%);
+      }
+      .digit.one::before {
+        top: 0;
+        height: 100%;
+        left: 0;
+        transform: translateX(0%);
+      }
+      .digit.one::after {
+        height: 100%;
+        bottom: 0;
+        right: 0;
+        transform: translateX(0%);
+      }
+      .digit.two::before {
+        left: 0;
+        transform: translateX(0);
+        width: 4rem;
+      }
+      .digit.two::after {
+        right: 0;
+        transform: translateX(0);
+        width: 4rem;
+      }
+      .digit.three::before {
+        left: 0;
+        transform: translateX(0);
+        width: 4rem;
+      }
+      .digit.three::after {
+        right: 100%;
+        transform: translateX(100%);
+        width: 4rem;
+      }
+      .digit.four::before {
+        height: 4rem;
+        top: 0;
+      }
+      .digit.four::after {
+        bottom: 0;
+        right: 100%;
+        transform: translateX(100%);
+        height: 4rem;
+        width: 4rem;
+      }
+      .digit.five::before {
+        width: 4rem;
+        left: 100%;
+        transform: translateX(-100%);
+      }
+      .digit.five::after {
+        width: 4rem;
+        right: 100%;
+        transform: translateX(100%);
+      }
+      .digit.six::before {
+        width: 4rem;
+        left: 100%;
+        transform: translateX(-100%);
+      }
+      .digit.seven::before {
+        height: 4rem;
+        width: 4rem;
+        left: 0;
+        transform: translateX(0);
+      }
+      .digit.seven::after {
+        height: 4rem;
+        width: 4rem;
+        bottom: 0;
+        right: 100%;
+        transform: translateX(100%);
+      }
+      .digit.nine::after {
+        width: 4rem;
+        right: 100%;
+        transform: translateX(100%);
+      }
+      .digit.zero::before {
+        height: 3rem;
+      }
+      .digit.zero::after {
+        height: 3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>The Time Is</h1>
+      <div class="clockContainer">
+        <div class="digit hoursFirst"></div>
+        <div class="digit hoursLast"></div>
+        <span class="divider"></span>
+        <div class="digit minutesFirst"></div>
+        <div class="digit minutesLast"></div>
+        <span class="divider"></span>
+        <div class="digit secondsFirst"></div>
+        <div class="digit secondsLast"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    $(document).ready(function () {
+      var getFirstDigit = function (number) {
+        return parseInt(number / 10);
+      };
+      var getLastDigit = function (number) {
+        return parseInt(number % 10);
+      };
+      var digit = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+      setInterval(function () {
+        var date = new Date();
+        var secondsLast = getLastDigit(date.getSeconds());
+        var secondsFirst = getFirstDigit(date.getSeconds());
+        var minutesLast = getLastDigit(date.getMinutes());
+        var minutesFirst = getFirstDigit(date.getMinutes());
+        var hoursLast = getLastDigit(date.getHours());
+        var hoursFirst = getFirstDigit(date.getHours());
+        $('.secondsLast').attr('class', 'digit secondsLast').addClass(digit[secondsLast]);
+        $('.secondsFirst').attr('class', 'digit secondsFirst').addClass(digit[secondsFirst]);
+        $('.minutesLast').attr('class', 'digit minutesLast').addClass(digit[minutesLast]);
+        $('.minutesFirst').attr('class', 'digit minutesFirst').addClass(digit[minutesFirst]);
+        $('.hoursLast').attr('class', 'digit hoursLast').addClass(digit[hoursLast]);
+        $('.hoursFirst').attr('class', 'digit hoursFirst').addClass(digit[hoursFirst]);
+      }, 1000);
+    });
+  </script>
+</html>
