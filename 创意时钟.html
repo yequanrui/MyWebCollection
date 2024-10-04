@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      body {
+        background: #94a19b;
+      }
+      svg {
+        max-height: 90vh;
+        max-width: 90vw;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 100 100">
+      <g transform="scale(-1 1) rotate(-90 0 100)">
+        <g fill="none" stroke="rgba(0,0,0,0.1)">
+          <circle cx="50" cy="50" r="46" stroke-width="8" />
+          <circle cx="50" cy="50" r="46" stroke-width="6" />
+          <circle cx="50" cy="50" r="38" stroke-width="7" />
+          <circle cx="50" cy="50" r="38" stroke-width="5" />
+          <circle cx="50" cy="50" r="30" stroke-width="6" />
+          <circle cx="50" cy="50" r="30" stroke-width="4" />
+          <circle cx="50" cy="50" r="22" stroke-width="5" />
+          <circle cx="50" cy="50" r="22" stroke-width="3" />
+          <circle cx="50" cy="50" r="16" stroke-width="4" />
+          <circle cx="50" cy="50" r="16" stroke-width="2" />
+        </g>
+        <g id="timeHere"></g>
+      </g>
+      <g font-weight="600" fill="#3553BA">
+        <g font-size="5" style="font-family: 'Roboto', sans-serif" dominant-baseline="middle" text-anchor="middle">
+          <g transform="rotate(15 50 50)"><text x="50" y="4.5">1</text></g>
+          <g transform="rotate(30 50 50)"><text x="50" y="4.5">2</text></g>
+          <g transform="rotate(45 50 50)"><text x="50" y="4.5">3</text></g>
+          <g transform="rotate(60 50 50)"><text x="50" y="4.5">4</text></g>
+          <g transform="rotate(75 50 50)"><text x="50" y="4.5">5</text></g>
+          <g transform="rotate(90 50 50)"><text x="50" y="4.5">6</text></g>
+          <g transform="rotate(105 50 50)"><text x="50" y="4.5">7</text></g>
+          <g transform="rotate(120 50 50)"><text x="50" y="4.5">8</text></g>
+          <g transform="rotate(135 50 50)"><text x="50" y="4.5">9</text></g>
+          <g transform="rotate(150 50 50)"><text x="50" y="4.5">10</text></g>
+          <g transform="rotate(165 50 50)"><text x="50" y="4.5">11</text></g>
+          <g transform="rotate(180 50 50)"><text x="50" y="4.5">12</text></g>
+          <g transform="rotate(195 50 50)"><text x="50" y="4.5">13</text></g>
+          <g transform="rotate(210 50 50)"><text x="50" y="4.5">14</text></g>
+          <g transform="rotate(225 50 50)"><text x="50" y="4.5">15</text></g>
+          <g transform="rotate(240 50 50)"><text x="50" y="4.5">16</text></g>
+          <g transform="rotate(255 50 50)"><text x="50" y="4.5">17</text></g>
+          <g transform="rotate(270 50 50)"><text x="50" y="4.5">18</text></g>
+          <g transform="rotate(285 50 50)"><text x="50" y="4.5">19</text></g>
+          <g transform="rotate(300 50 50)"><text x="50" y="4.5">20</text></g>
+          <g transform="rotate(315 50 50)"><text x="50" y="4.5" dominant-baseline="middle" text-anchor="middle">21</text></g>
+          <g transform="rotate(330 50 50)"><text x="50" y="4.5">22</text></g>
+          <g transform="rotate(345 50 50)"><text x="50" y="4.5">23</text></g>
+          <g transform="rotate(360 50 50)"><text x="50" y="4.5">24</text></g>
+        </g>
+        <g font-size="5" font-family="Roboto" dominant-baseline="middle" text-anchor="middle">
+          <g transform="rotate(30 50 50)"><text x="50" y="12.5">1</text></g>
+          <g transform="rotate(60 50 50)"><text x="50" y="12.5">2</text></g>
+          <g transform="rotate(90 50 50)"><text x="50" y="12.5">3</text></g>
+          <g transform="rotate(120 50 50)"><text x="50" y="12.5">4</text></g>
+          <g transform="rotate(150 50 50)"><text x="50" y="12.5">5</text></g>
+          <g transform="rotate(180 50 50)"><text x="50" y="12.5">6</text></g>
+          <g transform="rotate(210 50 50)"><text x="50" y="12.5">7</text></g>
+          <g transform="rotate(240 50 50)"><text x="50" y="12.5">8</text></g>
+          <g transform="rotate(270 50 50)"><text x="50" y="12.5">9</text></g>
+          <g transform="rotate(300 50 50)"><text x="50" y="12.5">10</text></g>
+          <g transform="rotate(330 50 50)"><text x="50" y="12.5">11</text></g>
+          <g transform="rotate(360 50 50)"><text x="50" y="12.5">12</text></g>
+        </g>
+        <g font-size="2" font-family="Roboto" dominant-baseline="middle" text-anchor="middle">
+          <g transform="rotate(6 50 50)"><text x="50" y="20.25">1</text></g>
+          <g transform="rotate(12 50 50)"><text x="50" y="20.25">2</text></g>
+          <g transform="rotate(18 50 50)"><text x="50" y="20.25">3</text></g>
+          <g transform="rotate(24 50 50)"><text x="50" y="20.25">4</text></g>
+          <g transform="rotate(30 50 50)"><text x="50" y="20.25">5</text></g>
+          <g transform="rotate(36 50 50)"><text x="50" y="20.25">6</text></g>
+          <g transform="rotate(42 50 50)"><text x="50" y="20.25">7</text></g>
+          <g transform="rotate(48 50 50)"><text x="50" y="20.25">8</text></g>
+          <g transform="rotate(54 50 50)"><text x="50" y="20.25">9</text></g>
+          <g transform="rotate(60 50 50)"><text x="50" y="20.25">10</text></g>
+          <g transform="rotate(66 50 50)"><text x="50" y="20.25">11</text></g>
+          <g transform="rotate(72 50 50)"><text x="50" y="20.25">12</text></g>
+          <g transform="rotate(78 50 50)"><text x="50" y="20.25">13</text></g>
+          <g transform="rotate(84 50 50)"><text x="50" y="20.25">14</text></g>
+          <g transform="rotate(90 50 50)"><text x="50" y="20.25">15</text></g>
+          <g transform="rotate(96 50 50)"><text x="50" y="20.25">16</text></g>
+          <g transform="rotate(102 50 50)"><text x="50" y="20.25">17</text></g>
+          <g transform="rotate(108 50 50)"><text x="50" y="20.25">18</text></g>
+          <g transform="rotate(114 50 50)"><text x="50" y="20.25">19</text></g>
+          <g transform="rotate(120 50 50)"><text x="50" y="20.25">20</text></g>
+          <g transform="rotate(126 50 50)"><text x="50" y="20.25">21</text></g>
+          <g transform="rotate(132 50 50)"><text x="50" y="20.25">22</text></g>
+          <g transform="rotate(138 50 50)"><text x="50" y="20.25">23</text></g>
+          <g transform="rotate(144 50 50)"><text x="50" y="20.25">24</text></g>
+          <g transform="rotate(150 50 50)"><text x="50" y="20.25">25</text></g>
+          <g transform="rotate(156 50 50)"><text x="50" y="20.25">26</text></g>
+          <g transform="rotate(162 50 50)"><text x="50" y="20.25">27</text></g>
+          <g transform="rotate(168 50 50)"><text x="50" y="20.25">28</text></g>
+          <g transform="rotate(174 50 50)"><text x="50" y="20.25">29</text></g>
+          <g transform="rotate(180 50 50)"><text x="50" y="20.25">30</text></g>
+          <g transform="rotate(186 50 50)"><text x="50" y="20.25">31</text></g>
+          <g transform="rotate(192 50 50)"><text x="50" y="20.25">32</text></g>
+          <g transform="rotate(198 50 50)"><text x="50" y="20.25">33</text></g>
+          <g transform="rotate(204 50 50)"><text x="50" y="20.25">34</text></g>
+          <g transform="rotate(210 50 50)"><text x="50" y="20.25">35</text></g>
+          <g transform="rotate(216 50 50)"><text x="50" y="20.25">36</text></g>
+          <g transform="rotate(222 50 50)"><text x="50" y="20.25">37</text></g>
+          <g transform="rotate(228 50 50)"><text x="50" y="20.25">38</text></g>
+          <g transform="rotate(234 50 50)"><text x="50" y="20.25">39</text></g>
+          <g transform="rotate(240 50 50)"><text x="50" y="20.25">40</text></g>
+          <g transform="rotate(246 50 50)"><text x="50" y="20.25">41</text></g>
+          <g transform="rotate(252 50 50)"><text x="50" y="20.25">42</text></g>
+          <g transform="rotate(258 50 50)"><text x="50" y="20.25">43</text></g>
+          <g transform="rotate(264 50 50)"><text x="50" y="20.25">44</text></g>
+          <g transform="rotate(270 50 50)"><text x="50" y="20.25">45</text></g>
+          <g transform="rotate(276 50 50)"><text x="50" y="20.25">46</text></g>
+          <g transform="rotate(282 50 50)"><text x="50" y="20.25">47</text></g>
+          <g transform="rotate(288 50 50)"><text x="50" y="20.25">48</text></g>
+          <g transform="rotate(294 50 50)"><text x="50" y="20.25">49</text></g>
+          <g transform="rotate(300 50 50)"><text x="50" y="20.25">50</text></g>
+          <g transform="rotate(306 50 50)"><text x="50" y="20.25">51</text></g>
+          <g transform="rotate(312 50 50)"><text x="50" y="20.25">52</text></g>
+          <g transform="rotate(318 50 50)"><text x="50" y="20.25">53</text></g>
+          <g transform="rotate(324 50 50)"><text x="50" y="20.25">54</text></g>
+          <g transform="rotate(330 50 50)"><text x="50" y="20.25">55</text></g>
+          <g transform="rotate(336 50 50)"><text x="50" y="20.25">56</text></g>
+          <g transform="rotate(342 50 50)"><text x="50" y="20.25">57</text></g>
+          <g transform="rotate(348 50 50)"><text x="50" y="20.25">58</text></g>
+          <g transform="rotate(354 50 50)"><text x="50" y="20.25">59</text></g>
+          <g transform="rotate(360 50 50)"><text x="50" y="20.25">60</text></g>
+        </g>
+        <g font-size="1.5" font-family="Roboto" dominant-baseline="middle" text-anchor="middle">
+          <g transform="rotate(6 50 50)"><text x="50" y="28.25">1</text></g>
+          <g transform="rotate(12 50 50)"><text x="50" y="28.25">2</text></g>
+          <g transform="rotate(18 50 50)"><text x="50" y="28.25">3</text></g>
+          <g transform="rotate(24 50 50)"><text x="50" y="28.25">4</text></g>
+          <g transform="rotate(30 50 50)"><text x="50" y="28.25">5</text></g>
+          <g transform="rotate(36 50 50)"><text x="50" y="28.25">6</text></g>
+          <g transform="rotate(42 50 50)"><text x="50" y="28.25">7</text></g>
+          <g transform="rotate(48 50 50)"><text x="50" y="28.25">8</text></g>
+          <g transform="rotate(54 50 50)"><text x="50" y="28.25">9</text></g>
+          <g transform="rotate(60 50 50)"><text x="50" y="28.25">10</text></g>
+          <g transform="rotate(66 50 50)"><text x="50" y="28.25">11</text></g>
+          <g transform="rotate(72 50 50)"><text x="50" y="28.25">12</text></g>
+          <g transform="rotate(78 50 50)"><text x="50" y="28.25">13</text></g>
+          <g transform="rotate(84 50 50)"><text x="50" y="28.25">14</text></g>
+          <g transform="rotate(90 50 50)"><text x="50" y="28.25">15</text></g>
+          <g transform="rotate(96 50 50)"><text x="50" y="28.25">16</text></g>
+          <g transform="rotate(102 50 50)"><text x="50" y="28.25">17</text></g>
+          <g transform="rotate(108 50 50)"><text x="50" y="28.25">18</text></g>
+          <g transform="rotate(114 50 50)"><text x="50" y="28.25">19</text></g>
+          <g transform="rotate(120 50 50)"><text x="50" y="28.25">20</text></g>
+          <g transform="rotate(126 50 50)"><text x="50" y="28.25">21</text></g>
+          <g transform="rotate(132 50 50)"><text x="50" y="28.25">22</text></g>
+          <g transform="rotate(138 50 50)"><text x="50" y="28.25">23</text></g>
+          <g transform="rotate(144 50 50)"><text x="50" y="28.25">24</text></g>
+          <g transform="rotate(150 50 50)"><text x="50" y="28.25">25</text></g>
+          <g transform="rotate(156 50 50)"><text x="50" y="28.25">26</text></g>
+          <g transform="rotate(162 50 50)"><text x="50" y="28.25">27</text></g>
+          <g transform="rotate(168 50 50)"><text x="50" y="28.25">28</text></g>
+          <g transform="rotate(174 50 50)"><text x="50" y="28.25">29</text></g>
+          <g transform="rotate(180 50 50)"><text x="50" y="28.25">30</text></g>
+          <g transform="rotate(186 50 50)"><text x="50" y="28.25">31</text></g>
+          <g transform="rotate(192 50 50)"><text x="50" y="28.25">32</text></g>
+          <g transform="rotate(198 50 50)"><text x="50" y="28.25">33</text></g>
+          <g transform="rotate(204 50 50)"><text x="50" y="28.25">34</text></g>
+          <g transform="rotate(210 50 50)"><text x="50" y="28.25">35</text></g>
+          <g transform="rotate(216 50 50)"><text x="50" y="28.25">36</text></g>
+          <g transform="rotate(222 50 50)"><text x="50" y="28.25">37</text></g>
+          <g transform="rotate(228 50 50)"><text x="50" y="28.25">38</text></g>
+          <g transform="rotate(234 50 50)"><text x="50" y="28.25">39</text></g>
+          <g transform="rotate(240 50 50)"><text x="50" y="28.25">40</text></g>
+          <g transform="rotate(246 50 50)"><text x="50" y="28.25">41</text></g>
+          <g transform="rotate(252 50 50)"><text x="50" y="28.25">42</text></g>
+          <g transform="rotate(258 50 50)"><text x="50" y="28.25">43</text></g>
+          <g transform="rotate(264 50 50)"><text x="50" y="28.25">44</text></g>
+          <g transform="rotate(270 50 50)"><text x="50" y="28.25">45</text></g>
+          <g transform="rotate(276 50 50)"><text x="50" y="28.25">46</text></g>
+          <g transform="rotate(282 50 50)"><text x="50" y="28.25">47</text></g>
+          <g transform="rotate(288 50 50)"><text x="50" y="28.25">48</text></g>
+          <g transform="rotate(294 50 50)"><text x="50" y="28.25">49</text></g>
+          <g transform="rotate(300 50 50)"><text x="50" y="28.25">50</text></g>
+          <g transform="rotate(306 50 50)"><text x="50" y="28.25">51</text></g>
+          <g transform="rotate(312 50 50)"><text x="50" y="28.25">52</text></g>
+          <g transform="rotate(318 50 50)"><text x="50" y="28.25">53</text></g>
+          <g transform="rotate(324 50 50)"><text x="50" y="28.25">54</text></g>
+          <g transform="rotate(330 50 50)"><text x="50" y="28.25">55</text></g>
+          <g transform="rotate(336 50 50)"><text x="50" y="28.25">56</text></g>
+          <g transform="rotate(342 50 50)"><text x="50" y="28.25">57</text></g>
+          <g transform="rotate(348 50 50)"><text x="50" y="28.25">58</text></g>
+          <g transform="rotate(354 50 50)"><text x="50" y="28.25">59</text></g>
+          <g transform="rotate(360 50 50)"><text x="50" y="28.25">60</text></g>
+        </g>
+        <g font-size="1" font-family="Roboto" dominant-baseline="middle" text-anchor="middle">
+          <g transform="rotate(0 50 50)"><text x="50" y="34.25">0</text></g>
+          <g transform="rotate(90 50 50)"><text x="50" y="34.25">250</text></g>
+          <g transform="rotate(180 50 50)"><text x="50" y="34.25">500</text></g>
+          <g transform="rotate(270 50 50)"><text x="50" y="34.25">750</text></g>
+        </g>
+      </g>
+    </svg>
+    <script>
+      function getTimePercentages() {
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentSecond = now.getSeconds();
+        const remainingMinutes = currentMinute;
+        const hourPercentage = (currentHour / 24) * 100;
+        const hour12Percentage = ((currentHour % 12) / 12) * 100;
+        const minutePercentage = (currentMinute / 60) * 100;
+        const secondPercentage = (currentSecond / 60) * 100;
+        const minutesLeftPercentage = (remainingMinutes / 60) * 100;
+        return {
+          hour: hourPercentage,
+          hour12: hour12Percentage,
+          minute: minutePercentage,
+          minutes: minutesLeftPercentage,
+          second: secondPercentage,
+        };
+      }
+      function setTime() {
+        let p = getTimePercentages();
+        let hoursLeftPerc = p.hour * 0.01 * 86400;
+        let hours12LeftPerc = p.hour12 * 0.01 * 3600;
+        let minsLeftPerc = p.minute * 0.01 * 60;
+        let minutesLeftPerc = p.minutes * 0.01 * 3600;
+        let secsLeftPerc = p.second * 0.01;
+        let cols = ['#5F7DE4', '#89A7F0', '#B3D1C6', '#DDFB9C', '#F4D66F', '#3553BA'];
+        document.querySelector(
+          '#timeHere'
+        ).innerHTML = `<circle cx="50"cy="50"r="46"stroke="${cols[0]}"stroke-width="4"fill="none"><animate class="hoursAnim"attributeName="opacity"values="0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1"dur="86400s"begin="-${hoursLeftPerc}s"repeatCount="indefinite"/></circle><circle cx="50"cy="50"r="46"stroke="${cols[0]}"stroke-width="4"fill="none"stroke-dasharray="291.03"stroke-dashoffset="0"stroke-linecap="round"><animate class="hoursAnim"attributeName="stroke-dashoffset"values="0; 291.03"dur="86400s"begin="-${hoursLeftPerc}s"repeatCount="indefinite"/></circle><circle cx="50"cy="50"r="38"stroke="${cols[1]}"stroke-width="3"fill="none"><animate attributeName="opacity"values="0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1"dur="3600s"begin="-${hours12LeftPerc}s"repeatCount="indefinite"/></circle><circle cx="50"cy="50"r="38"stroke="${cols[1]}"stroke-width="3"fill="none"stroke-dasharray="240.76"stroke-dashoffset="0"stroke-linecap="round"><animate attributeName="stroke-dashoffset"values="0; 240.76"dur="3600s"begin="-${hours12LeftPerc}s"repeatCount="indefinite"/></circle><circle cx="50"cy="50"r="30"stroke="${cols[2]}"stroke-width="2"fill="none"><animate attributeName="opacity"values="0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1"dur="3600s"begin="-${minutesLeftPerc}s"repeatCount="indefinite"/></circle><circle cx="50"cy="50"r="30"stroke="${cols[2]}"stroke-width="2"fill="none"stroke-dasharray="190.5"stroke-dashoffset="0"stroke-linecap="round"><animate attributeName="stroke-dashoffset"values="0; 190.5"dur="3600s"begin="-${minutesLeftPerc}s"repeatCount="indefinite"/></circle><circle cx="50"cy="50"r="22"stroke="${cols[3]}"stroke-width="1.5"fill="none"><animate attributeName="opacity"values="0; 0; 0; 0; 0; 0; 0; 0; 0; 1"dur="60s"begin="-${minsLeftPerc}s"repeatCount="indefinite"/></circle><circle cx="50"cy="50"r="22"stroke="${cols[3]}"stroke-width="1.5"fill="none"stroke-dasharray="140.23"stroke-dashoffset="0"stroke-linecap="round"><animate attributeName="stroke-dashoffset"values="0; 140.23"dur="60s"begin="-${minsLeftPerc}s"repeatCount="indefinite"/></circle><circle cx="50"cy="50"r="16"stroke="${cols[4]}"stroke-width="1"fill="none"><animate attributeName="opacity"values="0; 0.25; 1"dur="1s"begin="-${secsLeftPerc}s"repeatCount="indefinite"/></circle><circle cx="50"cy="50"r="16"stroke="${cols[4]}"stroke-width="1"fill="none"stroke-dasharray="102.53"stroke-dashoffset="0"stroke-linecap="round"><animate attributeName="stroke-dashoffset"values="0; 102.53"dur="1s"begin="-${secsLeftPerc}s"repeatCount="indefinite"/></circle>`;
+      }
+      setTime();
+    </script>
+  </body>
+</html>
