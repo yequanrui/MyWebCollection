@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      html,
+      body {
+        background: black;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .circle {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -4px 0 0 -4px;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        z-index: 10;
+        box-shadow: 0px 0px 8px 0px #fdfca9 inset, 0px 0px 24px 0px #ffeb3b, 0px 0px 8px 0px #ffffff42;
+      }
+      .button-wrapper {
+        position: relative;
+      }
+      .button {
+        z-index: 1;
+        position: relative;
+        text-decoration: none;
+        text-align: center;
+        appearance: none;
+        display: inline-block;
+      }
+      .button::before {
+        content: '';
+        box-shadow: 0px 0px 24px 0px #ffeb3b;
+        mix-blend-mode: screen;
+        transition: opacity 0.3s;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border-radius: 999px;
+        opacity: 0;
+      }
+      .button::after {
+        content: '';
+        box-shadow: 0px 0px 23px 0px #fdfca9 inset, 0px 0px 8px 0px #ffffff42;
+        transition: opacity 0.3s;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        border-radius: 999px;
+        opacity: 0;
+      }
+      .button-wrapper:hover {
+        .button::before,
+        .button::after {
+          opacity: 1;
+        }
+        .dot {
+          transform: translate(0, 0) rotate(var(--rotatation));
+        }
+        .dot::after {
+          animation-play-state: running;
+        }
+      }
+      .dot {
+        display: block;
+        position: absolute;
+        transition: transform calc(var(--speed) / 12) ease;
+        width: var(--size);
+        height: var(--size);
+        transform: translate(var(--starting-x), var(--starting-y)) rotate(var(--rotatation));
+      }
+      .dot::after {
+        content: '';
+        animation: hoverFirefly var(--speed) infinite, dimFirefly calc(var(--speed) / 2) infinite calc(var(--speed) / 3);
+        animation-play-state: paused;
+        display: block;
+        border-radius: 100%;
+        background: yellow;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0px 0px 6px 0px #ffeb3b, 0px 0px 4px 0px #fdfca9 inset, 0px 0px 2px 1px #ffffff42;
+      }
+      .dot-1 {
+        --rotatation: 0deg;
+        --speed: 14s;
+        --size: 6px;
+        --starting-x: 30px;
+        --starting-y: 20px;
+        top: 2px;
+        left: -16px;
+        opacity: 0.7;
+      }
+      .dot-2 {
+        --rotatation: 122deg;
+        --speed: 16s;
+        --size: 3px;
+        --starting-x: 40px;
+        --starting-y: 10px;
+        top: 1px;
+        left: 0px;
+        opacity: 0.7;
+      }
+      .dot-3 {
+        --rotatation: 39deg;
+        --speed: 20s;
+        --size: 4px;
+        --starting-x: -10px;
+        --starting-y: 20px;
+        top: -8px;
+        right: 14px;
+      }
+      .dot-4 {
+        --rotatation: 220deg;
+        --speed: 18s;
+        --size: 2px;
+        --starting-x: -30px;
+        --starting-y: -5px;
+        bottom: 4px;
+        right: -14px;
+        opacity: 0.9;
+      }
+      .dot-5 {
+        --rotatation: 190deg;
+        --speed: 22s;
+        --size: 5px;
+        --starting-x: -40px;
+        --starting-y: -20px;
+        bottom: -6px;
+        right: -3px;
+      }
+      .dot-6 {
+        --rotatation: 20deg;
+        --speed: 15s;
+        --size: 4px;
+        --starting-x: 12px;
+        --starting-y: -18px;
+        bottom: -12px;
+        left: 30px;
+        opacity: 0.7;
+      }
+      .dot-7 {
+        --rotatation: 300deg;
+        --speed: 19s;
+        --size: 3px;
+        --starting-x: 6px;
+        --starting-y: -20px;
+        bottom: -16px;
+        left: 44px;
+      }
+      @keyframes dimFirefly {
+        0% {
+          opacity: 1;
+        }
+        25% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 0.8;
+        }
+        75% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes hoverFirefly {
+        0% {
+          transform: translate(0, 0);
+        }
+        12% {
+          transform: translate(3px, 1px);
+        }
+        24% {
+          transform: translate(-2px, 3px);
+        }
+        37% {
+          transform: translate(2px, -2px);
+        }
+        55% {
+          transform: translate(-1px, 0);
+        }
+        74% {
+          transform: translate(0, 2px);
+        }
+        88% {
+          transform: translate(-3px, -1px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="button-wrapper">
+      <span class="dot dot-1"></span>
+      <span class="dot dot-2"></span>
+      <span class="dot dot-3"></span>
+      <span class="dot dot-4"></span>
+      <span class="dot dot-5"></span>
+      <span class="dot dot-6"></span>
+      <span class="dot dot-7"></span>
+      <span class="button bg-yellow-500 px-16 py-4 rounded-full uppercase">Button</span>
+    </a>
+    <div id="circle" class="circle bg-yellow-500"></div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/kinet@2.2.1/dist/kinet.min.js"></script>
+    <script>
+      var kinet = new Kinet({ acceleration: 0.02, friction: 0.25, names: ['x', 'y'] }),
+        circle = document.getElementById('circle');
+      kinet.on('tick', function (e) {
+        circle.style.transform = `translate3d(${e.x.current}px, ${e.y.current}px, 0) rotateX(${e.x.velocity / 2}deg) rotateY(${
+          e.y.velocity / 2
+        }deg)`;
+      }),
+        document.addEventListener('mousemove', function (e) {
+          kinet.animate('x', e.clientX - window.innerWidth / 2), kinet.animate('y', e.clientY - window.innerHeight / 2);
+        }),
+        kinet.on('start', function () {
+          console.log('start');
+        }),
+        kinet.on('end', function () {
+          console.log('end');
+        });
+    </script>
+  </body>
+</html>

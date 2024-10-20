@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>轻量计算器</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .calculator {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+      }
+      #expression {
+        width: 100%;
+        height: 60px;
+        font-size: 24px;
+        text-align: right;
+        border: none;
+        background-color: #f8f8f8;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+      }
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+      .span-3 {
+        grid-column: span 3;
+      }
+      button {
+        padding: 15px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #e0e0e0;
+      }
+      .operator {
+        background-color: #f1c40f;
+        color: white;
+      }
+      .operator:hover {
+        background-color: #d4ac0d;
+      }
+      .equals {
+        background-color: #3498db;
+        color: white;
+      }
+      .equals:hover {
+        background-color: #2980b9;
+      }
+      .clear,
+      .backspace {
+        background-color: #e74c3c;
+        color: white;
+      }
+      .clear:hover,
+      .backspace:hover {
+        background-color: #c0392b;
+      }
+      #history {
+        margin-top: 20px;
+        max-height: 150px;
+        overflow-y: auto;
+        border-top: 1px solid #e0e0e0;
+        padding-top: 10px;
+      }
+      #history p {
+        margin: 5px 0;
+        font-size: 14px;
+      }
+      .span-2 {
+        grid-column: span 2;
+      }
+      .clear-history {
+        background-color: #95a5a6;
+        color: white;
+      }
+      .clear-history:hover {
+        background-color: #7f8c8d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <input type="text" id="expression" readonly />
+      <div class="buttons">
+        <button class="percent">%</button>
+        <button class="clear">清除</button>
+        <button class="backspace">退格</button>
+        <button class="operator">+</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="operator">-</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="operator">×</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="operator">÷</button>
+        <button class="span-2">0</button>
+        <button class="clear-history">清空记录</button>
+        <button class="equals">=</button>
+      </div>
+      <div id="history"></div>
+    </div>
+
+    <script>
+      let expression = ''; // 存储当前表达式
+      let lastResult = ''; // 存储上一次计算结果
+      const expressionDisplay = document.getElementById('expression');
+
+      // 将数字或运算符添加到显示屏
+      function appendToDisplay(value) {
+        if (lastResult !== '') {
+          if ('+-×÷%'.includes(value)) {
+            expression = lastResult + value.replace('×', '*').replace('÷', '/');
+          } else {
+            expression = value;
+          }
+          lastResult = '';
+        } else {
+          expression += value.replace('×', '*').replace('÷', '/');
+        }
+        expressionDisplay.value = expression;
+      }
+
+      // 清除显示屏
+      function clearDisplay() {
+        expression = '';
+        lastResult = '';
+        expressionDisplay.value = '';
+      }
+
+      // 退格功能
+      function backspace() {
+        expression = expression.slice(0, -1);
+        expressionDisplay.value = expression;
+      }
+
+      // 计算表达式结果
+      function calculate() {
+        try {
+          // 使用Function构造函数计算表达式
+          let result = Function('"use strict";return (' + expression + ')')();
+          if (isNaN(result) || !isFinite(result)) {
+            throw new Error('无效的计算结果');
+          }
+          // 改进浮点数显示
+          result = formatResult(result);
+          addToHistory(expression, result);
+          lastResult = result.toString();
+          expression = lastResult;
+          expressionDisplay.value = expression;
+        } catch (error) {
+          expression = '计算错误: ' + error.message;
+          expressionDisplay.value = expression;
+          lastResult = '';
+        }
+      }
+
+      // 添加新函数来格式化结果
+      function formatResult(num) {
+        // 如果是整数，直接返回
+        if (Number.isInteger(num)) {
+          return num;
+        }
+
+        // 将数字转换为字符串
+        let str = num.toString();
+
+        // 如果数字很大或很小，使用指数表示法
+        if (Math.abs(num) < 1e-7 || Math.abs(num) > 1e11) {
+          return num.toExponential(6);
+        }
+
+        // 对于其他情况，限制小数位数到10位
+        let fixed = num.toFixed(10);
+        // 移除末尾的0
+        fixed = fixed.replace(/\.?0+$/, '');
+
+        return fixed;
+      }
+
+      // 添加计算历史记录
+      function addToHistory(expr, res) {
+        const historyDiv = document.getElementById('history');
+        const historyItem = document.createElement('p');
+        historyItem.textContent = `${expr} = ${res}`;
+        historyDiv.insertBefore(historyItem, historyDiv.firstChild);
+        // 限制历史记录最多显示10条
+        if (historyDiv.childElementCount > 10) {
+          historyDiv.removeChild(historyDiv.lastChild);
+        }
+      }
+
+      // 键盘事件监听器
+      document.addEventListener('keydown', function (event) {
+        const key = event.key;
+        if (/[0-9+\-*/.=%]/.test(key)) {
+          event.preventDefault();
+          if (key === '=') {
+            calculate();
+          } else if (key === '%') {
+            calculatePercent();
+          } else {
+            appendToDisplay(key);
+          }
+        } else if (key === 'Enter') {
+          event.preventDefault();
+          calculate();
+        } else if (key === 'Backspace') {
+          event.preventDefault();
+          backspace();
+        } else if (key === 'Escape') {
+          event.preventDefault();
+          clearDisplay();
+        }
+      });
+
+      // 修改百分比功能
+      function calculatePercent() {
+        if (expression === '') {
+          expression = '0';
+        } else {
+          try {
+            let result = Function('"use strict";return (' + expression + ')')();
+            result = result / 100;
+            expression = formatResult(result).toString();
+          } catch (error) {
+            expression = '计算错误';
+          }
+        }
+        expressionDisplay.value = expression;
+      }
+
+      // 添加清除历史记录的函数
+      function clearHistory() {
+        const historyDiv = document.getElementById('history');
+        historyDiv.innerHTML = '';
+      }
+
+      // 修改事件委托
+      document.querySelector('.buttons').addEventListener('click', function (event) {
+        if (event.target.tagName === 'BUTTON') {
+          if (event.target.classList.contains('equals')) {
+            calculate();
+          } else if (event.target.classList.contains('clear')) {
+            clearDisplay();
+          } else if (event.target.classList.contains('backspace')) {
+            backspace();
+          } else if (event.target.classList.contains('percent')) {
+            calculatePercent();
+          } else if (event.target.classList.contains('clear-history')) {
+            clearHistory();
+          } else {
+            appendToDisplay(event.target.textContent);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

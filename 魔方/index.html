@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>魔方</title>
+		<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<div class="mofang">
+			<div class="mofang__background"></div>
+			<div class="mofang__game"></div>
+			<div class="mofang__texts">
+				<h1 class="text text--title">
+					<span>魔方</span>
+				</h1>
+				<div class="text text--note">
+					双击即可开始
+				</div>
+				<div class="text text--timer">
+					0:00
+				</div>
+				<div class="text text--complete">
+					<span>完成!</span>
+				</div>
+				<div class="text text--best-time">
+					<icon trophy></icon>
+					<span>最佳时间!</span>
+				</div>
+			</div>
+
+			<div class="mofang__prefs">
+				<range name="flip" title="翻转类型" list="迅速的&nbsp;,平滑的,弹起"></range>
+				<range name="scramble" title="扰乱长度" list="20,25,30"></range>
+				<range name="fov" title="摄像机角度" list="摄影,透视的"></range>
+				<range name="theme" title="配色方案" list="灰色,浅蓝色,浅黄色,脏黄色,淡青色"></range>
+			</div>
+
+			<div class="mofang__stats">
+				<div class="stats" name="total-solves">
+					<i>全部解决:</i><b>-</b>
+				</div>
+				<div class="stats" name="best-time">
+					<i>最佳时间:</i><b>-</b>
+				</div>
+				<div class="stats" name="worst-time">
+					<i>最差时间:</i><b>-</b>
+				</div>
+				<div class="stats" name="average-5">
+					<i>平均值 5:</i><b>-</b>
+				</div>
+				<div class="stats" name="average-12">
+					<i>平均值 12:</i><b>-</b>
+				</div>
+				<div class="stats" name="average-25">
+					<i>平均值 25:</i><b>-</b>
+				</div>
+			</div>
+
+			<div class="mofang__buttons">
+				<button class="btn btn--bl btn--stats">
+					<icon trophy></icon>
+				</button>
+				<button class="btn btn--bl btn--prefs">
+					<icon settings></icon>
+				</button>
+				<button class="btn btn--bl btn--back">
+					<icon back></icon>
+				</button>
+					<a href="#" class="btn btn--br btn--pwa">
+				</button>
+			</div>
+		</div>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js'></script>
+		<script src="js/common.js"></script>
+	</body>
+
+</html>
