@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动态渐变背景卡片</title>
+    <style>
+      @property --rotation {
+        syntax: '<angle>';
+        initial-value: 0turn;
+        inherits: false;
+      }
+      html,
+      body {
+        height: 100%;
+        font-size: 24px;
+      }
+      body {
+        display: grid;
+        place-content: center;
+        background: #202020;
+      }
+      .glow-card {
+        aspect-ratio: 1;
+        position: relative;
+        color: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        overflow: hidden;
+        display: grid;
+        place-content: center;
+        box-shadow: 0 0 40px hsl(0, 255, 255, 0.05);
+        &::before {
+          position: absolute;
+          inset: 0;
+          content: '';
+          z-index: -2;
+          background-image: conic-gradient(from var(--rotation, 0turn), #007498, #00d493, #d91982, #f5a95b, #007498);
+          animation: 7s hue-rotation infinite linear;
+        }
+        &::after {
+          position: absolute;
+          width: 94%;
+          height: 94%;
+          top: 3%;
+          left: 3%;
+          border-radius: 0.7rem;
+          content: '';
+          z-index: -1;
+          background: black;
+          filter: blur(12px);
+        }
+      }
+      @keyframes hue-rotation {
+        from {
+          --rotation: 0turn;
+        }
+        to {
+          --rotation: 1turn;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow-card">开心快乐</div>
+  </body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      *,
+      *::after,
+      *::before {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background: radial-gradient(circle at 50% 50%, #eeeeee 0%, #333 100%);
+        font-family: 'PT Mono';
+      }
+      h1 {
+        margin: 0;
+        font-family: 'Montserrat';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 200px;
+        width: 200px;
+        text-align: center;
+        line-height: 200px;
+        font-size: 200px;
+        font-weight: 400;
+        color: rgba(230, 230, 230, 1);
+        text-shadow: 0 0px 50px rgba(255, 255, 255, 0.75), 0 0px 150px rgba(255, 255, 255, 0.5), 0 0px 200px rgba(255, 255, 255, 0);
+        transform: translate(-55%, -50%);
+        transform-origin: 50%;
+        cursor: pointer;
+        z-index: 100;
+        transition: all 0.25s;
+      }
+      h1.off {
+        color: transparent;
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35), 0 -1px 1px rgba(0, 0, 0, 0.15);
+      }
+      h1 span {
+        font-size: 30px;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 120px;
+      }
+      #clock {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 460px;
+        height: 460px;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+      }
+      h1.off + #clock {
+        background-image: linear-gradient(
+            60deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.7) 40%,
+            rgba(255, 255, 255, 0.5) 45%,
+            rgba(255, 255, 255, 0.25) 55%,
+            rgba(255, 255, 255, 0.35) 55.5%,
+            rgba(255, 255, 255, 0.3) 60%,
+            rgba(255, 255, 255, 0.2) 68%,
+            rgba(255, 255, 255, 0.1) 72%,
+            rgba(255, 255, 255, 0.25) 75%,
+            rgba(255, 255, 255, 0) 100%
+          ),
+          radial-gradient(circle at 50% 10%, rgba(180, 180, 180, 1) 0%, rgba(140, 140, 140, 1) 80%);
+        box-shadow: inset 0 10px 10px 0px rgba(0, 0, 0, 0.35), inset 0 -3px 1px rgba(222, 220, 210, 1), 0 1px 0 1px rgba(255, 255, 255, 0.5),
+          0 0 0px 10px rgba(222, 98, 0, 0.3), 0 0 0 11px rgba(255, 255, 255, 0.5), 0 30px 50px 20px rgba(0, 0, 0, 0.5);
+      }
+      #clock::after {
+        content: '';
+        position: absolute;
+        border: 1px solid #000;
+        width: 100px;
+        height: 30px;
+        transition-origin: 50%;
+        top: 50%;
+        left: 50%;
+        box-shadow: inset 0 0 20px 0px rgba(255, 255, 255, 1), 0 0 100px 1000px rgba(0, 0, 0, 0.75);
+        transition: all 0.5s;
+        transform: translate(120px, -50%);
+      }
+      #clock::before {
+        content: '';
+        position: absolute;
+        border: 1px dashed #000;
+        border-top: 0;
+        border-bottom: 0;
+        width: 30px;
+        height: 10px;
+        right: 0;
+        top: 50%;
+        margin: -5px 44px 0 0;
+        animation: pulse 1s infinite;
+      }
+      h1.off + #clock::after {
+        box-shadow: 0 0 100px 1000px rgba(0, 0, 0, 0), 0 0px 1px rgba(0, 0, 0, 0.25);
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.65) 0%,
+          rgba(255, 255, 255, 0) 40%,
+          rgba(255, 255, 255, 0) 60%,
+          rgba(255, 255, 255, 0.15) 100%
+        );
+        border: 1px solid rgba(0, 0, 0, 0);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+      }
+      h1.off + #clock::before {
+        border: 1px dashed rgba(80, 80, 80, 1);
+        border-top: 0;
+        border-bottom: 0;
+        opacity: 1;
+        animation: none;
+      }
+      ul {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        list-style: none;
+        margin: -10px 0 0 -10px;
+      }
+      #s,
+      #m,
+      #h {
+        transform: rotateZ(0deg);
+        transition: all 0.5s cubic-bezier(0.5, -0.5, 0.5, 1.5);
+      }
+      li {
+        position: absolute;
+        transition: all 0.25s;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: right;
+        opacity: 0.2;
+        transform-origin: 50%;
+        transition: all 0.25s linear 0.25s;
+      }
+      li::after {
+      }
+      li.active {
+        color: #424242;
+        opacity: 1;
+        font-weight: 700;
+        font-size: 18px;
+      }
+      @keyframes pulse {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="off">C<span>LOCK</span></h1>
+    <div id="clock">
+      <ul id="s"></ul>
+      <ul id="m"></ul>
+      <ul id="h"></ul>
+    </div>
+  </body>
+  <script>
+    function draw() {
+      const s = document.getElementById('s');
+      const m = document.getElementById('m');
+      const h = document.getElementById('h');
+      for (let i = 0; i < 60; i++) {
+        let D = i < 10 ? '0' + i : i;
+        s.innerHTML += `<li data-item="${D}">${D}</li>`;
+      }
+      for (let i = 0; i < 60; i++) {
+        let D = i < 10 ? '0' + i : i;
+        m.innerHTML += `<li data-item="${D}">${D}</li>`;
+      }
+      for (let i = 0; i < 24; i++) {
+        let D = i < 10 ? '0' + i : i;
+        h.innerHTML += `<li data-item="${D}">${D}</li>`;
+      }
+    }
+    function place() {
+      const hdeg = 15;
+      const msdeg = 6;
+      document.querySelectorAll('#s li').forEach((el, index) => {
+        el.style.transform = `rotateZ(${msdeg * index}deg) translateX(200px)`;
+      });
+      document.querySelectorAll('#m li').forEach((el, index) => {
+        el.style.transform = `rotateZ(${msdeg * index}deg) translateX(170px)`;
+      });
+      document.querySelectorAll('#h li').forEach((el, index) => {
+        el.style.transform = `rotateZ(${hdeg * index}deg) translateX(140px)`;
+      });
+    }
+    function sec(ts, timer) {
+      const TS = ts % 60;
+      if (ts == 0 && timer) min(0, timer);
+      const deg = (360 / 60) * ts;
+      document.querySelectorAll('#s li').forEach((el) => el.classList.remove('active'));
+      document.querySelectorAll('#s li')[TS].classList.add('active');
+      document.getElementById('s').style.transform = `rotateZ(-${deg}deg)`;
+      ts++;
+      if (timer) setTimeout(() => sec(ts, timer), TIME * 1000);
+    }
+    function min(tm, timer) {
+      const TM = tm % 60;
+      if (tm == 0 && timer) hour(0, timer);
+      const deg = (360 / 60) * tm;
+      document.querySelectorAll('#m li').forEach((el) => el.classList.remove('active'));
+      document.querySelectorAll('#m li')[TM].classList.add('active');
+      document.getElementById('m').style.transform = `rotateZ(-${deg}deg)`;
+      tm++;
+      if (timer) setTimeout(() => min(tm, timer), TIME * 60000);
+    }
+    function hour(th, timer) {
+      const TH = th % 24;
+      const deg = (360 / 24) * th;
+      document.querySelectorAll('#h li').forEach((el) => el.classList.remove('active'));
+      document.querySelectorAll('#h li')[TH].classList.add('active');
+      document.getElementById('h').style.transform = `rotateZ(-${deg}deg)`;
+      th++;
+      if (timer) setTimeout(() => hour(th, timer), TIME * 3600000);
+    }
+    function clock() {
+      const d = new Date();
+      const H = d.getHours();
+      const M = d.getMinutes();
+      const S = d.getSeconds();
+      hour(H, 0);
+      min(M, 0);
+      sec(S, 0);
+      setTimeout(clock, 1000);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      draw();
+      place();
+      // CLOCK
+      clock();
+      // LIGHT
+      document.querySelector('h1').addEventListener('click', function () {
+        this.classList.toggle('off');
+      });
+    });
+  </script>
+</html>
