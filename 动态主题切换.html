@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动态主题切换</title>
+    <style>
+      :root {
+        --quote-font: 'Georgia', serif;
+        --quote-font-size: clamp(16px, 1vw, 14px);
+        --quote-line-height: 1.5;
+        --quote-padding: 4vw;
+        --quote-border-width: 8px;
+        --quote-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        --quote-letter-spacing: 1px;
+      }
+      .theme-switcher {
+        margin-bottom: 20px;
+      }
+      .theme-switcherlabel {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+      .theme-switcherselect {
+        padding: 5px 10px;
+        font-size: 16px;
+      }
+      .inspiring-quote {
+        font-family: var(--quote-font);
+        font-size: var(--quote-font-size);
+        line-height: var(--quote-line-height);
+        max-width: 500px;
+        margin: 40px auto;
+        padding: var(--quote-padding);
+        position: relative;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0;
+        animation: fadeIn 1.2s ease-in-out forwards;
+        transition: all 0.5s ease-in-out;
+      }
+      .inspiring-quotep::before,
+      .inspiring-quotep::after {
+        font-size: clamp(16px, 1vw, 14px);
+        font-weight: bold;
+        position: absolute;
+      }
+      .inspiring-quotep::before {
+        content: '“';
+        left: -10px;
+        top: -30px;
+      }
+      .inspiring-quotep::after {
+        content: '”';
+        right: -10px;
+        bottom: -30px;
+      }
+      .inspiring-quotep {
+        margin: 0;
+        padding: 2vw;
+        display: inline-block;
+        position: relative;
+        font-style: italic;
+        font-weight: 400;
+        max-width: 90%;
+        text-align: center;
+      }
+      .inspiring-quotecite {
+        display: block;
+        font-size: clamp(16px, 1vw, 14px);
+        font-weight: bold;
+        margin-top: 1vw;
+        text-transform: uppercase;
+        letter-spacing: var(--quote-letter-spacing);
+        font-style: normal;
+      }
+      .patriotic-theme {
+        color: #43426b;
+        background: #faf8f1;
+        border-left: var(--quote-border-width) solid #43426b;
+        box-shadow: var(--quote-shadow);
+      }
+      .patriotic-themep::before,
+      .patriotic-themep::after {
+        color: #b3495d;
+      }
+      .classic-theme {
+        color: #333;
+        background: #f9f9f9;
+        border-left: var(--quote-border-width) solid #2c3e50;
+        box-shadow: var(--quote-shadow);
+      }
+      .dark-theme {
+        color: #fff;
+        background: #2c3e50;
+        border-left: var(--quote-border-width) solid #f1c40f;
+        box-shadow: var(--quote-shadow);
+      }
+      .gold-theme {
+        color: #333;
+        background: #fef7e5;
+        border-left: var(--quote-border-width) solid #d4a017;
+        box-shadow: var(--quote-shadow);
+      }
+      .ocean-theme {
+        color: #014f86;
+        background: #e3f2fd;
+        border-left: var(--quote-border-width) solid #0288d1;
+        box-shadow: var(--quote-shadow);
+      }
+      .minimalist-quotes-theme {
+        color: #000;
+        background: transparent;
+        border-left: none;
+        box-shadow: none;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (max-width: 768px) {
+        :root {
+          --quote-padding: 6vw;
+        }
+        .inspiring-quote {
+          padding: var(--quote-padding);
+        }
+        .inspiring-quotep {
+          font-size: clamp(20px, 4vw, 30px);
+        }
+        .inspiring-quotep::before,
+        .inspiring-quotep::after {
+          font-size: clamp(50px, 6vw, 70px);
+        }
+        .inspiring-quotecite {
+          font-size: clamp(16px, 1.8vw, 22px);
+        }
+      }
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        background-color: #eee;
+        padding: 20px;
+        margin-top: 35px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="theme-switcher">
+      <label for="theme">Choose a Theme:</label>
+      <select id="theme">
+        <option value="patriotic-theme">Patriotic</option>
+        <option value="classic-theme">Classic</option>
+        <option value="dark-theme">Dark</option>
+        <option value="gold-theme">Gold Elegance</option>
+        <option value="ocean-theme">Ocean Breeze</option>
+        <option value="minimalist-quotes-theme">Minimalist</option>
+      </select>
+    </div>
+    <blockquote class="inspiring-quote patriotic-theme">
+      <p>It’s not about being the best. It’s about being better than you were yesterday.</p>
+      <cite>Hardy</cite>
+    </blockquote>
+    <script>
+      document.getElementById('theme').addEventListener('change', function () {
+        const quoteBlock = document.querySelector('.inspiring-quote');
+        quoteBlock.className = 'inspiring-quote ' + this.value;
+      });
+    </script>
+  </body>
+</html>
